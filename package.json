@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "dependencies": {
     "next": "11.0.1",
@@ -14,7 +15,25 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "autoprefixer": "^10.3.3",
+    "daisyui": "^1.14.0",
     "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "postcss": "^8.3.6",
+    "prettier": "^2.3.2",
+    "tailwindcss": "^2.2.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": "eslint --fix",
+    "*.+(json|css|md)": "prettier --write"
   }
 }

@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <Image alt="Oversea Academy" src="/Logo2.png" width={320} height={128} />
         <h3 className={styles.title}>Coming soon!</h3>
 

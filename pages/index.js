@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import ServiceItem from '../components/service-item';
 
 export default function Home() {
   return (
@@ -39,14 +40,9 @@ export default function Home() {
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
                 <p className="mb-5 text-accent font-bold">Layanan Kami</p>
                 <h1 className="mb-9 text-3xl lg:text-4xl font-bold max-w-md">Persiapkan studi lanjutmu bersama kami</h1>
-                <div className="flex flex-row">
-                  <div>
-                    <div>
-                      <div></div>
-                      <div>Bimbingan beasiswa</div>
-                    </div>
-                    <div></div>
-                  </div>
+                <div className="flex flex-col gap-6">
+                  <ServiceItem title="Bimbingan Beasiswa" content="Helloooooo" />
+                  <ServiceItem title="Bimbingan TOEFL" content="Helloooooo" />
                 </div>
               </div>
             </div>

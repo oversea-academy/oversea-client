@@ -12,15 +12,46 @@ export default function Home() {
       </Head>
 
       <main>
-        <Image alt="Oversea Academy" src="/Logo2.png" width={320} height={128} />
-        <h3 className={styles.title}>Coming soon!</h3>
+        <section id="home">
+          <div className="hero w-full h-screen bg-accent bg-opacity-5">
+            <div className="w-full flex-col hero-content lg:flex-row-reverse justify-around">
+              <div className="max-w-md">
+                <Image
+                  src="/human.jpg"
+                  alt="photo"
+                  width={600}
+                  height={600}
+                  className="rounded-tl-3xl rounded-br-3xl"
+                />
+              </div>
+              <div className="max-w-md">
+                <p className="mb-5 text-accent font-bold">Oversea Academy</p>
+                <h1 className="mb-9 text-3xl lg:text-7xl font-bold">Growing Globally with Us!</h1>
+                <p className="mb-5">Let&#39;s prepare your oversea study and career</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <p className={styles.description}>
-          Visit our instagram{' '}
-          <a href="https://www.instagram.com/oversea.academy/" target="_blank" rel="noreferrer">
-            @oversea.academy
-          </a>
-        </p>
+        <section id="services">
+          <div className="w-full">
+            <div className="w-full flex justify-center p-3">
+              <div className="w-full md:w-9/12 lg:w-6/12 py-16">
+                <p className="mb-5 text-accent font-bold">Layanan Kami</p>
+                <h1 className="mb-9 text-3xl lg:text-4xl font-bold max-w-md">Persiapkan studi lanjutmu bersama kami</h1>
+                <div className="flex flex-row">
+                  <div>
+                    <div>
+                      <div></div>
+                      <div>Bimbingan beasiswa</div>
+                    </div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );

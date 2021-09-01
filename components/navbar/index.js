@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Navbar() {
   return (
-    <div className="navbar mb-2 shadow-lg bg-neutral-content text-neutral md:px-10 lg:px-20">
+    <div className="navbar shadow-lg bg-neutral-content text-neutral md:px-10 lg:px-20 sticky top-0 z-30">
       <div className="flex-none px-2 mx-2">
         <Image alt="Oversea Academy" src="/Logo2.png" width={160} height={64} />
       </div>

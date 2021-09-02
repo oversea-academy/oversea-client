@@ -1,15 +1,17 @@
-// import Image from 'next/image';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
-export default function ServiceItem({ title, content }) {
+export default function ServiceItem({ title, content, source }) {
   const [isActive, setIsActive] = useState(false);
   return (
-    <div className="w-full card shadow-lg">
+    <div className="w-full card shadow-xl">
       <div className="w-full card-body">
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-row gap-6 items-center">
-            <div className="bg-accent bg-opacity-20 rounded-full w-12 h-12"></div>
-            <div className="text-xl">{title}</div>
+            <div className="bg-accent bg-opacity-10 rounded-full w-12 h-12 flex justify-center items-center">
+              <Image src={source} alt="illustration" width={32} height={32} />
+            </div>
+            <div className="text-xl font-medium">{title}</div>
           </div>
           <div>
             <button className="btn btn-ghost" onClick={() => setIsActive(!isActive)}>

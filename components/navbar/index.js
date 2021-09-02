@@ -17,7 +17,7 @@ export default function Navbar() {
         <a className="btn btn-ghost capitalize">Masuk</a>
       </div>
       <div className="flex-none">
-        <a className="btn btn-accent capitalize">Daftar</a>
+        <a className="btn btn-primary capitalize">Daftar</a>
       </div>
     </div>
   );

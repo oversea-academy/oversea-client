@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/service-item';
+import TestimoniCard from '../components/testimoni-card';
 import React, { useState } from 'react';
 
 export default function Home() {
@@ -96,6 +97,7 @@ export default function Home() {
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
                 <p className="mb-3 text-primary font-bold">Testimoni</p>
                 <h1 className="mb-9 text-3xl lg:text-4xl font-bold">Apa kata mereka tentang kami?</h1>
+                <TestimoniCard />
               </div>
             </div>
           </div>

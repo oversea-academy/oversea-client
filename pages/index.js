@@ -45,6 +45,19 @@ export default function Home() {
     }
   ]);
 
+  const partners = [
+    {
+      id: 1,
+      source: '/images/partners/bmka.png',
+      description: 'BMKA Salman ITB'
+    },
+    {
+      id: 2,
+      source: '/images/partners/ras.png',
+      description: 'Rumah Amal Salman ITB'
+    }
+  ];
+
   return (
     <div className={styles.container}>
       <Head>
@@ -109,6 +122,67 @@ export default function Home() {
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
                 <p className="mb-3 text-primary font-bold">Mitra</p>
                 <h1 className="mb-9 text-3xl lg:text-4xl font-bold">Dipercaya oleh berbagai mitra</h1>
+                <div className="flex flex-wrap gap-3">
+                  {partners.map(({ id, source, description }) => (
+                    <div key={id} className="w-24 h-24 relative">
+                      <Image src={source} alt={description} layout="fill" objectFit="contain" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about">
+          <div className="w-full">
+            <div className="w-full flex justify-center p-3">
+              <div className="w-full md:w-9/12 lg:w-6/12 py-16">
+                <div className="mb-3 border-b border-base-300">
+                  <Image alt="Oversea Academy" src="/Logo.png" width={160} height={64} />
+                </div>
+                <div className="flex gap-20 px-5 font-medium">
+                  <div className="flex flex-col">
+                    <div>
+                      <a href="#">Tentang Kami</a>
+                    </div>
+                    <div>
+                      <a href="#">Blog</a>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-6">
+                    <div className="flex flex-col">
+                      <div>Kontak Kami</div>
+                      <div className="flex flex-row gap-2">
+                        <div className="w-6 h-6 relative">
+                          <Image alt="Icon" src="/icons/whatsapp.png" layout="fill" objectFit="contain" />
+                        </div>
+                        <div className="font-normal">0812-3456-7890</div>
+                      </div>
+                      <div className="flex flex-row gap-2">
+                        <div className="w-6 h-6 relative">
+                          <Image alt="Icon" src="/icons/email.png" layout="fill" objectFit="contain" />
+                        </div>
+                        <div className="font-normal">info@oversea.academy</div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <div>Ikuti Kami</div>
+                      <div className="flex flex-row gap-2">
+                        <div className="w-6 h-6 relative">
+                          <Image alt="Icon" src="/icons/youtube.png" layout="fill" objectFit="contain" />
+                        </div>
+                        <div className="font-normal">Oversea Academy</div>
+                      </div>
+                      <div className="flex flex-row gap-2">
+                        <div className="w-6 h-6 relative">
+                          <Image alt="Icon" src="/icons/instagram.png" layout="fill" objectFit="contain" />
+                        </div>
+                        <div className="font-normal">@oversea.academy</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -9,13 +9,13 @@ export default function Navbar() {
       </div>
       <div className="flex-1 px-2 mx-2">
         <div className="items-stretch hidden lg:flex">
-          <Link href="/">
+          <Link href="/" passHref>
             <div className="btn btn-ghost btn-sm rounded-btn capitalize">Home</div>
           </Link>
-          <Link href="/layanan">
+          <Link href="/layanan" passHref>
             <div className="btn btn-ghost btn-sm rounded-btn capitalize">Layanan Kami</div>
           </Link>
-          <Link href="/kemitraan">
+          <Link href="/kemitraan" passHref>
             <div className="btn btn-ghost btn-sm rounded-btn capitalize">Kemitraan</div>
           </Link>
         </div>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Navbar() {
@@ -8,9 +9,15 @@ export default function Navbar() {
       </div>
       <div className="flex-1 px-2 mx-2">
         <div className="items-stretch hidden lg:flex">
-          <a className="btn btn-ghost btn-sm rounded-btn capitalize">Home</a>
-          <a className="btn btn-ghost btn-sm rounded-btn capitalize">Layanan Kami</a>
-          <a className="btn btn-ghost btn-sm rounded-btn capitalize">Kemitraan</a>
+          <Link href="/" passHref>
+            <div className="btn btn-ghost btn-sm rounded-btn capitalize">Home</div>
+          </Link>
+          <Link href="/layanan" passHref>
+            <div className="btn btn-ghost btn-sm rounded-btn capitalize">Layanan Kami</div>
+          </Link>
+          <Link href="/kemitraan" passHref>
+            <div className="btn btn-ghost btn-sm rounded-btn capitalize">Kemitraan</div>
+          </Link>
         </div>
       </div>
       <div className="flex-none">

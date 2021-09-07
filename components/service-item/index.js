@@ -5,13 +5,13 @@ export default function ServiceItem({ title, content, source }) {
   const [isActive, setIsActive] = useState(false);
   return (
     <div className="w-full card shadow-xl">
-      <div className="w-full card-body">
+      <div className="w-full card-body p-4 lg:p-8">
         <div className="flex flex-row justify-between items-center">
-          <div className="flex flex-row gap-6 items-center">
+          <div className="flex flex-row gap-3 lg:gap-6 items-center">
             <div className="bg-accent bg-opacity-10 rounded-full w-12 h-12 flex justify-center items-center">
               <Image src={source} alt="illustration" width={32} height={32} />
             </div>
-            <div className="text-xl font-medium">{title}</div>
+            <div className="text-sm md:text-lg lg:text-xl font-medium">{title}</div>
           </div>
           <div>
             <button className="btn btn-ghost" onClick={() => setIsActive(!isActive)}>
@@ -19,7 +19,7 @@ export default function ServiceItem({ title, content, source }) {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="inline-block w-6 h-6 stroke-current"
+                className="inline-block w-4 h-4 lg:w-6 lg:h-6 stroke-current"
               >
                 {isActive ? (
                   <path
@@ -41,9 +41,9 @@ export default function ServiceItem({ title, content, source }) {
           </div>
         </div>
         {isActive && (
-          <div className="flex flex-row gap-6 items-center">
+          <div className="flex flex-row gap-3 lg:gap-6 items-center">
             <div className="w-12 h-12"></div>
-            <div>{content}</div>
+            <div className="text-sm md:text-base lg:text-lg">{content}</div>
           </div>
         )}
       </div>

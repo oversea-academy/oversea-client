@@ -10,37 +10,39 @@ export default function Home() {
     {
       id: 1,
       title: 'Bimbingan beasiswa',
-      content: 'Abc derfj ksksks kksks',
+      content:
+        'Temukan tutor persiapan study overseas kamu. Oversea Academy siap membantumu mempersiapkan persyaratan dokumen dan interview.',
       source: '/illustrations/1.png'
     },
     {
       id: 2,
       title: 'Bimbingan belajar IELTS dan TOEFL',
-      content: 'Abc derfj ksksks kksks',
+      content: 'Raih target skor IELTS dan TOEFL dengan bantuan tutor-tutor berpengalaman di Oversea Academy.',
       source: '/illustrations/2.png'
     },
     {
       id: 3,
       title: 'Lancar berbicara bahasa inggris',
-      content: 'Abc derfj ksksks kksks',
+      content: 'Lebih pede dan lancar berbahasa inggris bersama tutor-tutor berpengalaman di Oversea Academy.',
       source: '/illustrations/3.png'
     },
     {
       id: 4,
       title: 'Webinar persiapan studi lanjut dan beasiswa',
-      content: 'Abc derfj ksksks kksks',
+      content:
+        'Siapkan berbagai tips dan trick persipan studi lanjut dan beasiswa melalui webinar gratis di Oversea Academy.',
       source: '/illustrations/4.png'
     },
     {
       id: 5,
       title: 'Simulasi IELTS dan TOEFL ITP',
-      content: 'Abc derfj ksksks kksks',
+      content: 'Oversea Academy siap membantumu memprediksi sejauh mana kemampuanmu dalam tes IELTS dan TOEFL ITP.',
       source: '/illustrations/5.png'
     },
     {
       id: 6,
       title: 'Bimbingan belajar SAT dan TPA',
-      content: 'Abc derfj ksksks kksks',
+      content: 'Raih target skor SAT dan TPA dengan bantuan tutor-tutor berpengalaman di Oversea Academy.',
       source: '/illustrations/6.png'
     }
   ]);
@@ -118,11 +120,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="mitra">
+        <section id="kemitraan">
           <div className="w-full">
             <div className="w-full flex justify-center px-5">
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
-                <p className="mb-2 lg:mb-3 text-primary font-bold">Mitra</p>
+                <p className="mb-2 lg:mb-3 text-primary font-bold">Kemitraan</p>
                 <h1 className="mb-9 text-2xl md:text-3xl lg:text-4xl font-bold">Dipercaya oleh berbagai mitra</h1>
                 <div className="flex flex-wrap gap-3">
                   {partners.map(({ id, source, description }) => (

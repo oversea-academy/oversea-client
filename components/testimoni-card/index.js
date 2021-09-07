@@ -51,7 +51,7 @@ export default function TestimoniCard() {
 
   return (
     <div className="w-full relative">
-      <button className="absolute top-28 left-1 z-20 btn btn-circle btn-lg" onClick={prevButton}>
+      <button className="absolute top-28 left-0 lg:left-1 z-20 btn btn-circle lg:btn-lg" onClick={prevButton}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -66,13 +66,13 @@ export default function TestimoniCard() {
           ></path>
         </svg>
       </button>
-      <div className="mx-10 h-72 bg-neutral-content card shadow-xl px-10 py-5 flex flex-row gap-4">
-        <div className="max-w-xs">
+      <div className="mx-5 lg:mx-10 h-72 bg-neutral-content card shadow-xl px-5 lg:px-10 py-5 flex flex-col md:flex-row gap-4 items-center">
+        <div className="max-w-xs hidden md:block">
           <Image src="/human.jpg" alt="photo" width={250} height={250} className="rounded-xl" />
         </div>
         <div className="max-w-xs w-full text-center px-3">
           <svg
-            className="mx-auto my-4"
+            className="mx-auto my-2 lg:my-4"
             width="42"
             height="33"
             viewBox="0 0 42 33"
@@ -89,7 +89,10 @@ export default function TestimoniCard() {
           <div className="text-xs">{testimoni[num].description}</div>
         </div>
       </div>
-      <button className="absolute top-28 right-1 z-20 btn btn-primary btn-circle btn-lg" onClick={nextButton}>
+      <button
+        className="absolute top-28 right-0 lg:right-1 z-20 btn btn-primary btn-circle lg:btn-lg"
+        onClick={nextButton}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

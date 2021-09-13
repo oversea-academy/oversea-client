@@ -70,18 +70,20 @@ export default function Home() {
 
       <main>
         <section id="home">
-          <div className="hero w-full h-screen bg-primary bg-opacity-5">
-            <div className="w-full flex-col hero-content lg:flex-row-reverse justify-around">
-              <div className="max-w-md">
+          <div className="hero w-full h-screen lg:bg-primary lg:bg-opacity-5">
+            <div className="lg:hidden w-full h-full bg-center bg-no-repeat bg-cover opacity-60 bg-welcome-img"></div>
+            <div className="w-full h-full hero-content items-start lg:items-center lg:flex-row-reverse lg:justify-around">
+              <div className="max-w-md hidden lg:block">
                 <Image
-                  src="/human.jpg"
+                  src="/images/welcome.jpg"
                   alt="photo"
-                  width={600}
+                  width={500}
                   height={600}
+                  objectFit="cover"
                   className="rounded-tl-3xl rounded-br-3xl"
                 />
               </div>
-              <div className="max-w-md">
+              <div className="max-w-md mt-12 lg:mt-0">
                 <p className="mb-2 lg:mb-3 text-primary font-bold">Oversea Academy</p>
                 <h1 className="mb-5 lg:mb-9 text-3xl md:text-5xl lg:text-7xl font-bold">Growing Globally with Us!</h1>
                 <p className="mb-5">Let&#39;s prepare your oversea study and career</p>

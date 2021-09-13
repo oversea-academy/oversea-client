@@ -6,29 +6,48 @@ export default function TestimoniCard() {
   const [testimoni, setTestimoni] = useState([
     {
       id: 1,
+      name: `Noor Naila Imtinan Himam`,
+      description: `Siswa Bimbingan Beasiswa`,
+      message: `Joining Oversea academy for my scholarship preparation was totally a great decision. Although I have 
+      limited preparation time, Oversea academy was able to provide me with amazing tutors that gives powerful practices 
+      and consultation as well as significant tips and tricks. Moreover, I was amazed by the time flexibility I receive 
+      for tutoring sessions. As a result, I could pass every stage of the scholarship selection process confidently. 
+      Gratefully, I receive the scholarship to continue my study in my dream university.`,
+      achievement: `Lolos Beasiswa Prestasi Talenta ke University of British Columbia`,
+      image: `/images/testimoni/testimoni_1.jpg`
+    },
+    {
+      id: 2,
+      name: `dr. Emir Amaro`,
+      description: `Dokter Umum, Student Private TOEFL IBT`,
+      message: `Saya berkesempatan untuk belajar dari tutor oversea dalam rangka persiapan ujian TOEFL IBT saya. Selama persiapan 
+      tersebut, saya sangat terbantu dengan latihan dan simulasi yang diberikan. Referensi dan materi yang diberikan juga 
+      sangat lengkap, mulai dari mengenal anatomi tes TOEFL, tipe pertanyaan, hingga tips dan trik yang krusial dalam 
+      menjawab soal. Tutor oversea juga sangat friendly, hingga setiap sesi latihan tidak terasa membosankan.
+      Dengan latihan dan feedback yang diberikan, saya merasa percaya diri dalam menghadapi hari ujian. Saya pun akhirnya 
+      berhasil mencapai skor TOEFL yang saya targetkan. Terima kasih.`,
+      achievement: `TOEFL IBT sebelum 80, TOEFL IBT setelah 105`,
+      image: `/images/testimoni/testimoni_2.jpg`
+    },
+    {
+      id: 3,
+      name: `Ahmad Alfarobi J.I.`,
+      description: `Siswa Bimbingan Beasiswa dan Wawancara`,
+      message: `Bimbingan di overseas jadwalnya bisa menyesuaikan dan di berikan tutor yg tidak hanya 1 sehingga bisa memberikan 
+      berbagai sudut pandang. Selain itu tutor-tutornya memiliki pengalaman yang sesuai dengan apa yg ingin kita dapatkan sehingga 
+      mengetahui pasti mekanisme dan cara-cara mencapat tujuan tersebut.`,
+      achievement: `Lolos Beasiswa LPDP 2021 ke Wageningen University & Research, Belanda`,
+      image: `/images/testimoni/testimoni_3.jpg`
+    },
+    {
+      id: 4,
       name: `Sarah Zhafirah`,
       description: `Student of IELTS Program`,
       message: `I really enjoyed all of the lessons with Oversea Academy,and thanks to the tutors, my English improved
       significantly. I need to work more on reading and listening due to my lack of focus but the tutor has helped
       me alot, the personal feed back on speaking is very helpful and the tutor gave me useful tricks on writing.
       Thank you!`,
-      image: `/human.jpg`
-    },
-    {
-      id: 2,
-      name: `Muhammad Agus`,
-      description: `Student of JLPT Program`,
-      message: `Good`,
-      image: `/human.jpg`
-    },
-    {
-      id: 3,
-      name: `Siti April`,
-      description: `Student of TOEFL ITP Program`,
-      message: `I really enjoyed all of the lessons with Oversea Academy,and thanks to the tutors, my English improved
-      significantly. I need to work more on reading and listening due to my lack of focus but the tutor has helped
-      me alot, the personal feed back on speaking is very helpful and the tutor gave me useful tricks on writing.
-      Thank you!`,
+      achievement: `Lolos Beasiswa LPDP 2021 ke Wageningen University & Research, Belanda`,
       image: `/human.jpg`
     }
   ]);
@@ -51,7 +70,7 @@ export default function TestimoniCard() {
 
   return (
     <div className="w-full relative">
-      <button className="absolute top-28 left-0 lg:left-1 z-20 btn btn-circle lg:btn-lg" onClick={prevButton}>
+      <button className="absolute top-36 left-0 lg:left-1 z-20 btn btn-circle lg:btn-lg" onClick={prevButton}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -66,9 +85,9 @@ export default function TestimoniCard() {
           ></path>
         </svg>
       </button>
-      <div className="mx-5 lg:mx-10 h-72 bg-neutral-content card shadow-xl px-5 lg:px-10 py-5 flex flex-col md:flex-row gap-4 items-center">
-        <div className="max-w-xs hidden md:block">
-          <Image src="/human.jpg" alt="photo" width={250} height={250} className="rounded-xl" />
+      <div className="mx-5 lg:mx-10 h-96 bg-neutral-content card shadow-xl px-5 lg:px-10 py-5 flex flex-col md:flex-row gap-4 items-center">
+        <div className="w-72 h-72 relative hidden md:block">
+          <Image src={testimoni[num].image} alt="photo" layout="fill" objectFit="cover" className="rounded-xl" />
         </div>
         <div className="max-w-xs w-full text-center px-3">
           <svg
@@ -87,10 +106,11 @@ export default function TestimoniCard() {
           <div className="text-xs pb-3">{testimoni[num].message}</div>
           <div className="text-sm font-medium text-primary">{testimoni[num].name}</div>
           <div className="text-xs">{testimoni[num].description}</div>
+          <div className="text-xs italic">{testimoni[num].achievement}</div>
         </div>
       </div>
       <button
-        className="absolute top-28 right-0 lg:right-1 z-20 btn btn-primary btn-circle lg:btn-lg"
+        className="absolute top-36 right-0 lg:right-1 z-20 btn btn-primary btn-circle lg:btn-lg"
         onClick={nextButton}
       >
         <svg

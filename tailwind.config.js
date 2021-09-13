@@ -5,7 +5,11 @@ module.exports = {
     colors: {
       softblue: '#bce0e71a'
     },
-    extend: {}
+    extend: {
+      backgroundImage: {
+        'welcome-img': "url('/images/welcome.jpg')"
+      }
+    }
   },
   variants: {
     extend: {}

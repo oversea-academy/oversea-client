@@ -7,11 +7,11 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-30">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="navbar shadow-lg bg-neutral-content text-neutral md:px-10 lg:px-20 sticky top-0 z-30">
-        <div className="flex-none px-2 mx-2 hidden lg:flex">
-          <Image alt="Oversea Academy" src="/Logo.png" width={160} height={64} />
+      <div className="navbar shadow-lg bg-neutral-content text-neutral md:px-10 lg:px-20 sticky top-0 z-30 flex justify-between">
+        <div className="flex-none px-2 mx-2 w-24 h-12 flex relative">
+          <Image alt="Oversea Academy" src="/Logo.png" layout="fill" objectFit="cover" />
         </div>
-        <div className="flex-none flex lg:hidden">
+        <div className="flex lg:hidden">
           <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost" onClick={() => setIsDrawer(!isDrawer)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +23,8 @@ export default function Navbar() {
             </svg>
           </label>
         </div>
-        <div className="flex-1 px-2 mx-2">
-          <div className="items-stretch hidden lg:flex">
+        <div className="hidden lg:flex flex-1 px-2 mx-2">
+          <div className="items-stretch flex">
             <Link href="/#home" passHref>
               <div className="btn btn-ghost btn-sm rounded-btn capitalize">Home</div>
             </Link>
@@ -36,10 +36,10 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
-        <div className="flex-none">
+        <div className="hidden lg:flex flex-none">
           <a className="btn btn-ghost btn-sm capitalize">Masuk</a>
         </div>
-        <div className="flex-none">
+        <div className="hidden lg:flex flex-none">
           <a className="btn btn-primary btn-sm px-6 capitalize">Daftar</a>
         </div>
       </div>
@@ -60,6 +60,16 @@ export default function Navbar() {
             <li>
               <Link href="/#kemitraan" passHref>
                 <div className="capitalize hover:text-primary font-medium mb-3">Kemitraan</div>
+              </Link>
+            </li>
+            <li>
+              <Link href="#" passHref>
+                <div className="capitalize hover:text-primary font-medium mb-3">Masuk</div>
+              </Link>
+            </li>
+            <li>
+              <Link href="#" passHref>
+                <div className="capitalize hover:text-primary font-medium mb-3">Daftar</div>
               </Link>
             </li>
           </ul>

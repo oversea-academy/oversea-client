@@ -65,7 +65,7 @@ export default function Home() {
       <Head>
         <title>Oversea Academy</title>
         <meta name="description" content="Oversea Academy" />
-        <meta name="facebook-domain-verification" content="7h8hm8c9s9ehb08tv01oz3vc5crkhj" />
+        <meta name="facebook-domain-verification" content="b757k0aoii2enbq1g9jzj8w5vuk15w" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

@@ -71,22 +71,15 @@ export default function Home() {
 
       <main>
         <section id="home">
-          <div className="hero w-full h-screen lg:bg-primary lg:bg-opacity-5">
-            <div className="lg:hidden w-full h-full bg-center bg-no-repeat bg-cover opacity-60 bg-welcome-img"></div>
-            <div className="w-full h-full hero-content items-start lg:items-center lg:flex-row-reverse lg:justify-around">
-              <div className="max-w-md hidden lg:block">
-                <Image
-                  src="/images/welcome.jpg"
-                  alt="photo"
-                  width={500}
-                  height={600}
-                  objectFit="cover"
-                  className="rounded-tl-3xl rounded-br-3xl"
-                />
+          <div className="hero w-full bg-primary bg-opacity-10">
+            <div className="lg:hidden w-full h-full bg-bottom bg-no-repeat bg-contain opacity-20 bg-welcome-img"></div>
+            <div className="w-full h-full lg:my-16 hero-content items-start lg:items-center lg:flex-row-reverse lg:justify-around">
+              <div className="max-w-md hidden lg:block opacity-60">
+                <Image src="/images/map.png" alt="map" width={500} height={300} objectFit="contain" />
               </div>
               <div className="max-w-md mt-12 lg:mt-0">
                 <p className="mb-2 lg:mb-3 text-primary font-bold">Oversea Academy</p>
-                <h1 className="mb-5 lg:mb-9 text-3xl md:text-5xl lg:text-7xl font-bold">Growing Globally with Us!</h1>
+                <h1 className="mb-5 lg:mb-9 text-3xl md:text-5xl lg:text-6xl font-bold">Growing Globally with Us!</h1>
                 <p className="mb-5">Let&#39;s prepare your oversea study and career</p>
               </div>
             </div>
@@ -112,7 +105,7 @@ export default function Home() {
         </section>
 
         <section id="testimoni">
-          <div className="w-full bg-primary bg-opacity-5">
+          <div className="w-full bg-primary bg-opacity-10">
             <div className="w-full flex justify-center px-5">
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
                 <p className="mb-2 lg:mb-3 text-primary font-bold">Testimoni</p>

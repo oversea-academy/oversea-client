@@ -7,7 +7,10 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'welcome-img': "url('/images/welcome.jpg')"
+        'welcome-img': "url('/images/map.png')"
+      },
+      transitionProperty: {
+        height: 'height'
       }
     }
   },

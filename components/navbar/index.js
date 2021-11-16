@@ -1,9 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { EventEmitter } from '../../utils/events';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
+
+  function clickLogIn() {
+    EventEmitter.dispatch('showLogIn', true);
+  }
   return (
     <div className="sticky top-0 z-30">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -37,7 +42,9 @@ export default function Navbar() {
           </div>
         </div>
         <div className="hidden lg:flex flex-none">
-          <a className="btn btn-ghost btn-sm capitalize">Masuk</a>
+          <a onClick={clickLogIn} className="btn btn-ghost btn-sm capitalize">
+            Masuk
+          </a>
         </div>
         <div className="hidden lg:flex flex-none">
           <a className="btn btn-primary btn-sm px-6 capitalize">Daftar</a>

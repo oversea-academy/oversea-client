@@ -18,7 +18,7 @@ export default function ModalLogin() {
   return (
     <div onClick={closeModal} id="modal-login" className={`modal ${isActive ? 'modal-open' : ''}`}>
       <div className="modal-box p-0 max-w-lg">
-        <div className="w-full p-5 text-center rounded-t-2xl">Belum punya akun? Daftar sekarang!</div>
+        <div className="w-full p-5 text-center rounded-t-2xl bg-softblue">Belum punya akun? Daftar sekarang!</div>
         <div className="max-w-md m-auto py-10">
           <div className="flex flex-col w-full">
             <div className="flex flex-col gap-3">
@@ -32,7 +32,7 @@ export default function ModalLogin() {
             <div className="flex flex-col gap-3">
               <input type="text" placeholder="Email" className="input input-bordered" />
               <input type="password" placeholder="Password" className="input input-bordered" />
-              <button className="btn btn-info">Masuk</button>
+              <button className="btn btn-primary">Masuk</button>
             </div>
           </div>
         </div>

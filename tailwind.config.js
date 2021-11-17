@@ -25,6 +25,7 @@ module.exports = {
           primary: '#01818E',
           'primary-focus': '#045E67',
           'primary-content': '#ffffff',
+          'primary-soft': '#f4fcff',
           secondary: '#f000b8',
           'secondary-focus': '#bd0091',
           'secondary-content': '#ffffff',

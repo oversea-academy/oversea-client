@@ -47,7 +47,9 @@ export default function Navbar() {
           </a>
         </div>
         <div className="hidden lg:flex flex-none">
-          <a className="btn btn-primary btn-sm px-6 capitalize">Daftar</a>
+          <Link href="/signup" passHref>
+            <div className="btn btn-primary btn-sm px-6 capitalize">Daftar</div>
+          </Link>
         </div>
       </div>
       {isDrawer ? (
@@ -75,7 +77,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="#" passHref>
+              <Link href="/signup" passHref>
                 <div className="capitalize hover:text-primary font-medium mb-3">Daftar</div>
               </Link>
             </li>

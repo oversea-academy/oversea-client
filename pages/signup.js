@@ -1,7 +1,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { EventEmitter } from '../utils/events';
+import { FcGoogle } from 'react-icons/fc';
 
 export default function SignUp() {
+  function clickSignIn() {
+    EventEmitter.dispatch('showLogIn', true);
+  }
+
   return (
     <div className="min-h-screen">
       <Head>
@@ -19,15 +25,20 @@ export default function SignUp() {
                 <h1 className="mb-9 text-lg md:text-xl lg:text-2xl font-bold">Selamat Datang di Oversea Academy</h1>
                 <div className="flex flex-col-reverse md:flex-row gap-5">
                   <div className="border rounded-2xl">
-                    <div className="w-full p-5 text-center rounded-t-2xl bg-softblue border-b">
-                      Kamu sudah punya akun? Masuk!
+                    <div className="w-full p-5 text-center rounded-t-2xl bg-softblue font-bold border-b">
+                      Kamu sudah punya akun?&nbsp;
+                      <span className="text-primary cursor-pointer" onClick={clickSignIn}>
+                        Masuk!
+                      </span>
                     </div>
                     <div className="p-5 md:p-10">
                       <div className="flex flex-col w-full">
                         <div className="flex flex-col gap-3">
                           <div className="flex gap-5">
-                            <button className="btn btn-outline flex-grow">Facebook</button>
-                            <button className="btn btn-outline flex-grow">Google</button>
+                            <button className="btn btn-outline flex-grow flex gap-1 capitalize">
+                              <FcGoogle className="text-xl" />
+                              <span>Google</span>
+                            </button>
                           </div>
                         </div>
                         <div className="divider">OR</div>

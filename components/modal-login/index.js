@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { EventEmitter } from '../../utils/events';
+import { FcGoogle } from 'react-icons/fc';
 
 export default function ModalLogin() {
   const [isActive, setIsActive] = useState(false);
@@ -15,17 +17,30 @@ export default function ModalLogin() {
     }
   }
 
+  function clickRegister() {
+    setIsActive(false);
+  }
+
   return (
     <div onClick={closeModal} id="modal-login" className={`modal ${isActive ? 'modal-open' : ''}`}>
       <div className="modal-box p-0 max-w-lg">
-        <div className="w-full p-5 text-center rounded-t-2xl bg-softblue">Belum punya akun? Daftar sekarang!</div>
+        <div className="w-full p-5 text-center rounded-t-2xl font-bold bg-softblue">
+          Belum punya akun?&nbsp;
+          <span className="text-primary" onClick={clickRegister}>
+            <Link href="/signup" passHref>
+              Daftar sekarang!
+            </Link>
+          </span>
+        </div>
         <div className="max-w-md m-auto py-10">
           <div className="flex flex-col w-full">
             <div className="flex flex-col gap-3">
               <div className="font-bold">Masuk dengan</div>
               <div className="flex gap-5">
-                <button className="btn btn-outline flex-grow">Facebook</button>
-                <button className="btn btn-outline flex-grow">Google</button>
+                <button className="btn btn-outline flex-grow flex gap-1 capitalize">
+                  <FcGoogle className="text-xl" />
+                  <span>Google</span>
+                </button>
               </div>
             </div>
             <div className="divider">OR</div>

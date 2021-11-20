@@ -13,9 +13,11 @@ export default function Navbar() {
     <div className="sticky top-0 z-30">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="navbar shadow-lg bg-neutral-content text-neutral md:px-10 lg:px-20 sticky top-0 z-30 flex justify-between">
-        <div className="flex-none px-2 mx-2 w-24 h-12 flex relative">
-          <Image alt="Oversea Academy" src="/Logo.png" layout="fill" objectFit="cover" />
-        </div>
+        <Link href="/" passHref>
+          <div className="flex-none px-2 mx-2 w-24 h-12 flex relative cursor-pointer">
+            <Image alt="Oversea Academy" src="/Logo.png" layout="fill" objectFit="cover" />
+          </div>
+        </Link>
         <div className="flex lg:hidden">
           <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost" onClick={() => setIsDrawer(!isDrawer)}>
             <svg

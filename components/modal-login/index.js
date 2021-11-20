@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { EventEmitter } from '../../utils/events';
-import { FcGoogle } from 'react-icons/fc';
+import GoogleLoginButton from '../google-login';
 
 export default function ModalLogin() {
   const [isActive, setIsActive] = useState(false);
@@ -37,10 +37,7 @@ export default function ModalLogin() {
             <div className="flex flex-col gap-3">
               <div className="font-bold">Masuk dengan</div>
               <div className="flex gap-5">
-                <button className="btn btn-outline flex-grow flex gap-1 capitalize">
-                  <FcGoogle className="text-xl" />
-                  <span>Google</span>
-                </button>
+                <GoogleLoginButton />
               </div>
             </div>
             <div className="divider">OR</div>

@@ -40,12 +40,20 @@ export default function ServiceItem({ title, content, source }) {
             </button>
           </div>
         </div>
-        {isActive && (
-          <div className="flex flex-row gap-3 lg:gap-6 items-center">
+        {/* {isActive && (
+          <div className="flex flex-row gap-3 lg:gap-6 items-center transition duration-150 ease-in-out">
             <div className="w-12 h-12"></div>
             <div className="text-sm md:text-base lg:text-lg">{content}</div>
           </div>
-        )}
+        )} */}
+        <div
+          className={`flex flex-row gap-3 lg:gap-6 items-center transition-opacity transition-height duration-500 ease-in-out overflow-hidden ${
+            isActive ? 'h-20 opacity-100' : 'h-0 opacity-0'
+          }`}
+        >
+          <div className="w-12 h-12"></div>
+          <div className="text-sm md:text-base lg:text-lg">{content}</div>
+        </div>
       </div>
     </div>
   );

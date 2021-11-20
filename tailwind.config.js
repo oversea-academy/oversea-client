@@ -3,11 +3,14 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      softblue: '#bce0e71a'
+      softblue: '#d6f1f7'
     },
     extend: {
       backgroundImage: {
-        'welcome-img': "url('/images/welcome.jpg')"
+        'welcome-img': "url('/images/map.png')"
+      },
+      transitionProperty: {
+        height: 'height'
       }
     }
   },
@@ -22,6 +25,7 @@ module.exports = {
           primary: '#01818E',
           'primary-focus': '#045E67',
           'primary-content': '#ffffff',
+          'primary-soft': '#f4fcff',
           secondary: '#f000b8',
           'secondary-focus': '#bd0091',
           'secondary-content': '#ffffff',

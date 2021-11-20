@@ -1,16 +1,23 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { EventEmitter } from '../../utils/events';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
+
+  function clickLogIn() {
+    EventEmitter.dispatch('showLogIn', true);
+  }
   return (
     <div className="sticky top-0 z-30">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="navbar shadow-lg bg-neutral-content text-neutral md:px-10 lg:px-20 sticky top-0 z-30 flex justify-between">
-        <div className="flex-none px-2 mx-2 w-24 h-12 flex relative">
-          <Image alt="Oversea Academy" src="/Logo.png" layout="fill" objectFit="cover" />
-        </div>
+        <Link href="/" passHref>
+          <div className="flex-none px-2 mx-2 w-24 h-12 flex relative cursor-pointer">
+            <Image alt="Oversea Academy" src="/Logo.png" layout="fill" objectFit="cover" />
+          </div>
+        </Link>
         <div className="flex lg:hidden">
           <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost" onClick={() => setIsDrawer(!isDrawer)}>
             <svg
@@ -37,10 +44,14 @@ export default function Navbar() {
           </div>
         </div>
         <div className="hidden lg:flex flex-none">
-          <a className="btn btn-ghost btn-sm capitalize">Masuk</a>
+          <a onClick={clickLogIn} className="btn btn-ghost btn-sm capitalize">
+            Masuk
+          </a>
         </div>
         <div className="hidden lg:flex flex-none">
-          <a className="btn btn-primary btn-sm px-6 capitalize">Daftar</a>
+          <Link href="/signup" passHref>
+            <div className="btn btn-primary btn-sm px-6 capitalize">Daftar</div>
+          </Link>
         </div>
       </div>
       {isDrawer ? (
@@ -68,7 +79,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="#" passHref>
+              <Link href="/signup" passHref>
                 <div className="capitalize hover:text-primary font-medium mb-3">Daftar</div>
               </Link>
             </li>

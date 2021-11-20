@@ -184,7 +184,7 @@ export default function Layanan() {
                     </p>
                   </div>
                   <div className="my-3">
-                    <p className="py-2">Effective Date December 2021</p>
+                    <p className="py-2">Effective Date November 2021</p>
                   </div>
                 </div>
               </div>

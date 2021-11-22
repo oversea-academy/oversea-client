@@ -1,12 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { EventEmitter } from '../../utils/events';
+import { setSigned } from '../../store/actions/userSignedAction';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
+  const userSigned = useSelector((state) => state.userSigned.value);
+  const dispatch = useDispatch();
 
   function clickLogIn() {
+    console.log(userSigned);
+    dispatch(setSigned());
     EventEmitter.dispatch('showLogIn', true);
   }
   return (

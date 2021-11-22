@@ -5,6 +5,7 @@ import { GOOGLE_CLIENT_ID } from '../../constants';
 
 export default function GoogleLoginButton() {
   function onSuccess(res) {
+    console.log(res);
     console.log('Login Success ', res.profileObj);
     refreshTokenSetup(res);
   }

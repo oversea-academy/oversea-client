@@ -1,7 +1,7 @@
 import { GoogleLogin } from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 import { refreshTokenSetup } from '../../utils/refresh-token';
-const clientId = '213422843481-18129o9nb0b8f3feo8etv1i0f5lf8p9o.apps.googleusercontent.com';
+import { GOOGLE_CLIENT_ID } from '../../constants';
 
 export default function GoogleLoginButton() {
   function onSuccess(res) {
@@ -15,7 +15,7 @@ export default function GoogleLoginButton() {
   return (
     <div className="flex-grow">
       <GoogleLogin
-        clientId={clientId}
+        clientId={GOOGLE_CLIENT_ID}
         render={(renderProps) => (
           <button
             onClick={renderProps.onClick}

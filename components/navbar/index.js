@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EventEmitter } from '../../utils/events';
 import { setSigned } from '../../store/actions/userSignedAction';
-import { CgProfile, CgLogOut } from 'react-icons/cg';
+import { CgProfile, CgLogOut, CgChevronDown } from 'react-icons/cg';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const userSigned = useSelector((state) => state.userSigned.value);
   const dispatch = useDispatch();
 
@@ -15,6 +16,9 @@ export default function Navbar() {
     console.log(userSigned);
     dispatch(setSigned());
     EventEmitter.dispatch('showLogIn', true);
+  }
+  function handleShowUserMenu() {
+    setShowUserMenu(!showUserMenu);
   }
   return (
     <div className="sticky top-0 z-30">
@@ -52,25 +56,30 @@ export default function Navbar() {
         </div>
         {userSigned ? (
           <div className="hidden lg:flex flex-none relative">
-            <div className="avatar">
-              <div className="rounded-full w-10 h-10 cursor-pointer">
+            <div className="avatar flex items-center gap-1 cursor-pointer" onClick={handleShowUserMenu}>
+              <div className="rounded-full w-10 h-10">
                 <img src="http://daisyui.com/tailwind-css-component-profile-2@40w.png" alt="profile" />
               </div>
+              <CgChevronDown
+                className={`text-3xl transition duration-150 ease-in-out transform ${showUserMenu && 'rotate-180'}`}
+              />
             </div>
-            <div className="card shadow-2xl bg-primary-content text-neutral absolute top-16 right-0">
-              <div className="card-body p-5">
-                <div className="flex flex-col">
-                  <div className="p-1 w-32 flex gap-2 items-center cursor-pointer">
-                    <CgProfile />
-                    <div>Profil</div>
-                  </div>
-                  <div className="p-1 w-32 flex gap-2 items-center cursor-pointer">
-                    <CgLogOut />
-                    <div>Keluar</div>
+            {showUserMenu && (
+              <div className="card shadow-2xl bg-primary-content text-neutral absolute top-16 right-0">
+                <div className="card-body p-5">
+                  <div className="flex flex-col">
+                    <div className="p-1 w-32 flex gap-2 items-center cursor-pointer">
+                      <CgProfile />
+                      <div>Profil</div>
+                    </div>
+                    <div className="p-1 w-32 flex gap-2 items-center cursor-pointer">
+                      <CgLogOut />
+                      <div>Keluar</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         ) : (
           <div className="hidden lg:flex flex-none">

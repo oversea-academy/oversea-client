@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { EventEmitter } from '../utils/events';
 import { FcGoogle } from 'react-icons/fc';
+import GoogleLoginButton from '../components/google-login';
 
 export default function SignUp() {
   function clickSignIn() {
@@ -35,10 +36,7 @@ export default function SignUp() {
                       <div className="flex flex-col w-full">
                         <div className="flex flex-col gap-3">
                           <div className="flex gap-5">
-                            <button className="btn btn-outline flex-grow flex gap-1 capitalize">
-                              <FcGoogle className="text-xl" />
-                              <span>Google</span>
-                            </button>
+                            <GoogleLoginButton />
                           </div>
                         </div>
                         <div className="divider">OR</div>

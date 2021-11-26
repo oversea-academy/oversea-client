@@ -3,6 +3,8 @@ import Footer from '../footer';
 import ModalLogin from '../modal-login';
 import { useState, memo, useEffect } from 'react';
 import styles from './Layout.module.css';
+import { Provider } from 'react-redux';
+import store from '../../store';
 
 export default function Layout({ children }) {
   const [displayChildren, setDisplayChildren] = useState(children);
@@ -24,12 +26,14 @@ export default function Layout({ children }) {
 
   return (
     <div>
-      <Navbar />
-      <div onTransitionEnd={handleTransition} className={`${styles.content} ${styles[transitionStage]}`}>
-        {displayChildren}
-      </div>
-      <Footer />
-      <ModalLogin />
+      <Provider store={store}>
+        <Navbar />
+        <div onTransitionEnd={handleTransition} className={`${styles.content} ${styles[transitionStage]}`}>
+          {displayChildren}
+        </div>
+        <Footer />
+        <ModalLogin />
+      </Provider>
     </div>
   );
 }

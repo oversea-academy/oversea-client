@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { EventEmitter } from '../../utils/events';
 import GoogleLoginButton from '../google-login';
+import { mainRepository } from '../../repositories';
 
 export default function ModalLogin() {
   const [isActive, setIsActive] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   EventEmitter.subscribe('showLogIn', (data) => {
     setIsActive(data);
@@ -19,6 +22,24 @@ export default function ModalLogin() {
 
   function clickRegister() {
     setIsActive(false);
+  }
+
+  function signIn(e) {
+    e.preventDefault();
+    if (!email || !password) {
+      return;
+    }
+    mainRepository
+      .postLogin({
+        email: email,
+        password: password
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -41,11 +62,27 @@ export default function ModalLogin() {
               </div>
             </div>
             <div className="divider">OR</div>
-            <div className="flex flex-col gap-3">
-              <input type="text" placeholder="Email" className="input input-bordered" />
-              <input type="password" placeholder="Password" className="input input-bordered" />
-              <button className="btn btn-primary">Masuk</button>
-            </div>
+            <form className="flex flex-col gap-3">
+              <input
+                type="email"
+                placeholder="Email"
+                className="input input-bordered"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="input input-bordered"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button type="submit" className="btn btn-primary" onClick={signIn}>
+                Masuk
+              </button>
+            </form>
           </div>
         </div>
       </div>

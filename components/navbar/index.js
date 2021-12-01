@@ -14,7 +14,7 @@ export default function Navbar() {
 
   function clickLogIn() {
     console.log(userSigned);
-    dispatch(setSigned());
+    // dispatch(setSigned());
     EventEmitter.dispatch('showLogIn', true);
   }
   function handleShowUserMenu() {

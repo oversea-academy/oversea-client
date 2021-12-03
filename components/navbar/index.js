@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { EventEmitter } from '../../utils/events';
-import { setSigned } from '../../store/actions/userSignedAction';
+import { setSigned, setSignout } from '../../store/actions/userSignedAction';
+import { setProfile } from '../../store/actions/userProfileAction';
 import { CgProfile, CgLogOut, CgChevronDown } from 'react-icons/cg';
+import { mainRepository } from '../../repositories';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
@@ -13,13 +15,32 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   function clickLogIn() {
-    console.log(userSigned);
-    // dispatch(setSigned());
     EventEmitter.dispatch('showLogIn', true);
   }
   function handleShowUserMenu() {
     setShowUserMenu(!showUserMenu);
   }
+
+  function getProfile() {
+    mainRepository
+      .getMain()
+      .then((result) => {
+        dispatch(setSigned());
+        dispatch(setProfile(result));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleSignout() {
+    dispatch(setSignout());
+  }
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return (
     <div className="sticky top-0 z-30">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -72,7 +93,7 @@ export default function Navbar() {
                       <CgProfile />
                       <div>Profil</div>
                     </div>
-                    <div className="p-1 w-32 flex gap-2 items-center cursor-pointer">
+                    <div onClick={handleSignout} className="p-1 w-32 flex gap-2 items-center cursor-pointer">
                       <CgLogOut />
                       <div>Keluar</div>
                     </div>

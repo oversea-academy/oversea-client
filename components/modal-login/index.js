@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { EventEmitter } from '../../utils/events';
 import GoogleLoginButton from '../google-login';
@@ -8,6 +8,7 @@ export default function ModalLogin() {
   const [isActive, setIsActive] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   EventEmitter.subscribe('showLogIn', (data) => {
     setIsActive(data);
@@ -29,13 +30,18 @@ export default function ModalLogin() {
     if (!email || !password) {
       return;
     }
+    setIsLoading(true);
     mainRepository
       .postLogin({
         email: email,
         password: password
       })
       .then((data) => {
-        console.log(data);
+        if (data.status) {
+          window.location.reload();
+          setIsActive(false);
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -79,7 +85,7 @@ export default function ModalLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="submit" className="btn btn-primary" onClick={signIn}>
+              <button type="submit" className={`btn btn-primary ${isLoading && 'loading'}`} onClick={signIn}>
                 Masuk
               </button>
             </form>

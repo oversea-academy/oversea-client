@@ -1,9 +1,9 @@
 import request from '../utils/request';
 
-function getMain() {
+function getMeta() {
   return new Promise((resolve, reject) => {
     request
-      .get('/')
+      .get('/meta_')
       .then((response) => {
         resolve(response.data);
       })
@@ -29,7 +29,21 @@ function postLogin(data) {
   });
 }
 
+function logout() {
+  return new Promise((resolve, reject) => {
+    request
+      .get('/logout')
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 export default {
-  getMain,
+  getMeta,
+  logout,
   postLogin
 };

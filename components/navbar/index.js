@@ -23,7 +23,7 @@ export default function Navbar() {
 
   function getProfile() {
     mainRepository
-      .getMain()
+      .getMeta()
       .then((result) => {
         dispatch(setSigned());
         dispatch(setProfile(result));
@@ -34,7 +34,17 @@ export default function Navbar() {
   }
 
   function handleSignout() {
-    dispatch(setSignout());
+    mainRepository
+      .logout()
+      .then((result) => {
+        if (result.status) {
+          dispatch(setSignout());
+          dispatch(setProfile({}));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   useEffect(() => {

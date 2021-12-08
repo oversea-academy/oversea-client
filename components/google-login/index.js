@@ -1,13 +1,22 @@
 import { GoogleLogin } from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
-import { refreshTokenSetup } from '../../utils/refresh-token';
 import { GOOGLE_CLIENT_ID } from '../../constants';
+import { mainRepository } from '../../repositories';
 
 export default function GoogleLoginButton() {
   function onSuccess(res) {
-    console.log(res);
-    console.log('Login Success ', res.profileObj);
-    refreshTokenSetup(res);
+    mainRepository
+      .postLoginWithGoogle({
+        tokenId: res.tokenId
+      })
+      .then((data) => {
+        if (data.status) {
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function onFailure(res) {

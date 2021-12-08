@@ -29,6 +29,40 @@ function postLogin(data) {
   });
 }
 
+function postLoginWithGoogle(data) {
+  return new Promise((resolve, reject) => {
+    request
+      .post('/login/google', {
+        tokenId: data.tokenId
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+function registerAccount(data) {
+  return new Promise((resolve, reject) => {
+    request
+      .post('/register', {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        password: data.password,
+        phone_number: data.phone_number
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 function logout() {
   return new Promise((resolve, reject) => {
     request
@@ -45,5 +79,7 @@ function logout() {
 export default {
   getMeta,
   logout,
-  postLogin
+  postLogin,
+  postLoginWithGoogle,
+  registerAccount
 };

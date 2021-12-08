@@ -29,6 +29,21 @@ function postLogin(data) {
   });
 }
 
+function postLoginWithGoogle(data) {
+  return new Promise((resolve, reject) => {
+    request
+      .post('/login/google', {
+        tokenId: data.tokenId
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 function logout() {
   return new Promise((resolve, reject) => {
     request
@@ -45,5 +60,6 @@ function logout() {
 export default {
   getMeta,
   logout,
-  postLogin
+  postLogin,
+  postLoginWithGoogle
 };

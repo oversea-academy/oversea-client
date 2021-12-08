@@ -1,12 +1,62 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useState } from 'react';
 import { EventEmitter } from '../utils/events';
-import { FcGoogle } from 'react-icons/fc';
 import GoogleLoginButton from '../components/google-login';
+import Alert from '../components/alert';
+import { mainRepository } from '../repositories';
 
 export default function SignUp() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [alertShow, setAlertShow] = useState(false);
+  const [alertType, setAlertType] = useState('info');
+  const [alertText, setAlertText] = useState('');
+
   function clickSignIn() {
     EventEmitter.dispatch('showLogIn', true);
+  }
+
+  function register(e) {
+    e.preventDefault();
+    setAlertShow(false);
+    if (!firstName || !lastName || !email || !password || !phoneNumber) {
+      handleShowAlert('warning', 'Please fill the form');
+      return;
+    }
+    setIsLoading(true);
+    mainRepository
+      .registerAccount({
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        phone_number: phoneNumber
+      })
+      .then((data) => {
+        if (data.status) {
+          handleShowAlert('success', 'User registered, please confirm your email');
+          setIsLoading(false);
+        } else {
+          handleShowAlert('warning', data.message);
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        handleShowAlert('error', 'Something error');
+        setIsLoading(false);
+      });
+  }
+
+  function handleShowAlert(type, text) {
+    setAlertShow(true);
+    setAlertType(type);
+    setAlertText(text);
   }
 
   return (
@@ -40,16 +90,58 @@ export default function SignUp() {
                           </div>
                         </div>
                         <div className="divider">OR</div>
-                        <div className="flex flex-col gap-3">
+                        <form className="flex flex-col gap-3">
                           <div className="flex flex-col md:flex-row gap-3">
-                            <input type="text" placeholder="Nama Depan" className="input input-bordered" />
-                            <input type="text" placeholder="Nama Belakang" className="input input-bordered" />
+                            <input
+                              required
+                              type="text"
+                              placeholder="Nama Depan"
+                              className="input input-bordered"
+                              value={firstName}
+                              onChange={(e) => setFirstName(e.target.value)}
+                            />
+                            <input
+                              required
+                              type="text"
+                              placeholder="Nama Belakang"
+                              className="input input-bordered"
+                              value={lastName}
+                              onChange={(e) => setLastName(e.target.value)}
+                            />
                           </div>
-                          <input type="text" placeholder="Email" className="input input-bordered" />
-                          <input type="password" placeholder="Password" className="input input-bordered" />
-                          <input type="text" placeholder="Nomor HP" className="input input-bordered" />
-                          <button className="btn btn-primary">Sign Up</button>
-                        </div>
+                          <input
+                            required
+                            type="email"
+                            placeholder="Email"
+                            className="input input-bordered"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                          <input
+                            required
+                            type="password"
+                            placeholder="Password"
+                            className="input input-bordered"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                          <input
+                            required
+                            type="number"
+                            placeholder="Nomor HP"
+                            className="input input-bordered"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                          />
+                          <Alert isShow={alertShow} type={alertType} text={alertText} />
+                          <button
+                            type="submit"
+                            className={`btn btn-primary ${isLoading && 'loading'}`}
+                            onClick={register}
+                          >
+                            Sign Up
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>

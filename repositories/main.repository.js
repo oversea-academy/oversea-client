@@ -3,7 +3,7 @@ import request from '../utils/request';
 function getMeta() {
   return new Promise((resolve, reject) => {
     request
-      .get('/meta_')
+      .get('/account/profile')
       .then((response) => {
         resolve(response.data);
       })
@@ -16,7 +16,7 @@ function getMeta() {
 function postLogin(data) {
   return new Promise((resolve, reject) => {
     request
-      .post('/login', {
+      .post('/account/login', {
         email: data.email,
         password: data.password
       })
@@ -32,7 +32,7 @@ function postLogin(data) {
 function postLoginWithGoogle(data) {
   return new Promise((resolve, reject) => {
     request
-      .post('/login/google', {
+      .post('/account/login/google', {
         tokenId: data.tokenId
       })
       .then((response) => {
@@ -47,7 +47,7 @@ function postLoginWithGoogle(data) {
 function registerAccount(data) {
   return new Promise((resolve, reject) => {
     request
-      .post('/register', {
+      .post('/account/register', {
         first_name: data.first_name,
         last_name: data.last_name,
         email: data.email,
@@ -66,7 +66,7 @@ function registerAccount(data) {
 function logout() {
   return new Promise((resolve, reject) => {
     request
-      .get('/logout')
+      .get('/account/logout')
       .then((response) => {
         resolve(response.data);
       })

@@ -21,34 +21,27 @@ export default function Navbar() {
     setShowUserMenu(!showUserMenu);
   }
 
-  function getProfile() {
-    mainRepository
-      .getMeta()
-      .then((result) => {
-        dispatch(setSigned());
-        dispatch(setProfile(result));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function getProfile() {
+    const response = await mainRepository.getMeta();
+    if (response.status) {
+      dispatch(setSigned());
+      dispatch(setProfile(response.data));
+    }
   }
 
-  function handleSignout() {
-    mainRepository
-      .logout()
-      .then((result) => {
-        if (result.status) {
-          dispatch(setSignout());
-          dispatch(setProfile({}));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function handleSignout() {
+    const response = await mainRepository.logout();
+    if (response.status) {
+      window.localStorage.removeItem('AUTH');
+      dispatch(setSignout());
+      dispatch(setProfile({}));
+    }
   }
 
   useEffect(() => {
-    getProfile();
+    if (window.localStorage.getItem('AUTH')) {
+      getProfile();
+    }
   }, []);
 
   return (

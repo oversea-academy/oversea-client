@@ -25,27 +25,25 @@ export default function ModalLogin() {
     setIsActive(false);
   }
 
-  function signIn(e) {
+  async function signIn(e) {
     e.preventDefault();
     if (!email || !password) {
       return;
     }
     setIsLoading(true);
-    mainRepository
-      .postLogin({
-        email: email,
-        password: password
-      })
-      .then((data) => {
-        if (data.status) {
-          window.location.reload();
-          setIsActive(false);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const response = await mainRepository.postLogin({
+      email: email,
+      password: password
+    });
+    console.log(response);
+    if (!response.status) {
+      setIsLoading(false);
+      alert(response.message);
+      return;
+    }
+    window.localStorage.setItem('AUTH', '1');
+    setIsActive(false);
+    setIsLoading(false);
   }
 
   return (

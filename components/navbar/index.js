@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { EventEmitter } from '../../utils/events';
 import { setSigned, setSignout } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
+import { setRoles } from '../../store/actions/userRolesAction';
 import { CgProfile, CgLogOut, CgChevronDown } from 'react-icons/cg';
 import { accountRepository } from '../../repositories';
 
@@ -26,6 +27,7 @@ export default function Navbar() {
     if (response?.status) {
       dispatch(setSigned());
       dispatch(setProfile(response.data));
+      dispatch(setRoles(response.data.roles));
     } else {
       window.localStorage.removeItem('AUTH');
     }
@@ -40,7 +42,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    if (window.localStorage.getItem('AUTH')) {
+    if (window.localStorage.getItem('AUTH') && !userSigned) {
       getProfile();
     }
   }, []);

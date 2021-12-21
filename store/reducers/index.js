@@ -1,10 +1,12 @@
-import userSignedReducer from './userSignedReducer';
 import userProfileReducer from './userProfileReducer';
+import userRolesReducer from './userRolesReducer';
+import userSignedReducer from './userSignedReducer';
 import { combineReducers } from 'redux';
 
 const reducers = combineReducers({
-  userSigned: userSignedReducer,
-  userProfile: userProfileReducer
+  userProfile: userProfileReducer,
+  userRoles: userRolesReducer,
+  userSigned: userSignedReducer
 });
 
 export default reducers;

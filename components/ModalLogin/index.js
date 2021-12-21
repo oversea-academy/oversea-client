@@ -50,7 +50,7 @@ export default function ModalLogin() {
         <div className="w-full p-5 text-center rounded-t-2xl font-bold bg-softblue">
           Belum punya akun?&nbsp;
           <span className="text-primary" onClick={clickRegister}>
-            <Link href="/signup" passHref>
+            <Link href="/account/signup" passHref>
               Daftar sekarang!
             </Link>
           </span>

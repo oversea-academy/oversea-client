@@ -6,7 +6,7 @@ import { setSigned } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
 import { setRoles } from '../../store/actions/userRolesAction';
 
-const authenticatedRoute = (Component = null, options = { role: 'admin' }) => {
+const authenticatedRoute = (Component = null, options = {}) => {
   return function AuthenticatedRoute() {
     const [loading, setLoading] = useState(true);
     const userRoles = useSelector((state) => state.userRoles);
@@ -27,8 +27,8 @@ const authenticatedRoute = (Component = null, options = { role: 'admin' }) => {
     }
 
     function routePermission() {
-      if (userRoles.some((item) => item === options.role)) {
-        setLoading(true);
+      if (options.role === undefined || userRoles.some((item) => item === options.role)) {
+        setLoading(false);
       } else {
         router.push(options.pathAfterFailure || '/');
       }

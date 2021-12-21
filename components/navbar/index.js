@@ -22,10 +22,12 @@ export default function Navbar() {
   }
 
   async function getProfile() {
-    const response = await accountRepository.getMeta();
+    const response = await accountRepository.getProfile();
     if (response?.status) {
       dispatch(setSigned());
       dispatch(setProfile(response.data));
+    } else {
+      window.localStorage.removeItem('AUTH');
     }
   }
 

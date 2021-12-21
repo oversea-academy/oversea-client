@@ -1,22 +1,17 @@
 import { GoogleLogin } from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 import { GOOGLE_CLIENT_ID } from '../../constants';
-import { mainRepository } from '../../repositories';
+import { accountRepository } from '../../repositories';
 
 export default function GoogleLoginButton() {
-  function onSuccess(res) {
-    mainRepository
-      .postLoginWithGoogle({
-        tokenId: res.tokenId
-      })
-      .then((data) => {
-        if (data.status) {
-          window.location.reload();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function onSuccess(res) {
+    const response = await accountRepository.postLoginWithGoogle({
+      tokenId: res.tokenId
+    });
+    if (response?.status) {
+      window.localStorage.setItem('AUTH', '1');
+      window.location.reload();
+    }
   }
 
   function onFailure(res) {

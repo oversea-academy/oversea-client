@@ -6,7 +6,7 @@ import { EventEmitter } from '../../utils/events';
 import { setSigned, setSignout } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
 import { CgProfile, CgLogOut, CgChevronDown } from 'react-icons/cg';
-import { mainRepository } from '../../repositories';
+import { accountRepository } from '../../repositories';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
@@ -22,19 +22,18 @@ export default function Navbar() {
   }
 
   async function getProfile() {
-    const response = await mainRepository.getMeta();
-    if (response.status) {
+    const response = await accountRepository.getMeta();
+    if (response?.status) {
       dispatch(setSigned());
       dispatch(setProfile(response.data));
     }
   }
 
   async function handleSignout() {
-    const response = await mainRepository.logout();
-    if (response.status) {
+    const response = await accountRepository.logout();
+    if (response?.status) {
       window.localStorage.removeItem('AUTH');
-      dispatch(setSignout());
-      dispatch(setProfile({}));
+      window.location.reload();
     }
   }
 

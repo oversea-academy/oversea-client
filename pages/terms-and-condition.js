@@ -1,18 +1,6 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
-import { mainRepository } from '../repositories';
 
 export default function Layanan() {
-  useEffect(() => {
-    mainRepository
-      .getMain()
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
   return (
     <div>
       <Head>

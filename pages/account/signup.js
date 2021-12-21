@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useRouter } from 'next/router';
 import { EventEmitter } from '../../utils/events';
 import GoogleLoginButton from '../../components/GoogleLogin';
 import Alert from '../../components/Alert';
@@ -17,8 +19,14 @@ export default function SignUp() {
   const [alertType, setAlertType] = useState('info');
   const [alertText, setAlertText] = useState('');
 
+  const router = useRouter();
+
   function clickSignIn() {
-    EventEmitter.dispatch('showLogIn', true);
+    if (isMobile) {
+      router.push('/account/signin');
+    } else {
+      EventEmitter.dispatch('showLogIn', true);
+    }
   }
 
   async function register(e) {

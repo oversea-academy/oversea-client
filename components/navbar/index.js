@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import { isMobile } from 'react-device-detect';
 import { EventEmitter } from '../../utils/events';
 import { setSigned, setSignout } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
@@ -14,9 +16,14 @@ export default function Navbar() {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const userSigned = useSelector((state) => state.userSigned.value);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   function clickLogIn() {
-    EventEmitter.dispatch('showLogIn', true);
+    if (isMobile) {
+      router.push('/account/signin');
+    } else {
+      EventEmitter.dispatch('showLogIn', true);
+    }
   }
   function handleShowUserMenu() {
     setShowUserMenu(!showUserMenu);
@@ -139,12 +146,12 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="#" passHref>
-                <div className="capitalize hover:text-primary font-medium mb-3">Masuk</div>
-              </Link>
+              <div onClick={clickLogIn} className="capitalize hover:text-primary font-medium mb-3">
+                Masuk
+              </div>
             </li>
             <li>
-              <Link href="/signup" passHref>
+              <Link href="/account/signup" passHref>
                 <div className="capitalize hover:text-primary font-medium mb-3">Daftar</div>
               </Link>
             </li>

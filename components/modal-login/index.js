@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { EventEmitter } from '../../utils/events';
 import GoogleLoginButton from '../google-login';
-import { mainRepository } from '../../repositories';
+import { accountRepository } from '../../repositories';
 
 export default function ModalLogin() {
   const [isActive, setIsActive] = useState(false);
@@ -25,27 +25,23 @@ export default function ModalLogin() {
     setIsActive(false);
   }
 
-  function signIn(e) {
+  async function signIn(e) {
     e.preventDefault();
     if (!email || !password) {
       return;
     }
     setIsLoading(true);
-    mainRepository
-      .postLogin({
-        email: email,
-        password: password
-      })
-      .then((data) => {
-        if (data.status) {
-          window.location.reload();
-          setIsActive(false);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const response = await accountRepository.postLogin({
+      email: email,
+      password: password
+    });
+    if (response?.status) {
+      window.localStorage.setItem('AUTH', '1');
+      window.location.reload();
+    } else {
+      setIsLoading(false);
+      alert(response.message);
+    }
   }
 
   return (

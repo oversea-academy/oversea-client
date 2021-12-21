@@ -1,6 +1,6 @@
 import request from '../utils/request';
 
-function getMeta() {
+function getProfile() {
   return new Promise((resolve, reject) => {
     request
       .get('/account/profile')
@@ -77,7 +77,7 @@ function logout() {
 }
 
 export default {
-  getMeta,
+  getProfile,
   logout,
   postLogin,
   postLoginWithGoogle,

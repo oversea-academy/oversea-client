@@ -1,3 +1,3 @@
-import mainRepository from './main.repository';
+import accountRepository from './account.repository';
 
-export { mainRepository };
+export { accountRepository };

@@ -6,7 +6,7 @@ import { EventEmitter } from '../../utils/events';
 import { setSigned, setSignout } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
 import { CgProfile, CgLogOut, CgChevronDown } from 'react-icons/cg';
-import { mainRepository } from '../../repositories';
+import { accountRepository } from '../../repositories';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
@@ -21,34 +21,28 @@ export default function Navbar() {
     setShowUserMenu(!showUserMenu);
   }
 
-  function getProfile() {
-    mainRepository
-      .getMeta()
-      .then((result) => {
-        dispatch(setSigned());
-        dispatch(setProfile(result));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function getProfile() {
+    const response = await accountRepository.getProfile();
+    if (response?.status) {
+      dispatch(setSigned());
+      dispatch(setProfile(response.data));
+    } else {
+      window.localStorage.removeItem('AUTH');
+    }
   }
 
-  function handleSignout() {
-    mainRepository
-      .logout()
-      .then((result) => {
-        if (result.status) {
-          dispatch(setSignout());
-          dispatch(setProfile({}));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function handleSignout() {
+    const response = await accountRepository.logout();
+    if (response?.status) {
+      window.localStorage.removeItem('AUTH');
+      window.location.reload();
+    }
   }
 
   useEffect(() => {
-    getProfile();
+    if (window.localStorage.getItem('AUTH')) {
+      getProfile();
+    }
   }, []);
 
   return (

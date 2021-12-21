@@ -40,6 +40,11 @@ export default function Navbar() {
     }
   }
 
+  function handleProfile() {
+    router.push('/account/profile');
+    setShowUserMenu(false);
+  }
+
   async function handleSignout() {
     const response = await accountRepository.logout();
     if (response?.status) {
@@ -102,7 +107,7 @@ export default function Navbar() {
               <div className="card shadow-2xl bg-primary-content text-neutral absolute top-16 right-0">
                 <div className="card-body p-5">
                   <div className="flex flex-col">
-                    <div className="p-1 w-32 flex gap-2 items-center cursor-pointer">
+                    <div onClick={handleProfile} className="p-1 w-32 flex gap-2 items-center cursor-pointer">
                       <CgProfile />
                       <div>Profil</div>
                     </div>

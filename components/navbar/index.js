@@ -113,7 +113,7 @@ export default function Navbar() {
             <a onClick={clickLogIn} className="btn btn-ghost btn-sm capitalize">
               Masuk
             </a>
-            <Link href="/signup" passHref>
+            <Link href="/account/signup" passHref>
               <div className="btn btn-primary btn-sm px-6 capitalize">Daftar</div>
             </Link>
           </div>

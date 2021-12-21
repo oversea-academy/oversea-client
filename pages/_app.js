@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import store from '../store';
 
 import 'tailwindcss/tailwind.css';

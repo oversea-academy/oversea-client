@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import ServiceItem from '../components/service-item';
-import TestimoniCard from '../components/testimoni-card';
+import ServiceItem from '../components/ServiceItem';
+import TestimoniCard from '../components/TestimoniCard';
 import React, { useState } from 'react';
 
 export default function Home() {

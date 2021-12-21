@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import AuthenticatedRoute from '../../components/AuthenticatedRoute';
 
-export default function Admin() {
+function Admin() {
   return (
     <div>
       <Head>
@@ -8,7 +9,6 @@ export default function Admin() {
         <meta name="description" content="Oversea Academy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main>
         <section>
           <div className="w-full">
@@ -24,3 +24,5 @@ export default function Admin() {
     </div>
   );
 }
+
+export default AuthenticatedRoute(Admin, { role: 'admin' });

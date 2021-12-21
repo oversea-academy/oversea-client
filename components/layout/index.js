@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import Navbar from '../navbar';
-import Footer from '../footer';
-import ModalLogin from '../modal-login';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
+import ModalLogin from '../ModalLogin';
 import styles from './Layout.module.css';
 import { permissionRoutes } from '../../utils/permission-routes';
 

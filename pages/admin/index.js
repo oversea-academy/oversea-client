@@ -1,6 +1,19 @@
 import Head from 'next/head';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Admin() {
+  const userProfile = useSelector((state) => state.userProfile);
+  const router = useRouter();
+
+  useEffect(() => {
+    const roles = userProfile.roles ? userProfile.roles : [];
+    if (!roles.some((item) => item == 'admin')) {
+      router.push('/');
+    }
+  }, []);
+
   return (
     <div>
       <Head>

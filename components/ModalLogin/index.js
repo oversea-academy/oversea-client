@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { EventEmitter } from '../../utils/events';
-import GoogleLoginButton from '../google-login';
+import GoogleLoginButton from '../GoogleLogin';
 import { accountRepository } from '../../repositories';
 
 export default function ModalLogin() {

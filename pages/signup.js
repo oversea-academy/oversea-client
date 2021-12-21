@@ -2,8 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
 import { EventEmitter } from '../utils/events';
-import GoogleLoginButton from '../components/google-login';
-import Alert from '../components/alert';
+import GoogleLoginButton from '../components/GoogleLogin';
+import Alert from '../components/Alert';
 import { accountRepository } from '../repositories';
 
 export default function SignUp() {

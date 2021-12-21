@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { EventEmitter } from '../utils/events';
 import GoogleLoginButton from '../components/google-login';
 import Alert from '../components/alert';
-import { mainRepository } from '../repositories';
+import { accountRepository } from '../repositories';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -21,7 +21,7 @@ export default function SignUp() {
     EventEmitter.dispatch('showLogIn', true);
   }
 
-  function register(e) {
+  async function register(e) {
     e.preventDefault();
     setAlertShow(false);
     if (!firstName || !lastName || !email || !password || !phoneNumber) {
@@ -29,28 +29,20 @@ export default function SignUp() {
       return;
     }
     setIsLoading(true);
-    mainRepository
-      .registerAccount({
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        password: password,
-        phone_number: phoneNumber
-      })
-      .then((data) => {
-        if (data.status) {
-          handleShowAlert('success', 'User registered, please confirm your email');
-          setIsLoading(false);
-        } else {
-          handleShowAlert('warning', data.message);
-          setIsLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        handleShowAlert('error', 'Something error');
-        setIsLoading(false);
-      });
+    const response = await accountRepository.registerAccount({
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      password: password,
+      phone_number: phoneNumber
+    });
+    if (response?.status) {
+      handleShowAlert('success', 'User registered, please confirm your email');
+      setIsLoading(false);
+    } else {
+      handleShowAlert('warning', response.message);
+      setIsLoading(false);
+    }
   }
 
   function handleShowAlert(type, text) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { accountRepository } from '../../repositories';
@@ -11,39 +11,40 @@ const authenticatedRoute = (Component = null, options = {}) => {
     const [loading, setLoading] = useState(true);
     const userRoles = useSelector((state) => state.userRoles);
     const userSigned = useSelector((state) => state.userSigned.value);
-    const router = useRouter();
+    const userProfile = useSelector((state) => state.userProfile);
     const dispatch = useDispatch();
+    const router = useRouter();
 
-    async function getProfile() {
+    const getProfile = useCallback(async () => {
       const response = await accountRepository.getProfile();
       if (response?.status) {
-        dispatch(setSigned());
         dispatch(setProfile(response.data));
         dispatch(setRoles(response.data.roles));
+        dispatch(setSigned());
       } else {
         window.localStorage.removeItem('AUTH');
-        router.push(options.pathAfterFailure || '/');
+        window.location.replace(options.pathAfterFailure || '/');
       }
-    }
+    }, []);
 
-    function routePermission() {
+    const routePermission = useCallback(() => {
       if (options.role === undefined || userRoles.some((item) => item === options.role)) {
         setLoading(false);
       } else {
         router.push(options.pathAfterFailure || '/');
       }
-    }
+    }, [userRoles, setLoading]);
 
     useEffect(() => {
       if (userSigned) {
-        routePermission();
+        if (userProfile.email) routePermission();
       } else {
         getProfile();
       }
-    }, [loading, setLoading, userRoles, userSigned]);
+    }, [userSigned, routePermission, getProfile]);
 
     if (loading) {
-      return <div />;
+      return <div className="min-h-screen" />;
     }
 
     return <Component />;

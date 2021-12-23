@@ -1,20 +1,21 @@
 import request from '../utils/request';
+import handleErrorResponse from '../utils/handleErrorResponse';
 
 function getProfile() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     request
       .get('/account/profile')
       .then((response) => {
         resolve(response.data);
       })
       .catch((err) => {
-        reject(err);
+        resolve(handleErrorResponse(err));
       });
   });
 }
 
 function postLogin(data) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     request
       .post('/account/login', {
         email: data.email,
@@ -24,13 +25,13 @@ function postLogin(data) {
         resolve(response.data);
       })
       .catch((err) => {
-        reject(err);
+        resolve(handleErrorResponse(err));
       });
   });
 }
 
 function postLoginWithGoogle(data) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     request
       .post('/account/login/google', {
         tokenId: data.tokenId
@@ -39,13 +40,13 @@ function postLoginWithGoogle(data) {
         resolve(response.data);
       })
       .catch((err) => {
-        reject(err);
+        resolve(handleErrorResponse(err));
       });
   });
 }
 
 function registerAccount(data) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     request
       .post('/account/register', {
         first_name: data.first_name,
@@ -58,20 +59,20 @@ function registerAccount(data) {
         resolve(response.data);
       })
       .catch((err) => {
-        reject(err);
+        resolve(handleErrorResponse(err));
       });
   });
 }
 
 function logout() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     request
       .get('/account/logout')
       .then((response) => {
         resolve(response.data);
       })
       .catch((err) => {
-        reject(err);
+        resolve(handleErrorResponse(err));
       });
   });
 }

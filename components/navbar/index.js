@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
@@ -29,7 +29,7 @@ export default function Navbar() {
     setShowUserMenu(!showUserMenu);
   }
 
-  async function getProfile() {
+  const getProfile = useCallback(async () => {
     const response = await accountRepository.getProfile();
     if (response?.status) {
       dispatch(setSigned());
@@ -38,7 +38,7 @@ export default function Navbar() {
     } else {
       window.localStorage.removeItem('AUTH');
     }
-  }
+  }, []);
 
   function handleProfile() {
     router.push('/account/profile');
@@ -48,6 +48,7 @@ export default function Navbar() {
   async function handleSignout() {
     const response = await accountRepository.logout();
     if (response?.status) {
+      dispatch(setSignout());
       window.localStorage.removeItem('AUTH');
       window.location.reload();
     }
@@ -57,7 +58,7 @@ export default function Navbar() {
     if (window.localStorage.getItem('AUTH') && !userSigned) {
       getProfile();
     }
-  }, []);
+  }, [userSigned, getProfile]);
 
   return (
     <div className="sticky top-0 z-30">

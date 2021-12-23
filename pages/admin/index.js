@@ -11,7 +11,7 @@ function Admin() {
       </Head>
       <main>
         <section>
-          <div className="w-full">
+          <div className="w-full min-h-screen">
             <div className="w-full flex justify-center px-5">
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
                 <p className="mb-2 lg:mb-3 text-primary font-bold">Admin</p>

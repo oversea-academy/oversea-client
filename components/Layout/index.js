@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
-import Footer from '../Footer1';
+import Footer from '../Footer';
 import ModalLogin from '../ModalLogin';
 import styles from './Layout.module.css';
 

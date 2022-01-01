@@ -22,14 +22,14 @@ module.exports = {
     themes: [
       {
         pallete: {
-          primary: '#01818E',
+          primary: '#005365',
           'primary-focus': '#045E67',
           'primary-content': '#ffffff',
           'primary-soft': '#f4fcff',
-          secondary: '#f000b8',
+          secondary: '#01818E',
           'secondary-focus': '#bd0091',
           'secondary-content': '#ffffff',
-          accent: '#37cdbe',
+          accent: '#ECCE76',
           'accent-focus': '#2aa79b',
           'accent-content': '#ffffff',
           neutral: '#3d4451',

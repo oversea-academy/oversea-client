@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import AuthenticatedRoute from '../../components/AuthenticatedRoute';
-import AdminMenu from '../../components/AdminMenu';
+import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
+import AdminMenu from '../../../../components/AdminMenu';
 
 function Admin() {
   return (
@@ -12,7 +12,7 @@ function Admin() {
       </Head>
       <main>
         <AdminMenu>
-          <h1>Main</h1>
+          <h1>Program class register</h1>
         </AdminMenu>
       </main>
     </div>

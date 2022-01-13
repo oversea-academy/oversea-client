@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
 import React, { useState } from 'react';
+import { CgInpicture } from 'react-icons/cg';
+import CardClassInfo from '../components/CardClassInfo';
 
 export default function Home() {
   const [layanan, setLayanan] = useState([

@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
 import React, { useState } from 'react';
+import ClassOptions from '../components/ClassOptions';
 
 export default function Home() {
   const [layanan, setLayanan] = useState([
@@ -85,6 +86,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <ClassOptions></ClassOptions>
         </section>
 
         <section id="layanan">

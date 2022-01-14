@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
+import CardOffer from '../components/CardOffer';
 import React, { useState } from 'react';
 
 export default function Home() {
@@ -86,6 +87,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <CardOffer/>
 
         <section id="layanan">
           <div className="w-full">

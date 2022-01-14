@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
+import Button from '../components/Button';
 import React, { useState } from 'react';
 
 export default function Home() {
@@ -59,6 +60,12 @@ export default function Home() {
       description: 'Rumah Amal Salman ITB'
     }
   ];
+  
+  var btnOnCLick = (e) => {
+    e.preventDefault();
+    alert('Button Clicked');
+  };
+
 
   return (
     <div className={styles.container}>
@@ -86,6 +93,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <Button title="Enable" isDisabled={false} onClick={btnOnCLick}/>
+        <div className="mt-2 w-1/2">
+        <Button title="Disable" isDisabled={true} onClick={btnOnCLick}/>
+        </div>
 
         <section id="layanan">
           <div className="w-full">

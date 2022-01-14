@@ -87,6 +87,30 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="felx justify-center w-full ">
+            <div className="flex flex-wrap justify-start w-10/12 m-auto">
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+            </div>
+          </div>
         </section>
 
         <section id="layanan">

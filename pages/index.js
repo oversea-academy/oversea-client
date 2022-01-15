@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
 import Button from '../components/Button';
+import CardOffer from '../components/CardOffer';
 import React, { useState } from 'react';
 
 export default function Home() {
@@ -60,12 +61,11 @@ export default function Home() {
       description: 'Rumah Amal Salman ITB'
     }
   ];
-  
+
   var btnOnCLick = (e) => {
     e.preventDefault();
     alert('Button Clicked');
   };
-
 
   return (
     <div className={styles.container}>
@@ -94,10 +94,11 @@ export default function Home() {
           </div>
         </section>
 
-        <Button title="Enable" isDisabled={false} onClick={btnOnCLick}/>
+        <Button title="Enable" isDisabled={false} onClick={btnOnCLick} />
         <div className="mt-2 w-1/2">
-        <Button title="Disable" isDisabled={true} onClick={btnOnCLick}/>
+          <Button title="Disable" isDisabled={true} onClick={btnOnCLick} />
         </div>
+        <CardOffer />
 
         <section id="layanan">
           <div className="w-full">

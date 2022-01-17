@@ -79,26 +79,26 @@ export default function Home() {
 
       <main>
         <section id="home">
-          <div className="hero w-full bg-primary bg-opacity-10">
-            <div className="lg:hidden w-full h-full bg-bottom bg-no-repeat bg-contain opacity-20 bg-welcome-img"></div>
-            <div className="w-full h-full lg:my-16 hero-content items-start lg:items-center lg:flex-row-reverse lg:justify-around">
-              <div className="max-w-md hidden lg:block opacity-60">
-                <Image src="/images/map.png" alt="map" width={500} height={300} objectFit="contain" />
+          <div className="hero min-h-screen bg-welcome-img relative">
+            <div className="w-full hero-content justify-start mb-32">
+              <div className="max-w-lg ">
+                {/* <Image src="/Logo.png" alt="logo" width={200} height={100} objectFit="contain" /> */}
+                <p className="mb-12 text-primary font-bold">Oversea Academy</p>
+                <div className="text-5xl text-primary pb-5">All-in-one Oversea Study Preparation</div>
+                <div className="text-primary pb-5">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua.
+                </div>
+                <div className="w-48">
+                  <Button title="Cari Kelas" isDisabled={false} onClick={btnOnCLick} />
+                </div>
               </div>
-              <div className="max-w-md mt-12 lg:mt-0">
-                <p className="mb-2 lg:mb-3 text-primary font-bold">Oversea Academy</p>
-                <h1 className="mb-5 lg:mb-9 text-3xl md:text-5xl lg:text-6xl font-bold">Growing Globally with Us!</h1>
-                <p className="mb-5">Let&#39;s prepare your oversea study and career</p>
-              </div>
+            </div>
+            <div className="absolute -bottom-12">
+              <CardOffer />
             </div>
           </div>
         </section>
-
-        <Button title="Enable" isDisabled={false} onClick={btnOnCLick} />
-        <div className="mt-2 w-1/2">
-          <Button title="Disable" isDisabled={true} onClick={btnOnCLick} />
-        </div>
-        <CardOffer />
 
         <section id="layanan">
           <div className="w-full">

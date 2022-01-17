@@ -1,6 +1,6 @@
 export default function CardOffer() {
   return (
-    <div className="container px-11 py-6 mx-auto rounded-3xl shadow-lg md:w-4/5 lg:w-4/5">
+    <div className="container px-11 py-6 mx-auto rounded-3xl shadow-xl md:w-4/5 lg:w-4/5 bg-base-100">
       <div className="grid grid-cols-1 gap-6 md:gap-8 lg:gap-10  lg:grid-cols-3">
         <div className="px-2">
           <div className="inline-flex">

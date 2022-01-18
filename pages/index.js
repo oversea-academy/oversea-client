@@ -100,6 +100,15 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="class" className="mt-24">
+          <div className="w-full flex justify-center">
+            <div className="w-full md:w-9/12 lg:w-6/12 py-16 flex flex-col items-center">
+              <div className="text-primary text-3xl">Pilihan Kelas</div>
+              <div className="border-b-4 w-20 p-2 border-accent"></div>
+            </div>
+          </div>
+        </section>
+
         <section id="layanan">
           <div className="w-full">
             <div className="w-full flex justify-center px-5">

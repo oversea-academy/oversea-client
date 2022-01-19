@@ -1,12 +1,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import styles from './ClassOption.module.css';
-import { useSelector, useDispatch } from 'react-redux';
 import { EventEmitter } from '../../utils/events';
 
 export default function ClassOptions() {
   const [isFocused, setISFocused] = useState(0);
-  const dispatchOptions = useDispatch();
 
   function setBtnClassOptions(index) {
     var btn_class_options = document.getElementsByClassName('btn_class_options');
@@ -26,34 +24,22 @@ export default function ClassOptions() {
     }
 
     if (index == 0) {
-      EventEmitter.dispatch('showSemuaKelas', true);
+      EventEmitter.dispatch('showOptionClass', 'semua');
     } else if (index == 1) {
-      EventEmitter.dispatch('showIELTS', true);
+      EventEmitter.dispatch('showOptionClass', 'ielts');
     } else if (index == 2) {
-      EventEmitter.dispatch('showTOEFT', true);
+      EventEmitter.dispatch('showOptionClass', 'toefl');
     } else if (index == 3) {
-      EventEmitter.dispatch('showBasic', true);
+      EventEmitter.dispatch('showOptionClass', 'basic');
     } else {
-      EventEmitter.dispatch('showPrivate', true);
+      EventEmitter.dispatch('showOptionClass', 'private');
     }
   }
 
   // test  dispatch Event
 
-  EventEmitter.subscribe('showSemuaKelas', (data) => {
-    console.log('showSemuaKelas');
-  });
-  EventEmitter.subscribe('showIELTS', (data) => {
-    console.log('showIELTS');
-  });
-  EventEmitter.subscribe('showTOEFT', (data) => {
-    console.log('showTOEFT');
-  });
-  EventEmitter.subscribe('showBasic', (data) => {
-    console.log('showBasic');
-  });
-  EventEmitter.subscribe('showPrivate', (data) => {
-    console.log('showPrivate');
+  EventEmitter.subscribe('showOptionClass', (data) => {
+    console.log(data);
   });
 
   return (

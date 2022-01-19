@@ -94,13 +94,13 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-12">
+            <div className="absolute -bottom-64 lg:-bottom-12">
               <CardOffer />
             </div>
           </div>
         </section>
 
-        <section id="class" className="mt-24">
+        <section id="class" className="mt-64 lg:mt-24">
           <div className="w-full flex justify-center">
             <div className="w-full md:w-9/12 lg:w-6/12 py-16 flex flex-col items-center">
               <div className="text-primary text-3xl">Pilihan Kelas</div>

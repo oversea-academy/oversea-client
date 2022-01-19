@@ -3,7 +3,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      softblue: '#d6f1f7'
+      softblue: '#d6f1f7',
+      'gray-400': '#eff0f0'
     },
     extend: {
       backgroundImage: {

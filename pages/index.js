@@ -6,6 +6,7 @@ import TestimoniCard from '../components/TestimoniCard';
 import Button from '../components/Button';
 import CardOffer from '../components/CardOffer';
 import React, { useState } from 'react';
+import ClassOptions from '../components/ClassOptions';
 
 export default function Home() {
   const [layanan, setLayanan] = useState([
@@ -98,6 +99,7 @@ export default function Home() {
               <CardOffer />
             </div>
           </div>
+          <ClassOptions></ClassOptions>
         </section>
 
         <section id="class" className="mt-64 lg:mt-24">

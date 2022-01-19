@@ -94,6 +94,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          {/*Test cardClas Info  */}
           <div className="felx justify-center w-full ">
             <div className="flex flex-wrap justify-start w-10/12 m-auto">
               <CardClassInfo
@@ -118,6 +119,7 @@ export default function Home() {
               ></CardClassInfo>
             </div>
           </div>
+          {/* end Test cardClas Info  */}
         </section>
 
         <Button title="Enable" isDisabled={false} onClick={btnOnCLick} />

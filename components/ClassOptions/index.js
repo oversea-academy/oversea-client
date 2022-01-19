@@ -1,15 +1,13 @@
-import Image from 'next/image';
 import React, { useState } from 'react';
-import styles from './ClassOption.module.css';
 import { EventEmitter } from '../../utils/events';
 
 export default function ClassOptions() {
   const [isFocused, setISFocused] = useState(0);
 
   function setBtnClassOptions(index) {
-    var btn_class_options = document.getElementsByClassName('btn_class_options');
+    let btn_class_options = document.getElementsByClassName('btn_class_options');
     setISFocused(index);
-    for (var i = 0; i < btn_class_options.length; i++) {
+    for (let i = 0; i < btn_class_options.length; i++) {
       if (i === index) {
         btn_class_options[i].classList.add('from-primary');
         btn_class_options[i].classList.add('to-accent');
@@ -44,11 +42,6 @@ export default function ClassOptions() {
 
   return (
     <div className="block justify-center w-full my-3 mx-2">
-      <h2 className="text-center font-semibold text-4xl text-primary my-2">Pilihan Kelas</h2>
-      <div className="inline-flex justify-center w-full">
-        <div className={`${styles.garisBawah}`}> </div>
-      </div>
-
       <div className="inline-flex justify-center w-full ">
         <button
           onClick={() => setBtnClassOptions(0)}

@@ -8,7 +8,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'welcome-img': "url('/images/map.png')"
+        'welcome-img': "url('/images/woman-with-headset-full.png')",
+        'class-img': "url('/images/woman-with-laptop-full.png')"
       },
       transitionProperty: {
         height: 'height'

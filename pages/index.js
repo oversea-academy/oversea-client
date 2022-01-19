@@ -3,6 +3,8 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
+import Button from '../components/Button';
+import CardOffer from '../components/CardOffer';
 import React, { useState } from 'react';
 import ClassOptions from '../components/ClassOptions';
 
@@ -61,6 +63,11 @@ export default function Home() {
     }
   ];
 
+  var btnOnCLick = (e) => {
+    e.preventDefault();
+    alert('Button Clicked');
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -88,6 +95,12 @@ export default function Home() {
           </div>
           <ClassOptions></ClassOptions>
         </section>
+
+        <Button title="Enable" isDisabled={false} onClick={btnOnCLick} />
+        <div className="mt-2 w-1/2">
+          <Button title="Disable" isDisabled={true} onClick={btnOnCLick} />
+        </div>
+        <CardOffer />
 
         <section id="layanan">
           <div className="w-full">

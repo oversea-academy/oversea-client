@@ -23,6 +23,7 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.3.1",
     "autoprefixer": "^10.3.4",
     "daisyui": "^1.14.0",
     "eslint": "7.31.0",

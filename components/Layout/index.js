@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
-import Footer from '../Footer';
 import ModalLogin from '../ModalLogin';
 import styles from './Layout.module.css';
 
@@ -35,7 +34,6 @@ export default function Layout({ children }) {
       >
         {displayChildren}
       </div>
-      <Footer />
       <ModalLogin />
     </div>
   );

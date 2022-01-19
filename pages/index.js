@@ -64,9 +64,52 @@ export default function Home() {
     }
   ];
 
-  var btnOnCLick = (e) => {
+  const classes = [
+    {
+      id: 1,
+      name: 'Kelas IELTS Regular',
+      description: 'Belajar persiapan IELTS weedays malam',
+      price: 399000
+    },
+    {
+      id: 2,
+      name: 'Kelas IELTS Weekend',
+      description: 'Belajar persiapan IELTS saat weekend',
+      price: 399000
+    },
+    {
+      id: 3,
+      name: 'Kelas TOEFL ITP',
+      description: 'Belajar persiapan TOEFL ITP weedays malam',
+      price: 399000
+    },
+    {
+      id: 4,
+      name: 'Kelas IELTS Regular',
+      description: 'Belajar persiapan IELTS weedays malam',
+      price: 399000
+    },
+    {
+      id: 5,
+      name: 'Kelas TOEFL ITP',
+      description: 'Belajar persiapan TOEFL ITP weedays malam',
+      price: 399000
+    },
+    {
+      id: 6,
+      name: 'Kelas IELTS Regular',
+      description: 'Belajar persiapan IELTS weedays malam',
+      price: 399000
+    }
+  ];
+
+  const btnOnCLick = (e) => {
     e.preventDefault();
     alert('Button Clicked');
+  };
+
+  const handleClickClass = (id) => {
+    console.log(id);
   };
 
   return (
@@ -104,41 +147,28 @@ export default function Home() {
 
         <section id="class" className="mt-64 lg:mt-24">
           <div className="w-full flex justify-center">
-            <div className="w-full md:w-9/12 lg:w-6/12 py-16 flex flex-col items-center">
+            <div className="w-full md:w-10/12 lg:w-8/12 py-16 flex flex-col items-center">
               <div className="text-primary font-semibold text-4xl">Pilihan Kelas</div>
               <div className="border-b-4 w-20 p-2 border-accent mb-10"></div>
-              <div>
+              <div className="mb-10">
                 <ClassOptions></ClassOptions>
               </div>
-              <div className="felx justify-center w-full ">
-                <div className="flex flex-wrap justify-start w-10/12 m-auto">
+              <div className="flex flex-wrap gap-10 justify-center w-full">
+                {classes.map(({ id, name, description, price }) => (
                   <CardClassInfo
-                    name="Kelas IELTS Regular"
-                    description="Belajar persiapan IELTS weekdays malam"
-                    price="399k"
+                    key={id}
+                    name={name}
+                    description={description}
+                    price={price}
+                    onClick={(e) => handleClickClass(id)}
                   ></CardClassInfo>
-                  <CardClassInfo
-                    name="Kelas IELTS Regular"
-                    description="Belajar persiapan IELTS weekdays malam"
-                    price="399k"
-                  ></CardClassInfo>
-                  <CardClassInfo
-                    name="Kelas IELTS Regular"
-                    description="Belajar persiapan IELTS weekdays malam"
-                    price="399k"
-                  ></CardClassInfo>
-                  <CardClassInfo
-                    name="Kelas IELTS Regular"
-                    description="Belajar persiapan IELTS weekdays malam"
-                    price="399k"
-                  ></CardClassInfo>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section id="layanan">
+        {/* <section id="layanan">
           <div className="w-full">
             <div className="w-full flex justify-center px-5">
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
@@ -154,9 +184,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <section id="testimoni">
+        {/* <section id="testimoni">
           <div className="w-full bg-primary bg-opacity-10">
             <div className="w-full flex justify-center px-5">
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
@@ -166,9 +196,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <section id="kemitraan">
+        {/* <section id="kemitraan">
           <div className="w-full">
             <div className="w-full flex justify-center px-5">
               <div className="w-full md:w-9/12 lg:w-6/12 py-16">
@@ -184,7 +214,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section id="about">
           <div className="w-full">
@@ -199,7 +229,9 @@ export default function Home() {
                       <a href="#">Tentang Kami</a>
                     </div>
                     <div className="hover:text-primary">
-                      <a href="#">Blog</a>
+                      <a href="https://blog.oversea.academy" target="_blank" rel="noreferrer">
+                        Blog
+                      </a>
                     </div>
                   </div>
                   <div className="flex flex-col gap-6">

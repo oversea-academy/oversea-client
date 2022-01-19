@@ -6,6 +6,7 @@ import TestimoniCard from '../components/TestimoniCard';
 import Button from '../components/Button';
 import CardOffer from '../components/CardOffer';
 import React, { useState } from 'react';
+import ClassOptions from '../components/ClassOptions';
 
 export default function Home() {
   const [layanan, setLayanan] = useState([
@@ -92,6 +93,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <ClassOptions></ClassOptions>
         </section>
 
         <Button title="Enable" isDisabled={false} onClick={btnOnCLick} />

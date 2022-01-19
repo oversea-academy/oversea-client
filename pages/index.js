@@ -6,7 +6,8 @@ import TestimoniCard from '../components/TestimoniCard';
 import Button from '../components/Button';
 import CardOffer from '../components/CardOffer';
 import React, { useState } from 'react';
-import ClassOptions from '../components/ClassOptions';
+import { CgInpicture } from 'react-icons/cg';
+import CardClassInfo from '../components/CardClassInfo';
 
 export default function Home() {
   const [layanan, setLayanan] = useState([
@@ -93,7 +94,32 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <ClassOptions></ClassOptions>
+          {/*Test cardClas Info  */}
+          <div className="felx justify-center w-full ">
+            <div className="flex flex-wrap justify-start w-10/12 m-auto">
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+              <CardClassInfo
+                name="Kelas IELTS Regular"
+                description="Belajar persiapan IELTS weekdays malam"
+                price="399k"
+              ></CardClassInfo>
+            </div>
+          </div>
+          {/* end Test cardClas Info  */}
         </section>
 
         <Button title="Enable" isDisabled={false} onClick={btnOnCLick} />

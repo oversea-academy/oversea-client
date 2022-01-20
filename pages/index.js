@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
+import Subscribe from '../components/Subscribe';
 import React, { useState } from 'react';
 
 export default function Home() {
@@ -134,6 +135,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <Footer/>
 
         <section id="about">
           <div className="w-full">

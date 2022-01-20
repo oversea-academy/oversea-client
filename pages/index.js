@@ -136,7 +136,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Footer/>
+        <Subscribe/>
 
         <section id="about">
           <div className="w-full">

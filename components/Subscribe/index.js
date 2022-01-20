@@ -11,7 +11,7 @@ export default function Subscribe() {
     };
 
     return (
-        <footer className="flex justify-center px-4">
+        <footer className="flex justify-center px-4 py-6 md:py-10 lg:py-12">
             <div className="container py-8">
                 <h1 className="w-2/3 md:w-3/5 lg:w-1/2 mx-auto text-primary font-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                     Yuk tetap update info kelas dan beasiswa oversea lainnya!
@@ -44,11 +44,11 @@ export default function Subscribe() {
                                 static md:absolute top-0 right-0 position
                                 p-2 rounded-full
                                 w-full mx-auto md:w-1/3 h-full
-                                text-sm text-primary-content font-medium
+                                text-sm text-primary-content font-medium italic
                                 bg-gradient-to-r from-primary to-accent
                                 hover:from-secondary hover:to-accent
                             ">
-                                subscribe
+                                Subscribe
                             </button>
                         </form>
                     </div>

@@ -3,11 +3,14 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      softblue: '#d6f1f7'
+      softblue: '#d6f1f7',
+      'gray-400': '#eff0f0',
+      'gray-cloud': '#C4C4C4'
     },
     extend: {
       backgroundImage: {
-        'welcome-img': "url('/images/map.png')"
+        'welcome-img': "url('/images/woman-with-headset-full.png')",
+        'class-img': "url('/images/woman-with-laptop-full.png')"
       },
       transitionProperty: {
         height: 'height'
@@ -17,7 +20,7 @@ module.exports = {
   variants: {
     extend: {}
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('@tailwindcss/line-clamp')],
   daisyui: {
     themes: [
       {

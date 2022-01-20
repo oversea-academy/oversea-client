@@ -27,6 +27,23 @@ function postProgramClass(data) {
   });
 }
 
+function getProgramClass(data) {
+  const page = data.page || 1;
+  const limit = data.limit || 6;
+  const type = data.type || '';
+  return new Promise((resolve) => {
+    request
+      .get(`/program/class?page=${page}&limit=${limit}&type=${type}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
 export default {
-  postProgramClass
+  postProgramClass,
+  getProgramClass
 };

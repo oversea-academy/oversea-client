@@ -8,6 +8,7 @@ import CardOffer from '../components/CardOffer';
 import React, { useState } from 'react';
 import ClassOptions from '../components/ClassOptions';
 import CardClassInfo from '../components/CardClassInfo';
+import CardCalendarAndPrice from '../components/CardCalendarAndPrice';
 
 export default function Home() {
   const [layanan, setLayanan] = useState([
@@ -215,6 +216,10 @@ export default function Home() {
             </div>
           </div>
         </section> */}
+
+        <section>
+          <CardCalendarAndPrice></CardCalendarAndPrice>
+        </section>
 
         <section id="about">
           <div className="w-full">

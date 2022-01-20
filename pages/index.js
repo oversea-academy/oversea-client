@@ -217,9 +217,11 @@ export default function Home() {
           </div>
         </section> */}
 
+        {/* Test CardCalendarAndPrice */}
         <section>
           <CardCalendarAndPrice></CardCalendarAndPrice>
         </section>
+        {/* Test end CardCalendarAndPrice */}
 
         <section id="about">
           <div className="w-full">

@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     colors: {
       softblue: '#d6f1f7',
-      'gray-400': '#eff0f0'
+      'gray-400': '#eff0f0',
+      'gray-cloud': '#C4C4C4'
     },
     extend: {
       backgroundImage: {

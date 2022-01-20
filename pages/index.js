@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 import Button from '../components/Button';
 import CardOffer from '../components/CardOffer';
+import Subscribe from '../components/Subscribe';
 import Footer from '../components/Footer';
 import React, { useState, useEffect } from 'react';
 import ClassOptions from '../components/ClassOptions';
@@ -98,7 +99,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+        <Subscribe />
         <Footer />
       </main>
     </div>

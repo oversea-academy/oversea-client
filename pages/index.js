@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 import Button from '../components/Button';
 import CardOffer from '../components/CardOffer';
-import React, { useState, useEffect } from 'react';
+import Footer from '../components/Footer';
+import React, { useState } from 'react';
 import ClassOptions from '../components/ClassOptions';
 import CardClassInfo from '../components/CardClassInfo';
 import CardCalendarAndPrice from '../components/CardCalendarAndPrice';
@@ -100,6 +101,7 @@ export default function Home() {
           </div>
         </section>
 
+        <Footer />
         {/* Test CardCalendarAndPrice */}
         {/* <section>
           <CardCalendarAndPrice></CardCalendarAndPrice>

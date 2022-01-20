@@ -5,6 +5,7 @@ import ServiceItem from '../components/ServiceItem';
 import TestimoniCard from '../components/TestimoniCard';
 import Button from '../components/Button';
 import CardOffer from '../components/CardOffer';
+import Footer from '../components/Footer';
 import React, { useState } from 'react';
 import ClassOptions from '../components/ClassOptions';
 import CardClassInfo from '../components/CardClassInfo';
@@ -217,6 +218,7 @@ export default function Home() {
           </div>
         </section> */}
 
+        <Footer/>
         {/* Test CardCalendarAndPrice */}
         <section>
           <CardCalendarAndPrice></CardCalendarAndPrice>

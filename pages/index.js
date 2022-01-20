@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import React, { useState } from 'react';
 import ClassOptions from '../components/ClassOptions';
 import CardClassInfo from '../components/CardClassInfo';
+import CardCalendarAndPrice from '../components/CardCalendarAndPrice';
 
 export default function Home() {
   const [layanan, setLayanan] = useState([
@@ -218,6 +219,11 @@ export default function Home() {
         </section> */}
 
         <Footer/>
+        {/* Test CardCalendarAndPrice */}
+        <section>
+          <CardCalendarAndPrice></CardCalendarAndPrice>
+        </section>
+        {/* Test end CardCalendarAndPrice */}
 
         <section id="about">
           <div className="w-full">

@@ -1,14 +1,12 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 import Button from '../components/Button';
 import CardOffer from '../components/CardOffer';
 import Footer from '../components/Footer';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ClassOptions from '../components/ClassOptions';
 import CardClassInfo from '../components/CardClassInfo';
-import CardCalendarAndPrice from '../components/CardCalendarAndPrice';
 import { programRepository } from '../repositories';
 
 export default function Home() {
@@ -102,85 +100,6 @@ export default function Home() {
         </section>
 
         <Footer />
-        {/* Test CardCalendarAndPrice */}
-        {/* <section>
-          <CardCalendarAndPrice></CardCalendarAndPrice>
-        </section> */}
-        {/* Test end CardCalendarAndPrice */}
-
-        <section id="about">
-          <div className="w-full">
-            <div className="w-full flex justify-center px-5">
-              <div className="w-full md:w-9/12 lg:w-6/12 py-16">
-                <div className="mb-2 lg:mb-3 border-b border-base-300">
-                  <Image alt="Oversea Academy" src="/Logo.png" width={160} height={64} />
-                </div>
-                <div className="flex flex-col md:flex-row gap-10 lg:gap-20 px-5 font-medium">
-                  <div className="flex flex-col">
-                    <div className="hover:text-primary">
-                      <a href="#">Tentang Kami</a>
-                    </div>
-                    <div className="hover:text-primary">
-                      <a href="https://blog.oversea.academy" target="_blank" rel="noreferrer">
-                        Blog
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-6">
-                    <div className="flex flex-col">
-                      <div>Kontak Kami</div>
-                      <div className="flex flex-row gap-2">
-                        <div className="w-6 h-6 relative">
-                          <Image alt="Icon" src="/icons/whatsapp.png" layout="fill" objectFit="contain" />
-                        </div>
-                        <div className="font-normal hover:text-primary hover:underline">
-                          <a href="https://wa.me/6281234567890?text=Halo%20minsea" target="_blank" rel="noreferrer">
-                            0812-3456-7890
-                          </a>
-                        </div>
-                      </div>
-                      <div className="flex flex-row gap-2">
-                        <div className="w-6 h-6 relative">
-                          <Image alt="Icon" src="/icons/email.png" layout="fill" objectFit="contain" />
-                        </div>
-                        <div className="font-normal hover:text-primary hover:underline">
-                          <a href="mailto:info@oversea.academy">info@oversea.academy</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col">
-                      <div>Ikuti Kami</div>
-                      <div className="flex flex-row gap-2">
-                        <div className="w-6 h-6 relative">
-                          <Image alt="Icon" src="/icons/youtube.png" layout="fill" objectFit="contain" />
-                        </div>
-                        <div className="font-normal hover:text-primary hover:underline">
-                          <a
-                            href="https://www.youtube.com/channel/UCg3ZClA_TiqNZ0xv-iRnvqA"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Oversea Academy
-                          </a>
-                        </div>
-                      </div>
-                      <div className="flex flex-row gap-2">
-                        <div className="w-6 h-6 relative">
-                          <Image alt="Icon" src="/icons/instagram.png" layout="fill" objectFit="contain" />
-                        </div>
-                        <div className="font-normal hover:text-primary hover:underline">
-                          <a href="https://www.instagram.com/oversea.academy/" target="_blank" rel="noreferrer">
-                            @oversea.academy
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
   );

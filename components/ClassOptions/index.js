@@ -34,35 +34,35 @@ export default function ClassOptions({ handleValue }) {
   }
 
   return (
-    <div className="block justify-center w-full my-3 mx-2">
+    <div className="block justify-center w-full my-3 md:mx-2">
       <div className="inline-flex justify-center w-full ">
         <button
           onClick={() => setBtnClassOptions(0)}
-          className="btn_class_options py-2 px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary-content bg-gradient-to-r from-primary  to-accent rounded-l-full  hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
+          className="btn_class_options py-2 px-4 md:px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary-content bg-gradient-to-r from-primary  to-accent rounded-l-full  hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
         >
           Semua Kelas
         </button>
         <button
           onClick={() => setBtnClassOptions(1)}
-          className="btn_class_options py-2 px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r bg-gray-400 hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
+          className="btn_class_options py-2 px-4 md:px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r bg-gray-400 hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
         >
           IELTS
         </button>
         <button
           onClick={() => setBtnClassOptions(2)}
-          className="btn_class_options py-2 px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r bg-gray-400 hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
+          className="btn_class_options py-2 px-4 md:px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r bg-gray-400 hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
         >
           TOEFL
         </button>
         <button
           onClick={() => setBtnClassOptions(3)}
-          className="btn_class_options py-2 px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r  bg-gray-400 hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
+          className="btn_class_options py-2 px-4 md:px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r  bg-gray-400 hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
         >
           Basic
         </button>
         <button
           onClick={() => setBtnClassOptions(4)}
-          className="btn_class_options py-2 px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r  bg-gray-400 rounded-r-full hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
+          className="btn_class_options py-2 px-4 md:px-8 text-sm font-medium lg:text-xl sm:text-xs text-primary bg-gradient-to-r  bg-gray-400 rounded-r-full hover:text-secondary-content hover:from-primary  hover:to-accent focus:from-primary  focus:to-accent focus:text-secondary-content active:from-primary  active:to-accent"
         >
           Private
         </button>

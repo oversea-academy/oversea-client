@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { EventEmitter } from '../../utils/events';
 
-export default function ClassOptions() {
+export default function ClassOptions({ handleValue }) {
   const [isFocused, setISFocused] = useState(0);
 
   function setBtnClassOptions(index) {
@@ -22,23 +21,17 @@ export default function ClassOptions() {
     }
 
     if (index == 0) {
-      EventEmitter.dispatch('showOptionClass', 'semua');
+      handleValue('');
     } else if (index == 1) {
-      EventEmitter.dispatch('showOptionClass', 'ielts');
+      handleValue('ielts');
     } else if (index == 2) {
-      EventEmitter.dispatch('showOptionClass', 'toefl');
+      handleValue('toefl');
     } else if (index == 3) {
-      EventEmitter.dispatch('showOptionClass', 'basic');
+      handleValue('basic');
     } else {
-      EventEmitter.dispatch('showOptionClass', 'private');
+      handleValue('private');
     }
   }
-
-  // test  dispatch Event
-
-  EventEmitter.subscribe('showOptionClass', (data) => {
-    console.log(data);
-  });
 
   return (
     <div className="block justify-center w-full my-3 mx-2">

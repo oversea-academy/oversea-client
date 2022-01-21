@@ -27,13 +27,14 @@ export default function Layout({ children }) {
   return (
     <div>
       <Navbar />
-      <div
+      {/* <div
         onTransitionEnd={handleTransition}
         className={`${styles.content} 
         ${styles[transitionStage]}`}
       >
         {displayChildren}
-      </div>
+      </div> */}
+      <div>{children}</div>
       <ModalLogin />
     </div>
   );

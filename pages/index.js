@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 import Button from '../components/Button';
+import TextInput from '../components/TextInput';
 import CardOffer from '../components/CardOffer';
 import Subscribe from '../components/Subscribe';
 import Footer from '../components/Footer';
@@ -36,6 +37,12 @@ export default function Home() {
 
   const handleClickClass = (slug) => {
     router.push(`/class/${slug}`);
+  };
+
+  const [tesInput, setTes] = useState('');
+  var btnOnCLick = (e) => {
+    e.preventDefault();
+    alert(`${tesInput} di klik !`);
   };
 
   return (
@@ -99,6 +106,24 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section>
+          <form>
+            <TextInput placeholder="ini testing" value={tesInput} onChange={(e) => setTes(e.target.value)}/>
+            <button
+              onClick={btnOnCLick}
+              className="
+              py-2 px-6 w-1/2 rounded-full text-base text-primary-content font-medium
+              bg-gradient-to-r from-primary to-accent
+              hover:from-secondary hover:to-accent
+              transition transform hover:scale-105
+              motion-reduce:transition-none motion-reduce:transform-none"
+            >
+              submit
+            </button>
+          </form>
+        </section>
+
         <Subscribe />
         <Footer />
       </main>

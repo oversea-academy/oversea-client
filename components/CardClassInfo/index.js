@@ -1,13 +1,9 @@
 import Button from '../Button';
 import React from 'react';
 
-export default function CardClassInfo({
-  name,
-  description,
-  price,
-  image = '/images/cardClassInfo/default_image.png',
-  onClick
-}) {
+const defaultImage = '/images/cardClassInfo/default_image.png';
+
+export default function CardClassInfo({ name, description, price, image, onClick }) {
   const handlePrice = (price) => {
     if (price > 0) {
       const result = Math.round(price / 1000);
@@ -18,7 +14,7 @@ export default function CardClassInfo({
 
   return (
     <div className="w-64 bg-white rounded-3xl border-none shadow-lg">
-      <img className="rounded-t-3xl" src={image} alt="Image Class" />
+      <img className="rounded-t-3xl h-56 w-full object-cover" src={image ? image : defaultImage} alt="Image Class" />
       <div className="p-5">
         <div className="flex justify-between h-20">
           <h2 className="text-primary text-xl font-medium leading-8 line-clamp-2 w-3/4 mb-1 ">{name}</h2>

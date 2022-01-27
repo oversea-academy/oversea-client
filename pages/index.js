@@ -89,12 +89,13 @@ export default function Home() {
                 <ClassOptions handleValue={(type) => setClassType(type)}></ClassOptions>
               </div>
               <div className="flex flex-wrap gap-10 justify-center w-full">
-                {classList.data.map(({ id, slug, name, description, price }) => (
+                {classList.data.map(({ id, slug, name, description, price, image }) => (
                   <CardClassInfo
                     key={id}
                     name={name}
                     description={description}
                     price={price}
+                    image={image}
                     onClick={(e) => handleClickClass(slug)}
                   ></CardClassInfo>
                 ))}
@@ -107,7 +108,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <form>
             <TextInput placeholder="ini testing" value={tesInput} onChange={(e) => setTes(e.target.value)}/>
             <button
@@ -122,7 +123,7 @@ export default function Home() {
               submit
             </button>
           </form>
-        </section>
+        </section> */}
 
         <Subscribe />
         <Footer />

@@ -20,20 +20,23 @@ export default function Home() {
   });
   const router = useRouter();
 
-  useEffect(async () => {
+  useEffect(() => {
     setClassList({
       loading: true,
       data: []
     });
-    const result = await programRepository.getProgramClass({
-      type: classType
-    });
-    if (result.status) {
-      setClassList({
-        loading: false,
-        data: result.data
+    async function getData() {
+      const result = await programRepository.getProgramClass({
+        type: classType
       });
+      if (result.status) {
+        setClassList({
+          loading: false,
+          data: result.data
+        });
+      }
     }
+    getData();
   }, [classType]);
 
   const handleClickClass = (slug) => {
@@ -47,26 +50,26 @@ export default function Home() {
     { value: 0, label: 'Tanggal' },
     { value: 1, label: '1' },
     { value: 2, label: '2' },
-    { value: 3, label: '3' },
+    { value: 3, label: '3' }
   ];
   const mm = [
     { value: 0, label: 'Bulan' },
     { value: 1, label: 'Januari' },
     { value: 2, label: 'Februari' },
-    { value: 3, label: 'Maret' },
+    { value: 3, label: 'Maret' }
   ];
   const yy = [
     { value: 0, label: 'Tahun' },
     { value: 1, label: '1999' },
     { value: 2, label: '2000' },
-    { value: 3, label: '2001' },
+    { value: 3, label: '2001' }
   ];
   var btnOnCLick = (e) => {
     e.preventDefault();
-    if (day==0 || month==0 || year==0) {
+    if (day == 0 || month == 0 || year == 0) {
       alert(`ada yang kosong`);
     } else {
-      alert(`value: ${day}-${month}-${year}`)
+      alert(`value: ${day}-${month}-${year}`);
     }
   };
 

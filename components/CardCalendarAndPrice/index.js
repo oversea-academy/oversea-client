@@ -5,14 +5,14 @@ export default function CardCalendarAndPrice({
   schedule_day = 'Setiap Senin, Rabu, dan Jum’at',
   schedule_time = 'Pukul 19.00-21.30 WIB',
   price = '1200000',
-  discount = '801000',
+  discount = '0',
   onClick
 }) {
   /* Fungsi formatRupiah */
   var newPrice = parseInt(price) - parseInt(discount);
   newPrice = newPrice.toString();
   function formatRupiah(angka, prefix) {
-    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+    var number_string = angka.toString(),
       split = number_string.split(','),
       sisa = split[0].length % 3,
       rupiah = split[0].substr(0, sisa),
@@ -29,7 +29,7 @@ export default function CardCalendarAndPrice({
   }
 
   return (
-    <div className="container w-max mx-auto bg-white rounded-3xl border-none shadow-2xl">
+    <div className="container w-max mx-auto bg-white rounded-3xl border-none shadow-2xl bg-base-100">
       <div className="pt-16 pl-16 pr-16 pb-6">
         <div className="flex flex-col justify-center items-center text-center mb-14 ">
           <Image src="/images/cardCalendarAndPrice/calendar_img.png" alt="illustration" width={328} height={310} />

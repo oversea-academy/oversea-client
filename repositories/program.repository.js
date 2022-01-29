@@ -43,7 +43,21 @@ function getProgramClass(data) {
   });
 }
 
+function getProgramClassBySlug(slug) {
+  return new Promise((resolve) => {
+    request
+      .get(`/program/class/slug/${slug}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
 export default {
   postProgramClass,
-  getProgramClass
+  getProgramClass,
+  getProgramClassBySlug
 };

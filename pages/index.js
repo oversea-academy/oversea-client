@@ -20,23 +20,20 @@ export default function Home() {
   });
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect(async () => {
     setClassList({
       loading: true,
       data: []
     });
-    async function getData() {
-      const result = await programRepository.getProgramClass({
-        type: classType
+    const result = await programRepository.getProgramClass({
+      type: classType
+    });
+    if (result.status) {
+      setClassList({
+        loading: false,
+        data: result.data
       });
-      if (result.status) {
-        setClassList({
-          loading: false,
-          data: result.data
-        });
-      }
     }
-    getData();
   }, [classType]);
 
   const handleClickClass = (slug) => {
@@ -136,7 +133,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <form className="flex flex-col">
             <div className="inline-flex">
               <Dropdown data={dd} selected={(d) => setDay(d)} />
@@ -155,7 +152,7 @@ export default function Home() {
               submit
             </button>
           </form>
-        </section>
+        </section> */}
 
         {/* <section>
           <form>

@@ -9,7 +9,6 @@ import Footer from '../../components/Footer';
 export default function Class() {
   const router = useRouter();
   const { slug } = router.query;
-  console.log(slug);
 
   const [dataKelas, setDataKelas] = useState({
     loading: true,

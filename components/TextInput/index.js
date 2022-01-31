@@ -1,7 +1,7 @@
 const TextInput = ({ placeholder, value, onChange }) => (
   <div
     className="
-      my-3 p-0.5 w-full rounded-full
+      mt-2 mb-3 p-0.5 w-full rounded-full
       bg-gradient-to-r from-primary to-accent
       focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40
     "

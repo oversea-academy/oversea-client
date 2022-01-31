@@ -61,6 +61,10 @@ export default function Class() {
     router.push(`/class/${slug}`);
   };
 
+  const handleClickRegister = (id) => {
+    router.push(`/register/${id}`);
+  };
+
   return (
     <div>
       <Head>
@@ -132,6 +136,7 @@ export default function Class() {
                   schedule_day={dataKelas.data.schedule_day}
                   schedule_time={dataKelas.data.schedule_time}
                   price={dataKelas.data.price}
+                  onClick={(e) => handleClickRegister(dataKelas.data.id)}
                 ></CardCalendarAndPrice>
               </div>
             </div>

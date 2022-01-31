@@ -2,8 +2,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 import Button from '../components/Button';
-import TextInput from '../components/TextInput';
-import Dropdown from '../components/Dropdown';
 import CardOffer from '../components/CardOffer';
 import Subscribe from '../components/Subscribe';
 import Footer from '../components/Footer';
@@ -38,36 +36,6 @@ export default function Home() {
 
   const handleClickClass = (slug) => {
     router.push(`/class/${slug}`);
-  };
-
-  const [day, setDay] = useState(0);
-  const [month, setMonth] = useState(0);
-  const [year, setYear] = useState(0);
-  const dd = [
-    { value: 0, label: 'Tanggal' },
-    { value: 1, label: '1' },
-    { value: 2, label: '2' },
-    { value: 3, label: '3' }
-  ];
-  const mm = [
-    { value: 0, label: 'Bulan' },
-    { value: 1, label: 'Januari' },
-    { value: 2, label: 'Februari' },
-    { value: 3, label: 'Maret' }
-  ];
-  const yy = [
-    { value: 0, label: 'Tahun' },
-    { value: 1, label: '1999' },
-    { value: 2, label: '2000' },
-    { value: 3, label: '2001' }
-  ];
-  var btnOnCLick = (e) => {
-    e.preventDefault();
-    if (day == 0 || month == 0 || year == 0) {
-      alert(`ada yang kosong`);
-    } else {
-      alert(`value: ${day}-${month}-${year}`);
-    }
   };
 
   return (
@@ -132,44 +100,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* <section>
-          <form className="flex flex-col">
-            <div className="inline-flex">
-              <Dropdown data={dd} selected={(d) => setDay(d)} />
-              <Dropdown data={mm} selected={(m) => setMonth(m)} />
-              <Dropdown data={yy} selected={(y) => setYear(y)} />
-            </div>
-            <button
-              onClick={btnOnCLick}
-              className="
-              py-2 px-6 w-1/2 rounded-full text-base text-primary-content font-medium
-              bg-gradient-to-r from-primary to-accent
-              hover:from-secondary hover:to-accent
-              transition transform hover:scale-105
-              motion-reduce:transition-none motion-reduce:transform-none"
-            >
-              submit
-            </button>
-          </form>
-        </section> */}
-
-        {/* <section>
-          <form>
-            <TextInput placeholder="ini testing" value={tesInput} onChange={(e) => setTes(e.target.value)}/>
-            <button
-              onClick={btnOnCLick}
-              className="
-              py-2 px-6 w-1/2 rounded-full text-base text-primary-content font-medium
-              bg-gradient-to-r from-primary to-accent
-              hover:from-secondary hover:to-accent
-              transition transform hover:scale-105
-              motion-reduce:transition-none motion-reduce:transform-none"
-            >
-              submit
-            </button>
-          </form>
-        </section> */}
 
         <Subscribe />
         <Footer />

@@ -56,10 +56,7 @@ export default function Home() {
                 {/* <Image src="/Logo.png" alt="logo" width={200} height={100} objectFit="contain" /> */}
                 <p className="mb-12 text-primary font-bold">Oversea Academy</p>
                 <div className="text-5xl text-primary pb-5">All-in-one Oversea Study Preparation</div>
-                <div className="text-primary pb-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua.
-                </div>
+                <div className="text-primary pb-5">Let's prepare your oversea study and career</div>
                 <a href="#class">
                   <div className="w-48">
                     <Button title="Cari Kelas" isDisabled={false} />
@@ -75,8 +72,8 @@ export default function Home() {
 
         <section id="class" className="mt-64 lg:mt-24">
           <div className="w-full flex justify-center">
-            <div className="w-full md:w-10/12 lg:w-8/12 py-16 flex flex-col items-center">
-              <div className="text-primary font-semibold text-4xl">Pilihan Kelas</div>
+            <div className="w-full md:w-10/12 lg:w-8/12 pt-16 pb-8 md:py-16 flex flex-col items-center">
+              <div className="text-primary font-semibold text-2xl md:text-4xl">Pilihan Kelas</div>
               <div className="border-b-4 w-20 p-2 border-accent mb-10"></div>
               <div className="mb-10">
                 <ClassOptions handleValue={(type) => setClassType(type)}></ClassOptions>

@@ -83,15 +83,9 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:flex flex-1 px-2 mx-2">
           <div className="items-stretch flex">
-            <Link href="/#home" passHref>
+            {/* <Link href="/" passHref>
               <div className="btn btn-ghost btn-sm rounded-btn capitalize">Home</div>
-            </Link>
-            <Link href="#layanan" passHref>
-              <div className="btn btn-ghost btn-sm rounded-btn capitalize">Layanan</div>
-            </Link>
-            <Link href="#kemitraan" passHref>
-              <div className="btn btn-ghost btn-sm rounded-btn capitalize">Kemitraan</div>
-            </Link>
+            </Link> */}
           </div>
         </div>
         {userSigned ? (
@@ -137,19 +131,9 @@ export default function Navbar() {
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
           <ul className="p-4 overflow-y-auto menu w-80 bg-base-100">
             <li>
-              <Link href="/#home" passHref>
+              {/* <Link href="/" passHref>
                 <div className="capitalize hover:text-primary font-medium mb-3">Home</div>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#layanan" passHref>
-                <div className="capitalize hover:text-primary font-medium mb-3">Layanan</div>
-              </Link>
-            </li>
-            <li>
-              <Link href="/#kemitraan" passHref>
-                <div className="capitalize hover:text-primary font-medium mb-3">Kemitraan</div>
-              </Link>
+              </Link> */}
             </li>
             <li>
               <div onClick={clickLogIn} className="capitalize hover:text-primary font-medium mb-3">

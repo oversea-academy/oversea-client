@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import CardCalendarAndPrice from '../../components/CardCalendarAndPrice';
-import CardClassInfo from '../../components/CardClassInfo';
 import React, { useState, useEffect } from 'react';
 import { programRepository } from '../../repositories';
+import CardCalendarAndPrice from '../../components/CardCalendarAndPrice';
+import CardClassInfo from '../../components/CardClassInfo';
 import Footer from '../../components/Footer';
 
 export default function Class() {

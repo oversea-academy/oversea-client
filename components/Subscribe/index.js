@@ -4,7 +4,7 @@ export default function Subscribe() {
   return (
     <footer className="flex justify-center px-4 py-6 md:py-10 lg:py-12">
       <div className="container py-8">
-        <h1 className="w-2/3 md:w-3/5 lg:w-1/2 mx-auto text-primary font-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+        <h1 className="w-2/3 md:w-3/5 lg:w-1/2 mx-auto text-primary text-center md:text-left font-normal text-lg md:text-2xl lg:text-4xl">
           Yuk tetap update info kelas dan beasiswa oversea lainnya!
         </h1>
 

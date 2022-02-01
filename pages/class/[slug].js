@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import CardCalendarAndPrice from '../../components/CardCalendarAndPrice';
-import CardClassInfo from '../../components/CardClassInfo';
 import React, { useState, useEffect } from 'react';
 import { programRepository } from '../../repositories';
+import CardCalendarAndPrice from '../../components/CardCalendarAndPrice';
+import CardClassInfo from '../../components/CardClassInfo';
 import Footer from '../../components/Footer';
 
 export default function Class() {
@@ -59,6 +59,10 @@ export default function Class() {
 
   const handleClickClass = (slug) => {
     router.push(`/class/${slug}`);
+  };
+
+  const handleClickRegister = (id) => {
+    router.push(`/register/${id}`);
   };
 
   return (
@@ -132,6 +136,7 @@ export default function Class() {
                   schedule_day={dataKelas.data.schedule_day}
                   schedule_time={dataKelas.data.schedule_time}
                   price={dataKelas.data.price}
+                  onClick={(e) => handleClickRegister(dataKelas.data.id)}
                 ></CardCalendarAndPrice>
               </div>
             </div>

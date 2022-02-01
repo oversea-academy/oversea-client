@@ -56,8 +56,22 @@ function getProgramClassBySlug(slug) {
   });
 }
 
+function getProgramClassById(id) {
+  return new Promise((resolve) => {
+    request
+      .get(`/program/class/${id}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
 export default {
   postProgramClass,
   getProgramClass,
-  getProgramClassBySlug
+  getProgramClassBySlug,
+  getProgramClassById
 };

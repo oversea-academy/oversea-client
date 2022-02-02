@@ -76,11 +76,13 @@ export default function Class() {
 
       <main>
         <section id="cover">
-          <div className="hero min-h-screen bg-class-img relative ">
-            <div className="w-full hero-content justify-start mb-32 sm:mb-40">
+          <div className="hero min-h-20 md:min-h-screen bg-class-img relative ">
+            <div className="w-full hero-content justify-start mt-12 md:mt-0 md:mb-32">
               <div className="max-w-sm md:max-w-lg ">
-                <div className="text-2xl text-primary pb-5">Kelas Oversea</div>
-                <div className="text-5xl lg:text-7xl text-primary pb-5">
+                <div className="text-xl md:text-2xl text-primary pb-3 md:pb-5">
+                  {!dataKelas.loading ? dataKelas.data.program_type : ''}
+                </div>
+                <div className="text-3xl md:text-4xl lg:text-5xl text-primary pb-5">
                   {(!dataKelas.loading && dataKelas.data.name) ||
                     (dataKelas.loading && <p className="text-primary italic text-xl">Loading...</p>)}
                 </div>
@@ -92,7 +94,7 @@ export default function Class() {
           {!dataKelas.loading && (
             <div className="flex flex-col w-full  justify-evenly  content-center -mt-10 md:flex-row lg:mx-auto">
               <div className="w-full pl-4 mt-14 lg:w-2/5">
-                <div className="text-red-oringe  italic my-6 tracking-wider text-2xl sm:text-2xl md:text-lg lg:text-2xl">
+                <div className="text-red-oringe  italic my-6 tracking-wider text-lg md:text-xl">
                   <div className="flex justify-start font-normal">
                     <p className="pr-4">
                       Total Jam Belajar
@@ -106,24 +108,22 @@ export default function Class() {
                   </div>
                 </div>
                 <div className="text-primary tracking-wider">
-                  <h2 className="mt-6 mb-4 text-4xl sm:text-4xl md:text-2xl lg:text-4xl">Tujuan Pembelajaran</h2>
-                  <p className="my-4 text-lg sm:text-lg  md:text-base lg:text-lg ">{dataKelas.data.learning_goal}</p>
+                  <h2 className="mt-6 mb-4 text-2xl md:text-3xl">Tujuan Pembelajaran</h2>
+                  <p className="my-4 text-base lg:text-lg">{dataKelas.data.learning_goal}</p>
                 </div>
                 <div className="text-primary tracking-wider">
-                  <h2 className="mt-6 mb-0 text-4xl sm:text-4xl md:text-2xl lg:text-4xl">
-                    Materi dan Fasilitas yang Didapatkan
-                  </h2>
+                  <h2 className="mt-6 mb-0 text-2xl md:text-3xl">Materi dan Fasilitas yang Didapatkan</h2>
                   <div className="py-6 card bordered">
                     {/* loop of facilities */}
                     {dataKelas.data.facilities.map((data) => (
                       <div key={data} className="form-control py-1 content-center  ">
-                        <label className="flex justify-start  tracking-wider">
+                        <label className="flex justify-start tracking-wider">
                           <input
                             type="checkbox"
                             defaultChecked
-                            className=" self-center checkbox checkbox-primary checked"
+                            className="self-center checkbox checkbox-primary checked cursor-default"
                           />
-                          <span className="label-primary text-lg px-4 sm:text-lg  md:text-base lg:text-lg">{data}</span>
+                          <span className="label-primary px-4 text-base lg:text-lg">{data}</span>
                         </label>
                       </div>
                     ))}
@@ -143,10 +143,10 @@ export default function Class() {
           )}
         </section>
         <section id="KelasTerkait">
-          <div className="w-full pl-4 lg:pl-40 mb-20">
-            <div className="text-primary tracking-wider mt-10 mb-4 text-4xl sm:text-4xl md:text-2xl lg:text-4xl">
-              <h2>Kelas Terkait</h2>
-              <div className="border-b-4 w-20 p-2 border-accent mb-5 "></div>
+          <div className="w-full md:pl-32 mb-20">
+            <div className="text-primary flex flex-col items-center md:items-start mt-10 mb-6">
+              <div className="text-2xl md:text-3xl">Kelas Terkait</div>
+              <div className="border-b-4 w-20 p-2 border-accent"></div>
             </div>
             <div className="flex flex-wrap gap-10 justify-center lg:justify-start w-full">
               {classList.data.map(({ id, slug, name, description, price, image }) => (

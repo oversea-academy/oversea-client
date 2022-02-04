@@ -19,26 +19,31 @@ export default function Register() {
     email: ''
   });
 
-  const [day, setDay] = useState(0);
-  const [month, setMonth] = useState(0);
-  const [year, setYear] = useState(0);
+  const [day, setDay] = useState(null);
+  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
+  const [birthDate, setBirthDate] = useState(null);
+
   const dd = [
-    { value: 0, label: 'Tanggal' },
+    { value: '', label: 'Tanggal' },
     { value: 1, label: '1' },
     { value: 2, label: '2' },
     { value: 3, label: '3' }
   ];
   const mm = [
-    { value: 0, label: 'Bulan' },
+    { value: '', label: 'Bulan' },
     { value: 1, label: 'Januari' },
     { value: 2, label: 'Februari' },
-    { value: 3, label: 'Maret' }
+    { value: 3, label: 'Maret' },
+    { value: 4, label: 'April' }
   ];
   const yy = [
-    { value: 0, label: 'Tahun' },
-    { value: 1, label: '1999' },
-    { value: 2, label: '2000' },
-    { value: 3, label: '2001' }
+    { value: '', label: 'Tahun' },
+    { value: 1997, label: '1997' },
+    { value: 1998, label: '1998' },
+    { value: 1999, label: '1999' },
+    { value: 2000, label: '2000' },
+    { value: 2001, label: '2001' }
   ];
 
   const handleForm = (name, value) => {
@@ -50,8 +55,19 @@ export default function Register() {
     });
   };
 
-  const handleCheckout = () => {
-    console.log(form);
+  const handleCheckout = async () => {
+    if (form.name && form.email && form.whatsapp && form.institution && form.city && birthDate) {
+      const response = await programRepository.postProgramRegister({
+        program_id: id,
+        birth_date: birthDate,
+        ...form
+      });
+      if (response.status) {
+        alert('Success');
+      }
+    } else {
+      alert('Please fill the form');
+    }
   };
 
   useEffect(async () => {
@@ -63,6 +79,14 @@ export default function Register() {
       }
     }
   }, [id]);
+
+  useEffect(() => {
+    if (day && month && year) {
+      setBirthDate(`${month}/${day}/${year}`);
+    } else {
+      setBirthDate(null);
+    }
+  }, [day, month, year]);
 
   return (
     <div>
@@ -125,16 +149,16 @@ export default function Register() {
                       <span className="text-primary">Kota Domisili</span>
                       <TextInput
                         placeholder="Nama kota"
-                        value={form.domisili}
-                        onChange={(e) => handleForm('domisili', e.target.value)}
+                        value={form.city}
+                        onChange={(e) => handleForm('city', e.target.value)}
                       />
                     </div>
                     <div className="form-group">
                       <span className="text-primary">Institusi</span>
                       <TextInput
                         placeholder="Nama institusi"
-                        value={form.institusi}
-                        onChange={(e) => handleForm('institusi', e.target.value)}
+                        value={form.institution}
+                        onChange={(e) => handleForm('institution', e.target.value)}
                       />
                     </div>
                   </div>

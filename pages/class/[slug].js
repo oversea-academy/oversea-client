@@ -133,9 +133,11 @@ export default function Class() {
               </div>
               <div className="w-full z-10 md:w-3/5 lg:w-2/5">
                 <CardCalendarAndPrice
-                  schedule_day={dataKelas.data.schedule_day}
-                  schedule_time={dataKelas.data.schedule_time}
+                  scheduleDay={dataKelas.data.schedule_day}
+                  scheduleTime={dataKelas.data.schedule_time}
                   price={dataKelas.data.price}
+                  priceNormal={dataKelas.data.price_normal}
+                  closedAt={dataKelas.data.closed_at}
                   onClick={(e) => handleClickRegister(dataKelas.data.id)}
                 ></CardCalendarAndPrice>
               </div>

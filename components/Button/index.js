@@ -5,7 +5,7 @@ const Button = ({ title, isDisabled, onClick }) => (
         bg-gradient-to-r from-primary to-accent
         ${
           isDisabled
-            ? `cursor-default`
+            ? `cursor-default filter grayscale`
             : `hover:from-secondary hover:to-accent
                 transition transform hover:scale-105
                 motion-reduce:transition-none motion-reduce:transform-none`

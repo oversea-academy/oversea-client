@@ -69,9 +69,31 @@ function getProgramClassById(id) {
   });
 }
 
+function postProgramRegister(data) {
+  return new Promise((resolve) => {
+    request
+      .post('/program/register', {
+        program_id: data.program_id,
+        name: data.name,
+        email: data.email,
+        whatsapp: data.whatsapp,
+        birth_date: data.birth_date,
+        institution: data.institution,
+        city: data.city
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
 export default {
   postProgramClass,
   getProgramClass,
   getProgramClassBySlug,
-  getProgramClassById
+  getProgramClassById,
+  postProgramRegister
 };

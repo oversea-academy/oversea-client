@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { programRepository } from '../../repositories';
 import TextInput from '../../components/TextInput';
-import Dropdown from '../../components/Dropdown';
 import Button from '../../components/Button';
 import { formatCurrency } from '../../utils/helper';
 
@@ -13,38 +12,13 @@ export default function Register() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [program, setProgram] = useState(null);
+  const [isValid, setIsValid] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [form, setForm] = useState({
     name: '',
     email: ''
   });
-
-  const [day, setDay] = useState(null);
-  const [month, setMonth] = useState(null);
-  const [year, setYear] = useState(null);
-  const [birthDate, setBirthDate] = useState(null);
-
-  const dd = [
-    { value: '', label: 'Tanggal' },
-    { value: 1, label: '1' },
-    { value: 2, label: '2' },
-    { value: 3, label: '3' }
-  ];
-  const mm = [
-    { value: '', label: 'Bulan' },
-    { value: 1, label: 'Januari' },
-    { value: 2, label: 'Februari' },
-    { value: 3, label: 'Maret' },
-    { value: 4, label: 'April' }
-  ];
-  const yy = [
-    { value: '', label: 'Tahun' },
-    { value: 1997, label: '1997' },
-    { value: 1998, label: '1998' },
-    { value: 1999, label: '1999' },
-    { value: 2000, label: '2000' },
-    { value: 2001, label: '2001' }
-  ];
 
   const handleForm = (name, value) => {
     setForm((prevValue) => {
@@ -56,17 +30,17 @@ export default function Register() {
   };
 
   const handleCheckout = async () => {
-    if (form.name && form.email && form.whatsapp && form.institution && form.city && birthDate) {
+    if (form.name && form.email && form.whatsapp && form.institution && form.city && form.birth_date) {
+      setIsValid(true);
       const response = await programRepository.postProgramRegister({
         program_id: id,
-        birth_date: birthDate,
         ...form
       });
       if (response.status) {
         alert('Success');
       }
     } else {
-      alert('Please fill the form');
+      setIsValid(false);
     }
   };
 
@@ -81,12 +55,16 @@ export default function Register() {
   }, [id]);
 
   useEffect(() => {
-    if (day && month && year) {
-      setBirthDate(`${month}/${day}/${year}`);
+    if (program?.closed_at) {
+      const dateClosed = new Date(program.closed_at);
+      const dateNow = new Date();
+      if (dateNow > dateClosed) {
+        setIsDisabled(true);
+      }
     } else {
-      setBirthDate(null);
+      setIsDisabled(false);
     }
-  }, [day, month, year]);
+  }, [program]);
 
   return (
     <div>
@@ -117,6 +95,7 @@ export default function Register() {
                       <TextInput
                         placeholder="Nama Kamu"
                         value={form.name}
+                        type="text"
                         onChange={(e) => handleForm('name', e.target.value)}
                       />
                     </div>
@@ -125,31 +104,34 @@ export default function Register() {
                       <TextInput
                         placeholder="nama@gmail.com"
                         value={form.email}
+                        type="email"
                         onChange={(e) => handleForm('email', e.target.value)}
                       />
                     </div>
                     <div className="form-group">
                       <span className="text-primary">No Whatsapp Aktif</span>
                       <TextInput
-                        placeholder="+628XXXXXXXXXX"
+                        placeholder="08XXXXXXXXXX"
                         value={form.whatsapp}
+                        type="tel"
                         onChange={(e) => handleForm('whatsapp', e.target.value)}
                       />
                     </div>
                     <div className="form-group flex flex-col">
                       <span className="text-primary">Tanggal Lahir</span>
-                      {/* <TextInput placeholder="Input" value={input} onChange={(e) => setInput(e.target.value)}/> */}
-                      <div className="inline-flex gap-2">
-                        <Dropdown data={dd} selected={(d) => setDay(d)} />
-                        <Dropdown data={mm} selected={(m) => setMonth(m)} />
-                        <Dropdown data={yy} selected={(y) => setYear(y)} />
-                      </div>
+                      <TextInput
+                        placeholder="Tanggal Lahir"
+                        value={form.birth_date}
+                        type="date"
+                        onChange={(e) => handleForm('birth_date', e.target.value)}
+                      />
                     </div>
                     <div className="form-group">
                       <span className="text-primary">Kota Domisili</span>
                       <TextInput
                         placeholder="Nama kota"
                         value={form.city}
+                        type="text"
                         onChange={(e) => handleForm('city', e.target.value)}
                       />
                     </div>
@@ -158,6 +140,7 @@ export default function Register() {
                       <TextInput
                         placeholder="Nama institusi"
                         value={form.institution}
+                        type="text"
                         onChange={(e) => handleForm('institution', e.target.value)}
                       />
                     </div>
@@ -182,10 +165,14 @@ export default function Register() {
                       <div>Total</div>
                       <div>{program ? formatCurrency(program.price, 'IDR') : ''}</div>
                     </div>
-                    <div className="mt-6 flex justify-center md:justify-start">
+                    <div className="mt-6 flex flex-col justify-center md:justify-start">
                       <div className="w-40">
-                        <Button title="Checkout" onClick={handleCheckout} />
+                        <Button title="Checkout" isDisabled={isDisabled} onClick={handleCheckout} />
                       </div>
+                      {isDisabled && (
+                        <span className="text-sm text-error font-semibold">Masa pendaftaran kelas berakhir</span>
+                      )}
+                      {!isValid && <span className="text-error text-sm font-semibold">Form harus diisi</span>}
                     </div>
                   </div>
                 </div>

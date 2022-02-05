@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { programRepository } from '../../repositories';
 import TextInput from '../../components/TextInput';
-import Dropdown from '../../components/Dropdown';
 import Button from '../../components/Button';
 import { formatCurrency } from '../../utils/helper';
 
@@ -14,6 +13,7 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(true);
   const [program, setProgram] = useState(null);
   const [isValid, setIsValid] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [form, setForm] = useState({
     name: '',
@@ -53,6 +53,18 @@ export default function Register() {
       }
     }
   }, [id]);
+
+  useEffect(() => {
+    if (program?.closed_at) {
+      const dateClosed = new Date(program.closed_at);
+      const dateNow = new Date();
+      if (dateNow > dateClosed) {
+        setIsDisabled(true);
+      }
+    } else {
+      setIsDisabled(false);
+    }
+  }, [program]);
 
   return (
     <div>
@@ -155,9 +167,12 @@ export default function Register() {
                     </div>
                     <div className="mt-6 flex flex-col justify-center md:justify-start">
                       <div className="w-40">
-                        <Button title="Checkout" onClick={handleCheckout} />
+                        <Button title="Checkout" isDisabled={isDisabled} onClick={handleCheckout} />
                       </div>
-                      {!isValid && <span className="text-error text-sm">Form harus diisi</span>}
+                      {isDisabled && (
+                        <span className="text-sm text-error font-semibold">Masa pendaftaran kelas berakhir</span>
+                      )}
+                      {!isValid && <span className="text-error text-sm font-semibold">Form harus diisi</span>}
                     </div>
                   </div>
                 </div>

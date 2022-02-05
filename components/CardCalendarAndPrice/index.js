@@ -61,7 +61,7 @@ export default function CardCalendarAndPrice({
 
         <div className="flex flex-col items-center justify-center">
           <Button title="Ambil Kelas" isDisabled={isDisabled} onClick={onClick} />
-          {isDisabled && <span className="text-sm text-primary font-semibold">Masa pendaftaran kelas berakhir</span>}
+          {isDisabled && <span className="text-sm text-error font-semibold">Masa pendaftaran kelas berakhir</span>}
           {!isDisabled && closedAt && (
             <span className="text-sm text-primary font-semibold">{`Pendaftaran sampai ${formatDate(closedAt)}`}</span>
           )}

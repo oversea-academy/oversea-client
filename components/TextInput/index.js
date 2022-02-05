@@ -1,4 +1,4 @@
-const TextInput = ({ placeholder, value, onChange }) => (
+const TextInput = ({ placeholder, value, type = 'text', onChange }) => (
   <div
     className="
       mt-2 mb-3 p-0.5 w-full rounded-full
@@ -11,6 +11,7 @@ const TextInput = ({ placeholder, value, onChange }) => (
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      type={type}
       className="
         w-full rounded-full py-2 px-4
         bg-primary-content text-gray-700 text-sm

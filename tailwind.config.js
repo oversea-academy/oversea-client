@@ -6,7 +6,8 @@ module.exports = {
       softblue: '#d6f1f7',
       'gray-400': '#eff0f0',
       'gray-cloud': '#C4C4C4',
-      'red-oringe': '#EE6352'
+      'red-oringe': '#EE6352',
+      'dark-gray': '#003a47'
     },
     extend: {
       backgroundImage: {

@@ -27,7 +27,7 @@ function Admin() {
 
     const router = useRouter();
     const handleBackBtn = () => router.push("/admin/program/class");
-    var handleSaveBtn = async (e) => {
+    const handleSaveBtn = async (e) => {
         e.preventDefault();
         const response = await programRepository.postProgramClass(payload);
         if (response?.status) {

@@ -8,114 +8,32 @@ import TableAction from '../../../../components/TableAction';
 import { programRepository } from '../../../../repositories';
 
 function Admin() {
-  
-  // TEMPORARY DATA (HARDCODED)
-  const data = [
-    {
-        id: 1,
-        name: "Kelas IELTS",
-        description: "Seru banget karena native speakernya asik",
-        slug: "kelas-ielts",
-        price: "10000",
-        closed_at: "23 Feb"
-    },
-    {
-        id: 2,
-        name: "Kelas TOEFL",
-        description: "Asik sekali karena gurunya lucu",
-        slug: "kelas-toefl",
-        price: "8000",
-        closed_at: "15 Jan"
-    },
-    {
-      id: 3,
-      name: "Kelas IELTS",
-      description: "Seru banget karena native speakernya asik",
-      slug: "kelas-ielts",
-      price: "10000",
-      closed_at: "23 Feb"
-    },
-    {
-        id: 4,
-        name: "Kelas TOEFL",
-        description: "Asik sekali karena gurunya lucu",
-        slug: "kelas-toefl",
-        price: "8000",
-        closed_at: "15 Jan"
-    },
-    {
-      id: 5,
-      name: "Kelas IELTS",
-      description: "Seru banget karena native speakernya asik",
-      slug: "kelas-ielts",
-      price: "10000",
-      closed_at: "23 Feb"
-    },
-    {
-        id: 6,
-        name: "Kelas TOEFL",
-        description: "Asik sekali karena gurunya lucu",
-        slug: "kelas-toefl",
-        price: "8000",
-        closed_at: "15 Jan"
-    },
-    {
-      id: 7,
-      name: "Kelas IELTS",
-      description: "Seru banget karena native speakernya asik",
-      slug: "kelas-ielts",
-      price: "10000",
-      closed_at: "23 Feb"
-    },
-    {
-        id: 8,
-        name: "Kelas TOEFL",
-        description: "Asik sekali karena gurunya lucu",
-        slug: "kelas-toefl",
-        price: "8000",
-        closed_at: "15 Jan"
-    },
-    {
-      id: 9,
-      name: "Kelas IELTS",
-      description: "Seru banget karena native speakernya asik",
-      slug: "kelas-ielts",
-      price: "10000",
-      closed_at: "23 Feb"
-    },
-    {
-        id: 10,
-        name: "Kelas TOEFL",
-        description: "Asik sekali karena gurunya lucu",
-        slug: "kelas-toefl",
-        price: "8000",
-        closed_at: "15 Jan"
-    },
-    {
-      id: 11,
-      name: "Kelas IELTS",
-      description: "Seru banget karena native speakernya asik",
-      slug: "kelas-ielts",
-      price: "10000",
-      closed_at: "23 Feb"
-    },
-    {
-        id: 12,
-        name: "Kelas TOEFL",
-        description: "Asik sekali karena gurunya lucu",
-        slug: "kelas-toefl",
-        price: "8000",
-        closed_at: "15 Jan"
-    },
-    {
-      id: 13,
-      name: "Kelas IELTS",
-      description: "Seru banget karena native speakernya asik",
-      slug: "kelas-ielts",
-      price: "10000",
-      closed_at: "23 Feb"
-    },
-  ];
+  const [dataTable, setDataTable] = useState({
+    data: [],
+    loading: false,
+    totalRows: 0
+  });
+
+  const fetchUsers = async (page) => {
+    setDataTable({loading: true});
+    const result = await programRepository.getProgramClass({
+      page: page,
+      limit: 10
+    });
+    setDataTable({
+      data: result.data,
+      loading: false,
+      totalRows: result.total,
+    });
+  };
+
+  const handlePageChange = (page) => {
+    fetchUsers(page);
+  };
+
+  useEffect(() => {
+    fetchUsers(1);
+  }, []);
 
   const customStyles = {
     	headRow: {
@@ -203,10 +121,14 @@ function Admin() {
                 </div>
                 <DataTable
                   columns={columns}
-                  data={data}
+                  data={dataTable.data}
                   customStyles={customStyles}
+                  progressPending={dataTable.loading}
                   highlightOnHover
                   pagination
+                  paginationServer
+                  paginationTotalRows={dataTable.totalRows}
+                  onChangePage={handlePageChange}
                 />
             </div>
         </AdminMenu>

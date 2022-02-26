@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import AuthenticatedRoute from '../../components/AuthenticatedRoute';
 import AdminMenu from '../../components/AdminMenu';
+import ModalConfirm from '../../components/ModalConfirm';
 
 function Admin() {
   return (
@@ -12,6 +13,7 @@ function Admin() {
       </Head>
       <main>
         <AdminMenu>
+          <ModalConfirm isShow="true"></ModalConfirm>
           <h1>Main</h1>
         </AdminMenu>
       </main>

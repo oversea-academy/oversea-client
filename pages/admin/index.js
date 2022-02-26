@@ -13,7 +13,7 @@ function Admin() {
       </Head>
       <main>
         <AdminMenu>
-          <ModalConfirm></ModalConfirm>
+          <ModalConfirm isShow="true"></ModalConfirm>
           <h1>Main</h1>
         </AdminMenu>
       </main>

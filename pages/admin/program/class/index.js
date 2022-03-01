@@ -6,6 +6,7 @@ import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
 import TableAction from '../../../../components/TableAction';
 import { programRepository } from '../../../../repositories';
+import { ToastContainer } from 'react-toastify';
 
 function Admin() {
   const [dataTable, setDataTable] = useState({
@@ -64,12 +65,13 @@ function Admin() {
   const columns = [
     {
       name: 'Nama',
-      selector: (row) => row.name,
       sortable: true,
       style: {
         fontSize: '14px',
         color: '#005365'
-      }
+      },
+      grow: 2,
+      cell: (row) => <a href={'/admin/program/class/' + row.id}>{row.name}</a>
     },
     {
       name: 'Deskripsi',
@@ -127,6 +129,7 @@ function Admin() {
               paginationTotalRows={dataTable.totalRows}
               onChangePage={handlePageChange}
             />
+            <ToastContainer className="mt-16 text-xs" />
           </div>
         </AdminMenu>
       </main>

@@ -79,7 +79,8 @@ function postProgramRegister(data) {
         whatsapp: data.whatsapp,
         birth_date: data.birth_date,
         institution: data.institution,
-        city: data.city
+        city: data.city,
+        amount: data.amount
       })
       .then((response) => {
         resolve(response.data);

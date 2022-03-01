@@ -13,3 +13,18 @@ export const formatCurrency = (number, prefix) => {
   rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
   return prefix == undefined ? rupiah : rupiah ? 'IDR ' + rupiah : '';
 };
+
+export const validateWhatsappNumber = (whatsappNumber) => {
+  if (!whatsappNumber.startsWith('08') || whatsappNumber.length < 8) return false;
+  return true;
+};
+
+export const replaceWhatsappNumber = (whatsappNumber, code = '+62') => {
+  return `${code}${whatsappNumber.slice(1)}`;
+};
+
+export const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};

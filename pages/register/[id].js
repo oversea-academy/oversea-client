@@ -4,16 +4,19 @@ import { useRouter } from 'next/router';
 import { programRepository } from '../../repositories';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
-import { formatCurrency } from '../../utils/helper';
+import { formatCurrency, validateWhatsappNumber, validateEmail, replaceWhatsappNumber } from '../../utils/helper';
 
 export default function Register() {
   const router = useRouter();
   const { id } = router.query;
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [showModalSuccess, setShowModalSuccess] = useState(false);
   const [program, setProgram] = useState(null);
   const [isValid, setIsValid] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [responseData, setResponseData] = useState({});
 
   const [form, setForm] = useState({
     name: '',
@@ -30,14 +33,31 @@ export default function Register() {
   };
 
   const handleCheckout = async () => {
-    if (form.name && form.email && form.whatsapp && form.institution && form.city && form.birth_date) {
+    if (
+      form.name &&
+      form.email &&
+      form.whatsapp &&
+      form.birth_date &&
+      form.city &&
+      form.institution &&
+      validateWhatsappNumber(form.whatsapp) &&
+      validateEmail(form.email) &&
+      program.program_id
+    ) {
       setIsValid(true);
+      setIsButtonLoading(true);
       const response = await programRepository.postProgramRegister({
-        program_id: id,
-        ...form
+        program_id: program.program_id,
+        amount: program.price,
+        ...form,
+        whatsapp: replaceWhatsappNumber(form.whatsapp)
       });
       if (response.status) {
-        alert('Success');
+        setIsButtonLoading(false);
+        setShowModalSuccess(true);
+        setResponseData(response.data);
+      } else {
+        alert('Failed');
       }
     } else {
       setIsValid(false);
@@ -167,12 +187,16 @@ export default function Register() {
                     </div>
                     <div className="mt-6 flex flex-col justify-center md:justify-start">
                       <div className="w-40">
-                        <Button title="Checkout" isDisabled={isDisabled} onClick={handleCheckout} />
+                        {isButtonLoading ? (
+                          <Button title="Loading..." isDisabled={true} />
+                        ) : (
+                          <Button title="Checkout" isDisabled={isDisabled} onClick={handleCheckout} />
+                        )}
                       </div>
                       {isDisabled && (
                         <span className="text-sm text-error font-semibold">Masa pendaftaran kelas berakhir</span>
                       )}
-                      {!isValid && <span className="text-error text-sm font-semibold">Form harus diisi</span>}
+                      {!isValid && <span className="text-error text-sm font-semibold">Form tidak valid</span>}
                     </div>
                   </div>
                 </div>
@@ -181,6 +205,22 @@ export default function Register() {
           </div>
         </section>
       </main>
+
+      <div className={`modal ${showModalSuccess ? 'modal-open' : ''}`}>
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">
+            🎉Terimakasih telah melakukan pendaftaran pada {program ? program.name : ''}
+          </h3>
+          {responseData.invoice_url && <p className="py-4">Silakan lanjut ke pembayaran</p>}
+          {responseData.invoice_url && (
+            <div className="modal-action">
+              <a href={responseData.invoice_url} target="_blank" className="btn btn-primary" rel="noreferrer">
+                Pembayaran
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

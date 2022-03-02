@@ -2,11 +2,11 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
+import DayJs from 'dayjs';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
 import TableAction from '../../../../components/TableAction';
 import { programRepository } from '../../../../repositories';
-import { ToastContainer } from 'react-toastify';
 
 function Admin() {
   const [dataTable, setDataTable] = useState({
@@ -89,7 +89,7 @@ function Admin() {
     },
     {
       name: 'Tanggal Penutupan',
-      selector: (row) => row.closed_at
+      selector: (row) => (row.closed_at ? DayJs(row.closed_at).format('DD MMM YYYY HH:mm A') : '')
     },
     {
       name: 'Action',
@@ -129,7 +129,6 @@ function Admin() {
               paginationTotalRows={dataTable.totalRows}
               onChangePage={handlePageChange}
             />
-            <ToastContainer className="mt-16 text-xs" />
           </div>
         </AdminMenu>
       </main>

@@ -3,10 +3,14 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
+import ModalConfirm from '../../../../components/ModalConfirm';
 import { programRepository } from '../../../../repositories';
+import toastRun from '../../../../utils/toastRun';
 
-function Admin() {
+function CreateProgramClass() {
   const [payload, setPayload] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
 
   const createSlug = (txt) => txt.replace(/\s+/g, '-').toLowerCase();
   const handlePayload = (e, key) => {
@@ -20,21 +24,50 @@ function Admin() {
   };
   const handleName = (e) => {
     setPayload({
+      ...payload,
       name: e.target.value,
       slug: createSlug(e.target.value)
     });
   };
 
   const router = useRouter();
-  const handleBackBtn = () => router.push('/admin/program/class');
-  const handleSaveBtn = async (e) => {
+  const handleBackBtn = (e) => {
     e.preventDefault();
+    router.push('/admin/program/class');
+  };
+  const handleSaveBtn = (e) => {
+    e.preventDefault();
+    if (
+      payload.name &&
+      payload.description &&
+      payload.slug &&
+      payload.total_hour &&
+      payload.total_meet &&
+      payload.learning_goal &&
+      payload.facility &&
+      payload.schedule_day &&
+      payload.schedule_time &&
+      payload.price &&
+      payload.price_normal &&
+      payload.closed_at &&
+      payload.ref_class_type
+    ) {
+      setIsShowModal(true);
+    } else {
+      toastRun.error('Form tidak lengkap');
+    }
+  };
+
+  const onConfirm = async () => {
+    setIsLoading(true);
     const response = await programRepository.postProgramClass(payload);
     if (response?.status) {
-      console.log('success');
+      toastRun.success('Kelas baru berhasil ditambahkan!');
     } else {
-      alert('error');
+      toastRun.error(response.message || 'API Error');
     }
+    setIsLoading(false);
+    setIsShowModal(false);
   };
 
   return (
@@ -57,7 +90,7 @@ function Admin() {
                 <input
                   required
                   type="text"
-                  placeholder="Name"
+                  placeholder="Contoh: Kelas IELTS Regular"
                   value={payload.name}
                   onChange={handleName}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -69,7 +102,7 @@ function Admin() {
                 <input
                   required
                   type="text"
-                  placeholder="Description"
+                  placeholder="Contoh: Belajar persiapan IELTS"
                   value={payload.description}
                   onChange={(e) => handlePayload(e, 'description')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -86,7 +119,7 @@ function Admin() {
                 <input
                   required
                   type="number"
-                  placeholder="Total Hour"
+                  placeholder="Jumlah jam belajar"
                   value={payload.total_hour}
                   onChange={(e) => handlePayload(e, 'total_hour')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -98,7 +131,7 @@ function Admin() {
                 <input
                   required
                   type="number"
-                  placeholder="Total Meet"
+                  placeholder="Jumlah pertemuan"
                   value={payload.total_meet}
                   onChange={(e) => handlePayload(e, 'total_meet')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -110,7 +143,7 @@ function Admin() {
                 <textarea
                   required
                   type="textarea"
-                  placeholder="Learning Goals"
+                  placeholder="Isi tujuan pembelajaran"
                   value={payload.learning_goal}
                   onChange={(e) => handlePayload(e, 'learning_goal')}
                   className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -122,7 +155,7 @@ function Admin() {
                 <textarea
                   required
                   type="textarea"
-                  placeholder="Facility"
+                  placeholder="List fasilitas dipisahkan dengan semicolon, contoh: point 1;point 2"
                   value={payload.facility}
                   onChange={(e) => handlePayload(e, 'facility')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -134,7 +167,7 @@ function Admin() {
                 <input
                   required
                   type="text"
-                  placeholder="Schedule Day"
+                  placeholder="Contoh: Setiap Senin, Rabu, dan Jumat"
                   value={payload.schedule_day}
                   onChange={(e) => handlePayload(e, 'schedule_day')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -146,9 +179,21 @@ function Admin() {
                 <input
                   required
                   type="text"
-                  placeholder="Schedule Time"
+                  placeholder="Contoh: Pukul 19.00-21.30 WIB"
                   value={payload.schedule_time}
                   onChange={(e) => handlePayload(e, 'schedule_time')}
+                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+                />
+              </div>
+              {/* Price Normal*/}
+              <div className="flex flex-row my-6">
+                <label className="w-64 my-auto">Harga Normal</label>
+                <input
+                  required
+                  type="number"
+                  placeholder="Harga asli"
+                  value={payload.price_normal}
+                  onChange={(e) => handlePayload(e, 'price_normal')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                 />
               </div>
@@ -158,9 +203,21 @@ function Admin() {
                 <input
                   required
                   type="number"
-                  placeholder="Price"
+                  placeholder="Harga penawaran"
                   value={payload.price}
                   onChange={(e) => handlePayload(e, 'price')}
+                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+                />
+              </div>
+              {/* Closed At */}
+              <div className="flex flex-row my-6">
+                <label className="w-64 my-auto">Tanggal Penutupan</label>
+                <input
+                  required
+                  type="date"
+                  placeholder="Tanggal penutupan kelas"
+                  value={payload.closed_at}
+                  onChange={(e) => handlePayload(e, 'closed_at')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                 />
               </div>
@@ -170,7 +227,7 @@ function Admin() {
                 <input
                   required
                   type="text"
-                  placeholder="Class Type"
+                  placeholder="Contoh: ielts;basic"
                   value={payload.ref_class_type}
                   onChange={(e) => handlePayload(e, 'ref_class_type')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
@@ -187,9 +244,17 @@ function Admin() {
             </form>
           </div>
         </AdminMenu>
+        <ModalConfirm
+          title="Yakin mau menambahkan program kelas ini?"
+          description="Pastikan kembali form sudah benar"
+          isShow={isShowModal}
+          isLoading={isLoading}
+          onConfirm={onConfirm}
+          onCancel={() => setIsShowModal(false)}
+        ></ModalConfirm>
       </main>
     </div>
   );
 }
 
-export default AuthenticatedRoute(Admin, { role: 'admin' });
+export default AuthenticatedRoute(CreateProgramClass, { role: 'admin' });

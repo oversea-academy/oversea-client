@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
+import ModalConfirm from '../../../../components/ModalConfirm';
 import { programRepository } from '../../../../repositories';
 import toastRun from '../../../../utils/toastRun';
 
 function CreateProgramClass() {
   const [payload, setPayload] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
 
   const createSlug = (txt) => txt.replace(/\s+/g, '-').toLowerCase();
   const handlePayload = (e, key) => {
@@ -29,8 +31,11 @@ function CreateProgramClass() {
   };
 
   const router = useRouter();
-  const handleBackBtn = () => router.push('/admin/program/class');
-  const handleSaveBtn = async (e) => {
+  const handleBackBtn = (e) => {
+    e.preventDefault();
+    router.push('/admin/program/class');
+  };
+  const handleSaveBtn = (e) => {
     e.preventDefault();
     if (
       payload.name &&
@@ -47,17 +52,22 @@ function CreateProgramClass() {
       payload.closed_at &&
       payload.ref_class_type
     ) {
-      setIsLoading(true);
-      const response = await programRepository.postProgramClass(payload);
-      if (response?.status) {
-        toastRun.success('Kelas baru berhasil ditambahkan!');
-      } else {
-        toastRun.error(response.message || 'API Error');
-      }
-      setIsLoading(false);
+      setIsShowModal(true);
     } else {
       toastRun.error('Form tidak lengkap');
     }
+  };
+
+  const onConfirm = async () => {
+    setIsLoading(true);
+    const response = await programRepository.postProgramClass(payload);
+    if (response?.status) {
+      toastRun.success('Kelas baru berhasil ditambahkan!');
+    } else {
+      toastRun.error(response.message || 'API Error');
+    }
+    setIsLoading(false);
+    setIsShowModal(false);
   };
 
   return (
@@ -227,19 +237,21 @@ function CreateProgramClass() {
                 <button className="btn btn-accent" onClick={handleBackBtn}>
                   Kembali
                 </button>
-                {isLoading ? (
-                  <button className="btn btn-primary" disabled>
-                    Loading...
-                  </button>
-                ) : (
-                  <button className="btn btn-primary" onClick={handleSaveBtn}>
-                    Simpan
-                  </button>
-                )}
+                <button className="btn btn-primary" onClick={handleSaveBtn}>
+                  Simpan
+                </button>
               </div>
             </form>
           </div>
         </AdminMenu>
+        <ModalConfirm
+          title="Yakin mau menambahkan program kelas ini?"
+          description="Pastikan kembali form sudah benar"
+          isShow={isShowModal}
+          isLoading={isLoading}
+          onConfirm={onConfirm}
+          onCancel={() => setIsShowModal(false)}
+        ></ModalConfirm>
       </main>
     </div>
   );

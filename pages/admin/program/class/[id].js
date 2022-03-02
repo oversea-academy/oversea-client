@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import DayJs from 'dayjs';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
 import { programRepository } from '../../../../repositories';
@@ -97,8 +98,8 @@ function Admin() {
                 <p className="mr-4">:</p>
               </div>
               <ul className="list-disc ml-4">
-                {dataKelas.data.facilities?.map((it) => (
-                  <li>{it}</li>
+                {dataKelas.data.facilities?.map((it, index) => (
+                  <li key={index}>{it}</li>
                 ))}
               </ul>
             </div>
@@ -142,7 +143,7 @@ function Admin() {
                 <p className="">Penutupan Kelas</p>
                 <p className="mr-4">:</p>
               </div>
-              <p>{dataKelas.data.closed_at}</p>
+              <p>{dataKelas.data.closed_at ? DayJs(dataKelas.data.closed_at).format('DD MMM YYYY HH:mm A') : ''}</p>
             </div>
             <div className="flex justify-end gap-4 md:gap-6">
               <button className="btn btn-accent text-xs md:text-sm" onClick={handleBackBtn}>

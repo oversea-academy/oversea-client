@@ -15,7 +15,8 @@ function postProgramClass(data) {
         schedule_day: data.schedule_day,
         schedule_time: data.schedule_time,
         price: data.price,
-        discount: data.discount,
+        price_normal: data.price_normal,
+        closed_at: data.closed_at,
         ref_class_type: data.ref_class_type
       })
       .then((response) => {

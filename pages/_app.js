@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import store from '../store';
 
 import 'tailwindcss/tailwind.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {

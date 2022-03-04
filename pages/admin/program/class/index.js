@@ -1,12 +1,15 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import DayJs from 'dayjs';
+import { CgTrash } from 'react-icons/cg';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
-import TableAction from '../../../../components/TableAction';
+import ModalConfirm from '../../../../components/ModalConfirm';
 import { programRepository } from '../../../../repositories';
+import toastRun from '../../../../utils/toastRun';
 
 function Admin() {
   const [dataTable, setDataTable] = useState({
@@ -14,6 +17,9 @@ function Admin() {
     loading: false,
     totalRows: 0
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState(null);
 
   const fetchUsers = async (page) => {
     setDataTable({ loading: true });
@@ -35,6 +41,28 @@ function Admin() {
   useEffect(() => {
     fetchUsers(1);
   }, []);
+
+  const handleDelete = (row) => {
+    setSelectedProgram(row);
+    setIsShowModal(true);
+  };
+
+  const onConfirmDelete = async () => {
+    if (selectedProgram && selectedProgram.program_id) {
+      setIsLoading(true);
+      const response = await programRepository.deleteProgram(selectedProgram.program_id);
+      if (response?.status) {
+        fetchUsers(1);
+        toastRun.success('Program berhasil dihapus');
+      } else {
+        toastRun.error(response.message || 'API Error');
+      }
+      setIsLoading(false);
+      setIsShowModal(false);
+    } else {
+      toastRun.error('ID program tidak ditemukan');
+    }
+  };
 
   const customStyles = {
     headRow: {
@@ -71,12 +99,12 @@ function Admin() {
         color: '#005365'
       },
       grow: 2,
-      cell: (row) => <a href={'/admin/program/class/' + row.id}>{row.name}</a>
+      cell: (row) => <Link href={'/admin/program/class/' + row.id}>{row.name}</Link>
     },
     {
       name: 'Deskripsi',
       selector: (row) => row.description,
-      grow: 2
+      grow: 1
     },
     {
       name: 'Slug',
@@ -89,13 +117,20 @@ function Admin() {
     },
     {
       name: 'Tanggal Penutupan',
-      selector: (row) => (row.closed_at ? DayJs(row.closed_at).format('DD MMM YYYY HH:mm A') : '')
+      selector: (row) => (row.closed_at ? DayJs(row.closed_at).format('DD MMM YYYY HH:mm A') : ''),
+      grow: 2
     },
     {
       name: 'Action',
       button: true,
       width: '80px',
-      cell: (row) => <TableAction row={row} />
+      cell: (row) => (
+        <div className="flex content-center gap-1 my-1.5">
+          <button className="btn btn-error min-h-8 h-8 px-3" onClick={() => handleDelete(row)}>
+            <CgTrash className="text-xl" />
+          </button>
+        </div>
+      )
     }
   ];
 
@@ -131,6 +166,14 @@ function Admin() {
             />
           </div>
         </AdminMenu>
+        <ModalConfirm
+          title={`Yakin mau menghapus program kelas "${selectedProgram.name}"?`}
+          description=""
+          isShow={isShowModal}
+          isLoading={isLoading}
+          onConfirm={onConfirmDelete}
+          onCancel={() => setIsShowModal(false)}
+        ></ModalConfirm>
       </main>
     </div>
   );

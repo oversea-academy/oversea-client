@@ -48,7 +48,7 @@ function Admin() {
         <AdminMenu>
           <div className="container px-20 py-16 mb-8 bg-primary-content rounded-lg shadow-lg text-sm md:text-base">
             <div className="flex justify-start">
-              <p className="text-primary font-bold text-3xl">Buat Kelas</p>
+              <p className="text-primary font-bold text-3xl">Detail Kelas</p>
             </div>
             <div className="flex flex-col md:flex-row my-6">
               <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">

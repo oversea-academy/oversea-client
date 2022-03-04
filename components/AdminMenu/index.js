@@ -75,12 +75,7 @@ export default function AdminMenu({ children }) {
             <ul className="w-80">
               <li className="px-8 py-3 w-80 hover:text-accent">
                 <Link href="/admin/program/class" passHref>
-                  Program Kelas
-                </Link>
-              </li>
-              <li className="px-8 py-3 w-80 hover:text-accent">
-                <Link href="/admin/program/webinar" passHref>
-                  Register Webinar
+                  List Program Kelas
                 </Link>
               </li>
             </ul>
@@ -110,13 +105,8 @@ export default function AdminMenu({ children }) {
           >
             <ul className="w-80">
               <li className="px-8 py-3 w-80 hover:text-accent">
-                <Link href="/admin/register/class" passHref>
-                  Program Kelas
-                </Link>
-              </li>
-              <li className="px-8 py-3 w-80 hover:text-accent">
-                <Link href="/admin/register/webinar" passHref>
-                  Register Webinar
+                <Link href="/admin/register" passHref>
+                  List Pendaftaran
                 </Link>
               </li>
             </ul>

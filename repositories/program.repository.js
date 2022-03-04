@@ -92,10 +92,54 @@ function postProgramRegister(data) {
   });
 }
 
+function getProgramRegisterById(id) {
+  return new Promise((resolve) => {
+    request
+      .get(`https://620a0b9292946600171c571b.mockapi.io/program_register/${id}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
+function getProgramRegisterStatus() {
+  return new Promise((resolve) => {
+    request
+      .get(`https://620a0b9292946600171c571b.mockapi.io/program_register_status/1`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
+function updateProgramRegisterStatus(programRegisterId, data) {
+  return new Promise((resolve) => {
+    request
+      .put(`/program/register/status/${programRegisterId}`, {
+        ref_register_status_id: data.ref_register_status_id
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
 export default {
   postProgramClass,
   getProgramClass,
   getProgramClassBySlug,
   getProgramClassById,
-  postProgramRegister
+  postProgramRegister,
+  getProgramRegisterById,
+  getProgramRegisterStatus,
+  updateProgramRegisterStatus
 };

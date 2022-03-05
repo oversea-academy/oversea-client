@@ -95,7 +95,7 @@ function postProgramRegister(data) {
 function getProgramRegisterById(id) {
   return new Promise((resolve) => {
     request
-      .get(`https://620a0b9292946600171c571b.mockapi.io/program_register/${id}`)
+      .get(`/program/register/${id}`)
       .then((response) => {
         resolve(response.data);
       })
@@ -108,7 +108,7 @@ function getProgramRegisterById(id) {
 function getProgramRegisterStatus() {
   return new Promise((resolve) => {
     request
-      .get(`https://620a0b9292946600171c571b.mockapi.io/program_register_status/1`)
+      .get(`/program/register/status`)
       .then((response) => {
         resolve(response.data);
       })

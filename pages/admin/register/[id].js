@@ -29,7 +29,7 @@ function DetailRegister() {
       data: {}
     });
     if (id !== undefined) {
-      getDataRegister('1');
+      getDataRegister(id);
     }
   }, [id]);
 
@@ -50,7 +50,7 @@ function DetailRegister() {
     });
 
     if (response?.status) {
-      getDataRegister('1');
+      getDataRegister(id);
       toastRun.success('Status berhasil diubah!');
     } else {
       toastRun.error(response.message || 'API Error');
@@ -97,112 +97,122 @@ function DetailRegister() {
       <main>
         <AdminMenu>
           <div className="container px-20 py-16 mb-8 bg-primary-content rounded-lg shadow-lg text-sm md:text-base">
-            <div className="flex justify-start">
+            <div className="flex justify-start mb-10">
               <p className="text-primary font-bold text-3xl">Detail Pendaftaran</p>
             </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Nama Program</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>{dataRegister.data.program_name}</p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Nama Pendaftar</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>{dataRegister.data.name}</p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Email</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>{dataRegister.data.email}</p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Nomor Whatsapp</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>{dataRegister.data.whatsapp}</p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 justify-between font-semibold">
-                <p className="w-56">Tanggal Lahir</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>{dataRegister.data.birth_date}</p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 justify-between font-semibold">
-                <p className="w-56">Institusi</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>{dataRegister.data.institution}</p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Kota Domisili</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>{dataRegister.data.city}</p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Status</p>
-                <p className="mr-4">:</p>
-              </div>
-              {isStatusUpdate ? (
-                <div className="flex gap-3">
-                  <select className="select select-bordered w-full max-w-xs" onChange={onSelectStatus}>
-                    <option disabled selected>
-                      Pilih status
-                    </option>
-                    {listStatus.map((item, index) => (
-                      <option key={index} value={item.value}>
-                        {item.label}
-                      </option>
-                    ))}
-                  </select>
-                  <button className="btn btn-error" onClick={() => setIsStatusUpdate(false)}>
-                    Cancel
+            {dataRegister.loading ? (
+              <div className="text-xl">Loading...</div>
+            ) : (
+              <div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Nama Program</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>{dataRegister.data.program_name}</p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Nama Pendaftar</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>{dataRegister.data.name}</p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Email</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>{dataRegister.data.email}</p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Nomor Whatsapp</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>{dataRegister.data.whatsapp}</p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 justify-between font-semibold">
+                    <p className="w-56">Tanggal Lahir</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>{dataRegister.data.birth_date}</p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 justify-between font-semibold">
+                    <p className="w-56">Institusi</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>{dataRegister.data.institution}</p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Kota Domisili</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>{dataRegister.data.city}</p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Status</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  {isStatusUpdate ? (
+                    <div className="flex gap-3">
+                      <select className="select select-bordered w-full max-w-xs" onChange={onSelectStatus}>
+                        <option disabled selected>
+                          Pilih status
+                        </option>
+                        {listStatus.map((item, index) => (
+                          <option key={index} value={item.value}>
+                            {item.label}
+                          </option>
+                        ))}
+                      </select>
+                      <button className="btn btn-error" onClick={() => setIsStatusUpdate(false)}>
+                        Cancel
+                      </button>
+                      <button className="btn btn-success" onClick={onHandleShowModal}>
+                        OK
+                      </button>
+                    </div>
+                  ) : (
+                    <p>{dataRegister.data.status}</p>
+                  )}
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Tanggal Dibuat</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>
+                    {dataRegister.data.created_at
+                      ? DayJs(dataRegister.data.created_at).format('DD MMM YYYY HH:mm A')
+                      : ''}
+                  </p>
+                </div>
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="">Tanggal Diupdate</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  <p>
+                    {dataRegister.data.updated_at
+                      ? DayJs(dataRegister.data.updated_at).format('DD MMM YYYY HH:mm A')
+                      : ''}
+                  </p>
+                </div>
+                <div className="flex justify-end gap-4 md:gap-6">
+                  <button className="btn btn-accent text-xs md:text-sm" onClick={handleBackBtn}>
+                    Kembali
                   </button>
-                  <button className="btn btn-success" onClick={onHandleShowModal}>
-                    OK
+                  <button className="btn btn-primary text-xs md:text-sm" onClick={handleChangeStatus}>
+                    Ubah Status
                   </button>
                 </div>
-              ) : (
-                <p>{dataRegister.data.status}</p>
-              )}
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Tanggal Dibuat</p>
-                <p className="mr-4">:</p>
               </div>
-              <p>
-                {dataRegister.data.created_at ? DayJs(dataRegister.data.created_at).format('DD MMM YYYY HH:mm A') : ''}
-              </p>
-            </div>
-            <div className="flex flex-col md:flex-row my-6">
-              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
-                <p className="">Tanggal Diupdate</p>
-                <p className="mr-4">:</p>
-              </div>
-              <p>
-                {dataRegister.data.updated_at ? DayJs(dataRegister.data.updated_at).format('DD MMM YYYY HH:mm A') : ''}
-              </p>
-            </div>
-            <div className="flex justify-end gap-4 md:gap-6">
-              <button className="btn btn-accent text-xs md:text-sm" onClick={handleBackBtn}>
-                Kembali
-              </button>
-              <button className="btn btn-primary text-xs md:text-sm" onClick={handleChangeStatus}>
-                Ubah Status
-              </button>
-            </div>
+            )}
           </div>
         </AdminMenu>
         <ModalConfirm

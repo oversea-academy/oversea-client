@@ -146,6 +146,34 @@ function deleteProgram(programId) {
   });
 }
 
+function getProgramRegister(data) {
+  const page = data.page || 1;
+  const limit = data.limit || 10;
+  return new Promise((resolve) => {
+    request
+      .get(`/program/register?page=${page}&limit=${limit}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
+function deleteProgramRegister(programRegisterId) {
+  return new Promise((resolve) => {
+    request
+      .delete(`/program/register/${programRegisterId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
 export default {
   postProgramClass,
   getProgramClass,
@@ -155,5 +183,7 @@ export default {
   getProgramRegisterById,
   getProgramRegisterStatus,
   updateProgramRegisterStatus,
-  deleteProgram
+  deleteProgram,
+  deleteProgramRegister,
+  getProgramRegister
 };

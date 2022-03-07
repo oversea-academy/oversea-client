@@ -83,165 +83,202 @@ function CreateProgramClass() {
             <div className="flex justify-start">
               <p className="text-primary font-bold text-3xl">Buat Kelas</p>
             </div>
-            <form>
-              {/* Name */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Nama</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Contoh: Kelas IELTS Regular"
-                  value={payload.name}
-                  onChange={handleName}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+            {/* Name */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Nama</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Desc */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Deskripsi</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Contoh: Belajar persiapan IELTS"
-                  value={payload.description}
-                  onChange={(e) => handlePayload(e, 'description')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="text"
+                placeholder="Contoh: Kelas IELTS Regular"
+                value={payload.name}
+                onChange={handleName}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Desc */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Deskripsi</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Slug */}
-              <div className="flex flex-row my-6">
-                <label className="w-48 my-auto">Slug</label>
-                <p className="text-primary font-medium">{payload.slug}</p>
+              <input
+                required
+                type="text"
+                placeholder="Contoh: Belajar persiapan IELTS"
+                value={payload.description}
+                onChange={(e) => handlePayload(e, 'description')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Slug */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Slug</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Total Hour */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Total Jam</label>
-                <input
-                  required
-                  type="number"
-                  placeholder="Jumlah jam belajar"
-                  value={payload.total_hour}
-                  onChange={(e) => handlePayload(e, 'total_hour')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <p className="text-primary font-medium">{payload.slug}</p>
+            </div>
+            {/* Total Hour */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Total Jam</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Total Meet */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Total Meet</label>
-                <input
-                  required
-                  type="number"
-                  placeholder="Jumlah pertemuan"
-                  value={payload.total_meet}
-                  onChange={(e) => handlePayload(e, 'total_meet')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="number"
+                placeholder="Jumlah jam belajar"
+                value={payload.total_hour}
+                onChange={(e) => handlePayload(e, 'total_hour')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Total Meet */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Total Meet</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Learning Goal */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Tujuan Pembelajaran</label>
-                <textarea
-                  required
-                  type="textarea"
-                  placeholder="Isi tujuan pembelajaran"
-                  value={payload.learning_goal}
-                  onChange={(e) => handlePayload(e, 'learning_goal')}
-                  className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="number"
+                placeholder="Jumlah pertemuan"
+                value={payload.total_meet}
+                onChange={(e) => handlePayload(e, 'total_meet')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Learning Goal */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Tujuan Pembelajaran</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Facility */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 h-20 my-auto">Fasilitas</label>
-                <textarea
-                  required
-                  type="textarea"
-                  placeholder="List fasilitas dipisahkan dengan semicolon, contoh: point 1;point 2"
-                  value={payload.facility}
-                  onChange={(e) => handlePayload(e, 'facility')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <textarea
+                required
+                type="textarea"
+                placeholder="Isi tujuan pembelajaran"
+                value={payload.learning_goal}
+                onChange={(e) => handlePayload(e, 'learning_goal')}
+                className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Facility */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Fasilitas</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Schedule Day */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Jadwal Hari</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Contoh: Setiap Senin, Rabu, dan Jumat"
-                  value={payload.schedule_day}
-                  onChange={(e) => handlePayload(e, 'schedule_day')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <textarea
+                required
+                type="textarea"
+                placeholder="List fasilitas dipisahkan dengan semicolon, contoh: point 1;point 2"
+                value={payload.facility}
+                onChange={(e) => handlePayload(e, 'facility')}
+                className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Schedule Day */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Jadwal Hari</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Schedule Time */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Jadwal Waktu</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Contoh: Pukul 19.00-21.30 WIB"
-                  value={payload.schedule_time}
-                  onChange={(e) => handlePayload(e, 'schedule_time')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="text"
+                placeholder="Contoh: Setiap Senin, Rabu, dan Jumat"
+                value={payload.schedule_day}
+                onChange={(e) => handlePayload(e, 'schedule_day')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Schedule Time */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Jadwal Waktu</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Price Normal*/}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Harga Normal</label>
-                <input
-                  required
-                  type="number"
-                  placeholder="Harga asli"
-                  value={payload.price_normal}
-                  onChange={(e) => handlePayload(e, 'price_normal')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="text"
+                placeholder="Contoh: Pukul 19.00-21.30 WIB"
+                value={payload.schedule_time}
+                onChange={(e) => handlePayload(e, 'schedule_time')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Price */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Harga</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Price */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Harga</label>
-                <input
-                  required
-                  type="number"
-                  placeholder="Harga penawaran"
-                  value={payload.price}
-                  onChange={(e) => handlePayload(e, 'price')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="number"
+                placeholder="Harga penawaran"
+                value={payload.price}
+                onChange={(e) => handlePayload(e, 'price')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Price Normal*/}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Harga Normal</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Closed At */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Tanggal Penutupan</label>
-                <input
-                  required
-                  type="date"
-                  placeholder="Tanggal penutupan kelas"
-                  value={payload.closed_at}
-                  onChange={(e) => handlePayload(e, 'closed_at')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="number"
+                placeholder="Harga asli"
+                value={payload.price_normal}
+                onChange={(e) => handlePayload(e, 'price_normal')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Closed At */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Tanggal Penutupan</p>
+                <p className="mr-4">:</p>
               </div>
-              {/* Class Type */}
-              <div className="flex flex-row my-6">
-                <label className="w-64 my-auto">Tipe Kelas</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Contoh: ielts;basic"
-                  value={payload.ref_class_type}
-                  onChange={(e) => handlePayload(e, 'ref_class_type')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                />
+              <input
+                required
+                type="date"
+                placeholder="Tanggal penutupan kelas"
+                value={payload.closed_at}
+                onChange={(e) => handlePayload(e, 'closed_at')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            {/* Class Type */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Tipe Kelas</p>
+                <p className="mr-4">:</p>
               </div>
-              <div className="flex justify-end gap-6">
-                <button className="btn btn-accent" onClick={handleBackBtn}>
-                  Kembali
-                </button>
-                <button className="btn btn-primary" onClick={handleSaveBtn}>
-                  Simpan
-                </button>
-              </div>
-            </form>
+              <input
+                required
+                type="text"
+                placeholder="Contoh: ielts;basic"
+                value={payload.ref_class_type}
+                onChange={(e) => handlePayload(e, 'ref_class_type')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
+            <div className="flex justify-end gap-6">
+              <button className="btn btn-accent" onClick={handleBackBtn}>
+                Kembali
+              </button>
+              <button className="btn btn-primary" onClick={handleSaveBtn}>
+                Simpan
+              </button>
+            </div>
           </div>
         </AdminMenu>
         <ModalConfirm

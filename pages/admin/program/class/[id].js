@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import DayJs from 'dayjs';
+import DayJs, { Dayjs } from 'dayjs';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import ModalConfirm from '../../../../components/ModalConfirm';
 import AdminMenu from '../../../../components/AdminMenu';
@@ -202,7 +202,7 @@ function Admin() {
             {/* Learning Goal */}
             <div className="flex flex-col md:flex-row my-6">
               <div className="flex flex-row w-48 md:w-56 justify-between font-semibold">
-                <p className="w-56 h-20">Tujuan Pembelajaran</p>
+                <p className="w-56">Tujuan Pembelajaran</p>
                 <p className="mr-4">:</p>
               </div>
               {isStillChanging ? (
@@ -212,7 +212,7 @@ function Admin() {
                   placeholder="Isi tujuan pembelajaran"
                   value={dataTemp.data.learning_goal}
                   onChange={(e) => handleData(e, 'learning_goal')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+                  className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                 />
               ) : (
                 <p>{dataKelas.data.learning_goal}</p>
@@ -221,7 +221,7 @@ function Admin() {
             {/* Facility */}
             <div className="flex flex-col md:flex-row my-6">
               <div className="flex flex-row w-48 md:w-56 justify-between font-semibold">
-                <p className="w-56 h-20">Fasilitas</p>
+                <p className="w-56">Fasilitas</p>
                 <p className="mr-4">:</p>
               </div>
               {isStillChanging ? (
@@ -231,7 +231,7 @@ function Admin() {
                   placeholder="List fasilitas dipisahkan dengan semicolon, contoh: point 1;point 2"
                   value={dataTemp.data.facilities}
                   onChange={(e) => handleData(e, 'facilities')}
-                  className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+                  className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                 />
               ) : (
                 <ul className="list-disc ml-4">

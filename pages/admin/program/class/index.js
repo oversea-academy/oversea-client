@@ -19,7 +19,7 @@ function Admin() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState(null);
+  const [selectedProgram, setSelectedProgram] = useState({name: ""});
 
   const fetchUsers = async (page) => {
     setDataTable({ loading: true });
@@ -125,7 +125,7 @@ function Admin() {
       button: true,
       width: '80px',
       cell: (row) => (
-        <div className="flex content-center gap-1 my-1.5">
+        <div className="flex content-center my-1.5">
           <button className="btn btn-error min-h-8 h-8 px-3" onClick={() => handleDelete(row)}>
             <CgTrash className="text-xl" />
           </button>

@@ -70,6 +70,50 @@ function getProgramClassById(id) {
   });
 }
 
+function updateProgramClass(programClassId, data) {
+  var keys = Object.keys(data);
+
+  for (var i = 0; i < keys.length; i++) {
+      var val = data[keys[i]];
+      console.log(`${keys[i]}: ${val}`);
+  }
+  return new Promise((resolve) => {
+    request
+      .put(`/program/class/${programClassId}`, {
+        program_id: data.program_id,
+        total_hour: data.total_hour,
+        total_meet: data.total_meet,
+        learning_goal: data.learning_goal,
+        facility: data.facility,
+        schedule_day: data.schedule_day,
+        schedule_time: data.schedule_time,
+        price: data.price,
+        price_normal: data.price_normal,
+        ref_class_type: data.ref_class_type
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
+
+function deleteProgram(programId) {
+  return new Promise((resolve) => {
+    request
+      .delete(`/program/${programId}`)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        resolve(handleErrorResponse(err));
+      });
+  });
+}
+
 function postProgramRegister(data) {
   return new Promise((resolve) => {
     request
@@ -133,19 +177,6 @@ function updateProgramRegisterStatus(programRegisterId, data) {
   });
 }
 
-function deleteProgram(programId) {
-  return new Promise((resolve) => {
-    request
-      .delete(`/program/${programId}`)
-      .then((response) => {
-        resolve(response.data);
-      })
-      .catch((err) => {
-        resolve(handleErrorResponse(err));
-      });
-  });
-}
-
 function getProgramRegister(data) {
   const page = data.page || 1;
   const limit = data.limit || 10;
@@ -179,11 +210,12 @@ export default {
   getProgramClass,
   getProgramClassBySlug,
   getProgramClassById,
+  updateProgramClass,
+  deleteProgram,
   postProgramRegister,
   getProgramRegisterById,
   getProgramRegisterStatus,
   updateProgramRegisterStatus,
-  deleteProgram,
   deleteProgramRegister,
   getProgramRegister
 };

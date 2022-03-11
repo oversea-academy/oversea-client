@@ -5,7 +5,7 @@ import DayJs from 'dayjs';
 import AuthenticatedRoute from '../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../components/AdminMenu';
 import ModalConfirm from '../../../components/ModalConfirm';
-import { programRepository } from '../../../repositories';
+import { ProgramRegisterRepo } from '../../../repositories';
 import { ROLE } from '../../../constants';
 import toastRun from '../../../utils/toastRun';
 
@@ -34,7 +34,7 @@ function DetailRegister() {
   }, [id]);
 
   useEffect(async () => {
-    const result = await programRepository.getProgramRegisterStatus();
+    const result = await ProgramRegisterRepo.getProgramRegisterStatus();
     if (result.status) {
       setListStatus(result.data);
     }
@@ -45,7 +45,7 @@ function DetailRegister() {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await programRepository.updateProgramRegisterStatus(id, {
+    const response = await ProgramRegisterRepo.updateProgramRegisterStatus(id, {
       ref_register_status_id: selectedStatus
     });
 
@@ -78,7 +78,7 @@ function DetailRegister() {
   };
 
   const getDataRegister = async (programRegisterId) => {
-    const result = await programRepository.getProgramRegisterById(programRegisterId);
+    const result = await ProgramRegisterRepo.getProgramRegisterById(programRegisterId);
     if (result.status) {
       setDataRegister({
         loading: false,

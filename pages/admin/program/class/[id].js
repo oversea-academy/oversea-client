@@ -5,7 +5,7 @@ import DayJs, { Dayjs } from 'dayjs';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import ModalConfirm from '../../../../components/ModalConfirm';
 import AdminMenu from '../../../../components/AdminMenu';
-import { programRepository } from '../../../../repositories';
+import { ProgramClassRepo } from '../../../../repositories';
 import toastRun from '../../../../utils/toastRun';
 
 function Admin() {
@@ -31,7 +31,7 @@ function Admin() {
         ...dataTemp.data,
         [key]: e.target.value
       };
-      (_.isEqual(temp, dataKelas.data))
+      _.isEqual(temp, dataKelas.data)
         ? setDataTemp({ isEqual: true, data: temp })
         : setDataTemp({ isEqual: false, data: temp });
     }
@@ -43,7 +43,7 @@ function Admin() {
       name: e.target.value,
       slug: createSlug(e.target.value)
     };
-    (_.isEqual(temp, dataKelas.data))
+    _.isEqual(temp, dataKelas.data)
       ? setDataTemp({ isEqual: true, data: temp })
       : setDataTemp({ isEqual: false, data: temp });
   };
@@ -60,7 +60,7 @@ function Admin() {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await programRepository.updateProgramClass(id, dataTemp.data);
+    const response = await ProgramClassRepo.updateProgramClass(id, dataTemp.data);
 
     if (response?.status) {
       getDataKelas(id);
@@ -75,7 +75,7 @@ function Admin() {
   };
 
   const getDataKelas = async (programKelasId) => {
-    const result = await programRepository.getProgramClassById(programKelasId);
+    const result = await ProgramClassRepo.getProgramClassById(programKelasId);
     if (result.status) {
       setDataKelas({
         loading: false,
@@ -87,7 +87,7 @@ function Admin() {
   const handleBackBtn = () => router.push('/admin/program/class');
   const handleChangeBtn = (e) => {
     setIsStillChanging(true);
-    setDataTemp({ isEqual: true, data: {...dataKelas.data} });
+    setDataTemp({ isEqual: true, data: { ...dataKelas.data } });
   };
   const handleCancelBtn = () => setIsStillChanging(false);
   const handleSaveBtn = () => {
@@ -146,7 +146,7 @@ function Admin() {
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                 />
               ) : (
-              <p>{dataKelas.data.description}</p>
+                <p>{dataKelas.data.description}</p>
               )}
             </div>
             {/* Slug */}
@@ -158,7 +158,7 @@ function Admin() {
               {isStillChanging ? (
                 <p className="text-primary font-medium">{dataTemp.data.slug}</p>
               ) : (
-              <p>{dataKelas.data.slug}</p>
+                <p>{dataKelas.data.slug}</p>
               )}
             </div>
             {/* Total Hour */}
@@ -328,7 +328,7 @@ function Admin() {
                   required
                   type="date"
                   placeholder="Tanggal penutupan kelas"
-                  value={DayJs(dataTemp.data.closed_at).format("YYYY-MM-DD")}
+                  value={DayJs(dataTemp.data.closed_at).format('YYYY-MM-DD')}
                   onChange={(e) => handleData(e, 'closed_at')}
                   className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                 />
@@ -358,13 +358,25 @@ function Admin() {
             {/* Button */}
             {isStillChanging ? (
               <div className="flex justify-end gap-4 md:gap-6">
-                <button className="btn btn-accent text-xs md:text-sm" onClick={handleCancelBtn}>Batal</button>
-                <button className="btn btn-primary text-xs md:text-sm" onClick={handleSaveBtn} disabled={(dataTemp.isEqual) ? true : false}>Simpan</button>
+                <button className="btn btn-accent text-xs md:text-sm" onClick={handleCancelBtn}>
+                  Batal
+                </button>
+                <button
+                  className="btn btn-primary text-xs md:text-sm"
+                  onClick={handleSaveBtn}
+                  disabled={dataTemp.isEqual ? true : false}
+                >
+                  Simpan
+                </button>
               </div>
             ) : (
               <div className="flex justify-end gap-4 md:gap-6">
-                <button className="btn btn-accent text-xs md:text-sm" onClick={handleBackBtn}>Kembali</button>
-                <button className="btn btn-primary text-xs md:text-sm" onClick={handleChangeBtn}>Ubah</button>
+                <button className="btn btn-accent text-xs md:text-sm" onClick={handleBackBtn}>
+                  Kembali
+                </button>
+                <button className="btn btn-primary text-xs md:text-sm" onClick={handleChangeBtn}>
+                  Ubah
+                </button>
               </div>
             )}
           </div>

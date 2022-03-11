@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import GoogleLoginButton from '../../components/GoogleLogin';
-import { accountRepository } from '../../repositories';
+import { AccountRepo } from '../../repositories';
 
 export default function ModalLogin() {
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ export default function ModalLogin() {
       return;
     }
     setIsLoading(true);
-    const response = await accountRepository.postLogin({
+    const response = await AccountRepo.postLogin({
       email: email,
       password: password
     });

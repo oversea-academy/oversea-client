@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { programRepository } from '../../repositories';
+import { ProgramClassRepo } from '../../repositories';
 import CardCalendarAndPrice from '../../components/CardCalendarAndPrice';
 import CardClassInfo from '../../components/CardClassInfo';
 import Footer from '../../components/Footer';
@@ -28,7 +28,7 @@ export default function Class() {
     });
 
     if (slug !== undefined) {
-      const result = await programRepository.getProgramClassBySlug(slug);
+      const result = await ProgramClassRepo.getProgramClassBySlug(slug);
       if (result.status) {
         const data = result.data;
         setDataKelas({
@@ -45,7 +45,7 @@ export default function Class() {
       loading: true,
       data: []
     });
-    const result = await programRepository.getProgramClass({
+    const result = await ProgramClassRepo.getProgramClass({
       limit: 3,
       type: classType
     });

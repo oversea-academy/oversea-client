@@ -9,7 +9,7 @@ import { setSigned, setSignout } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
 import { setRoles } from '../../store/actions/userRolesAction';
 import { CgProfile, CgLogOut, CgChevronDown } from 'react-icons/cg';
-import { accountRepository } from '../../repositories';
+import { AccountRepo } from '../../repositories';
 
 export default function Navbar() {
   const [isDrawer, setIsDrawer] = useState(false);
@@ -30,7 +30,7 @@ export default function Navbar() {
   }
 
   const getProfile = useCallback(async () => {
-    const response = await accountRepository.getProfile();
+    const response = await AccountRepo.getProfile();
     if (response?.status) {
       dispatch(setSigned());
       dispatch(setProfile(response.data));
@@ -46,12 +46,7 @@ export default function Navbar() {
   }
 
   async function handleSignout() {
-    const response = await accountRepository.logout();
-    if (response?.status) {
-      dispatch(setSignout());
-      window.localStorage.removeItem('AUTH');
-      window.location.reload();
-    }
+    dispatch(setSignout());
   }
 
   useEffect(() => {

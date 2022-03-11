@@ -8,7 +8,7 @@ import { CgTrash } from 'react-icons/cg';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
 import ModalConfirm from '../../../../components/ModalConfirm';
-import { programRepository } from '../../../../repositories';
+import { ProgramClassRepo, ProgramRepo } from '../../../../repositories';
 import toastRun from '../../../../utils/toastRun';
 
 function Admin() {
@@ -19,11 +19,11 @@ function Admin() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState({name: ""});
+  const [selectedProgram, setSelectedProgram] = useState({ name: '' });
 
   const fetchUsers = async (page) => {
     setDataTable({ loading: true });
-    const result = await programRepository.getProgramClass({
+    const result = await ProgramClassRepo.getProgramClass({
       page: page,
       limit: 10
     });
@@ -50,7 +50,7 @@ function Admin() {
   const onConfirmDelete = async () => {
     if (selectedProgram && selectedProgram.program_id) {
       setIsLoading(true);
-      const response = await programRepository.deleteProgram(selectedProgram.program_id);
+      const response = await ProgramRepo.deleteProgram(selectedProgram.program_id);
       if (response?.status) {
         fetchUsers(1);
         toastRun.success('Program berhasil dihapus');

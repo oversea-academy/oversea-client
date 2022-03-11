@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import React, { useState, useEffect } from 'react';
 import ClassOptions from '../components/ClassOptions';
 import CardClassInfo from '../components/CardClassInfo';
-import { programRepository } from '../repositories';
+import { ProgramClassRepo } from '../repositories';
 
 export default function Home() {
   const [classType, setClassType] = useState('');
@@ -23,7 +23,7 @@ export default function Home() {
       loading: true,
       data: []
     });
-    const result = await programRepository.getProgramClass({
+    const result = await ProgramClassRepo.getProgramClass({
       type: classType
     });
     if (result.status) {

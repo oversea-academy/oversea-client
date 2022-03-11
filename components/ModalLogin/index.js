@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { EventEmitter } from '../../utils/events';
 import GoogleLoginButton from '../GoogleLogin';
 import { AccountRepo } from '../../repositories';
@@ -36,6 +37,7 @@ export default function ModalLogin() {
       password: password
     });
     if (response?.status) {
+      Cookies.set('token', response.data.token, { expires: 7 });
       window.localStorage.setItem('AUTH', '1');
       window.location.reload();
     } else {

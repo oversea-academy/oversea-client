@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
+import Cookies from 'js-cookie';
 import { EventEmitter } from '../../utils/events';
 import { setSigned, setSignout } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
@@ -46,7 +47,10 @@ export default function Navbar() {
   }
 
   async function handleSignout() {
+    Cookies.remove('token');
     dispatch(setSignout());
+    window.localStorage.removeItem('AUTH');
+    window.location.reload();
   }
 
   useEffect(() => {

@@ -9,6 +9,7 @@ export default function GoogleLoginButton() {
       tokenId: res.tokenId
     });
     if (response?.status) {
+      Cookies.set('token', response.data.token, { expires: 7 });
       window.localStorage.setItem('AUTH', '1');
       window.location.reload();
     }

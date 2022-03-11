@@ -27,7 +27,7 @@ export default function ModalLogin() {
     if (response?.status) {
       Cookies.set('token', response.data.token, { expires: 7 });
       window.localStorage.setItem('AUTH', '1');
-      window.location.replace('/');
+      window.location.replace('/admin');
     } else {
       setIsLoading(false);
       alert(response.message);

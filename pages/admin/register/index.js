@@ -2,16 +2,16 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
-import DayJs from 'dayjs';
 import { CgTrash, CgSearch } from 'react-icons/cg';
-import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
-import AdminMenu from '../../../../components/AdminMenu';
-import ModalConfirm from '../../../../components/ModalConfirm';
-import { ProgramClassRepo, ProgramRepo } from '../../../../repositories';
-import toastRun from '../../../../utils/toastRun';
-import { formatCurrency } from '../../../../utils/helper';
+import AuthenticatedRoute from '../../../components/AuthenticatedRoute';
+import AdminMenu from '../../../components/AdminMenu';
+import ModalConfirm from '../../../components/ModalConfirm';
+import { ProgramRegisterRepo } from '../../../repositories';
+import toastRun from '../../../utils/toastRun';
+import datatableStyle from '../../../utils/datatableStyle';
+import { ROLE } from '../../../constants';
 
-function Admin() {
+function ProgramRegister() {
   const router = useRouter();
   const [dataTable, setDataTable] = useState({
     data: [],
@@ -20,13 +20,13 @@ function Admin() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState({ name: '' });
+  const [selectedData, setSelectedData] = useState(null);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
 
   const fetchData = async (pageNumber, perPageNumber) => {
     setDataTable({ loading: true });
-    const result = await ProgramClassRepo.getProgramClass({
+    const result = await ProgramRegisterRepo.getProgramRegister({
       page: pageNumber,
       limit: perPageNumber
     });
@@ -50,85 +50,58 @@ function Admin() {
   }, [page, perPage]);
 
   const handleDelete = (row) => {
-    setSelectedProgram(row);
+    setSelectedData(row);
     setIsShowModal(true);
   };
 
   const handleDetail = (row) => {
-    router.push('/admin/program/class/' + row.id);
+    router.push('/admin/register/' + row.id);
   };
 
   const onConfirmDelete = async () => {
-    if (selectedProgram && selectedProgram.program_id) {
+    if (selectedData && selectedData.id) {
       setIsLoading(true);
-      const response = await ProgramRepo.deleteProgram(selectedProgram.program_id);
+      const response = await ProgramRegisterRepo.deleteProgramRegister(selectedData.id);
       if (response?.status) {
         fetchData(page, perPage);
-        toastRun.success('Program berhasil dihapus');
+        toastRun.success(`Pendaftar ${selectedData?.name} berhasil dihapus`);
       } else {
         toastRun.error(response.message || 'API Error');
       }
       setIsLoading(false);
       setIsShowModal(false);
     } else {
-      toastRun.error('ID program tidak ditemukan');
-    }
-  };
-
-  const customStyles = {
-    headRow: {
-      style: {
-        border: 'none'
-      }
-    },
-    headCells: {
-      style: {
-        fontSize: '14px',
-        fontWeight: 500
-      }
-    },
-    rows: {
-      highlightOnHoverStyle: {
-        backgroundColor: 'rgb(230, 244, 244)',
-        borderBottomColor: '#FFFFFF',
-        outline: '1px solid #FFFFFF'
-      }
-    },
-    pagination: {
-      style: {
-        border: 'none'
-      }
+      toastRun.error('ID pendaftar tidak ditemukan');
     }
   };
 
   const columns = [
     {
       name: 'Nama',
-      sortable: true,
-      style: {
-        fontSize: '14px',
-        color: '#005365'
-      },
-      grow: 1,
-      cell: (row) => row.name
+      selector: (row) => row.name,
+      grow: 1
     },
     {
-      name: 'Slug',
-      selector: (row) => row.slug
+      name: 'Email',
+      selector: (row) => row.email,
+      grow: 1
     },
     {
-      name: 'Harga',
-      sortable: true,
-      selector: (row) => formatCurrency(row.price, 'IDR')
+      name: 'Nama Program',
+      cell: (row) => row.program_name
     },
     {
-      name: 'Tanggal Penutupan',
-      selector: (row) => (row.closed_at ? DayJs(row.closed_at).format('DD MMM YYYY HH:mm A') : '')
+      name: 'Tipe Program',
+      selector: (row) => row.program_type
+    },
+    {
+      name: 'Status',
+      selector: (row) => row.status
     },
     {
       name: 'Action',
       button: true,
-      width: '80px',
+      grow: 1,
       cell: (row) => (
         <div className="flex content-center gap-1 my-1.5">
           <button className="btn btn-primary min-h-8 h-8 px-3" onClick={() => handleDetail(row)}>
@@ -142,8 +115,6 @@ function Admin() {
     }
   ];
 
-  const handleCreateClass = () => router.push('/admin/program/class/create');
-
   return (
     <div>
       <Head>
@@ -154,16 +125,13 @@ function Admin() {
       <main>
         <AdminMenu>
           <div className="container px-20 py-16 mb-8 bg-primary-content rounded-lg shadow-lg">
-            <div className="flex justify-between">
-              <p className="text-primary font-bold text-3xl">Program Kelas</p>
-              <button onClick={handleCreateClass} className="btn btn-primary">
-                Buat Kelas
-              </button>
+            <div className="flex justify-between mb-10">
+              <p className="text-primary font-bold text-3xl">Pendaftar Program</p>
             </div>
             <DataTable
               columns={columns}
               data={dataTable.data}
-              customStyles={customStyles}
+              customStyles={datatableStyle}
               progressPending={dataTable.loading}
               highlightOnHover
               pagination
@@ -175,7 +143,7 @@ function Admin() {
           </div>
         </AdminMenu>
         <ModalConfirm
-          title={`Yakin mau menghapus program kelas "${selectedProgram.name}"?`}
+          title={`Yakin mau menghapus pendaftar "${selectedData?.name}"?`}
           description=""
           isShow={isShowModal}
           isLoading={isLoading}
@@ -187,4 +155,4 @@ function Admin() {
   );
 }
 
-export default AuthenticatedRoute(Admin, { role: 'admin' });
+export default AuthenticatedRoute(ProgramRegister, { role: ROLE.ADMIN });

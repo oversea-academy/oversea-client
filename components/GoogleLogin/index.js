@@ -1,14 +1,15 @@
 import { GoogleLogin } from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 import { GOOGLE_CLIENT_ID } from '../../constants';
-import { accountRepository } from '../../repositories';
+import { AccountRepo } from '../../repositories';
 
 export default function GoogleLoginButton() {
   async function onSuccess(res) {
-    const response = await accountRepository.postLoginWithGoogle({
+    const response = await AccountRepo.postLoginWithGoogle({
       tokenId: res.tokenId
     });
     if (response?.status) {
+      Cookies.set('token', response.data.token, { expires: 7 });
       window.localStorage.setItem('AUTH', '1');
       window.location.reload();
     }

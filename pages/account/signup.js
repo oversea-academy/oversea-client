@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { EventEmitter } from '../../utils/events';
 import GoogleLoginButton from '../../components/GoogleLogin';
 import Alert from '../../components/Alert';
-import { accountRepository } from '../../repositories';
+import { AccountRepo } from '../../repositories';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -37,7 +37,7 @@ export default function SignUp() {
       return;
     }
     setIsLoading(true);
-    const response = await accountRepository.registerAccount({
+    const response = await AccountRepo.registerAccount({
       first_name: firstName,
       last_name: lastName,
       email: email,

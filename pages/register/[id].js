@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { programRepository } from '../../repositories';
+import { ProgramRegisterRepo, ProgramClassRepo } from '../../repositories';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import { formatCurrency, validateWhatsappNumber, validateEmail, replaceWhatsappNumber } from '../../utils/helper';
@@ -46,7 +46,7 @@ export default function Register() {
     ) {
       setIsValid(true);
       setIsButtonLoading(true);
-      const response = await programRepository.postProgramRegister({
+      const response = await ProgramRegisterRepo.postProgramRegister({
         program_id: program.program_id,
         amount: program.price,
         ...form,
@@ -66,7 +66,7 @@ export default function Register() {
 
   useEffect(async () => {
     if (id) {
-      const response = await programRepository.getProgramClassById(id);
+      const response = await ProgramClassRepo.getProgramClassById(id);
       setIsLoading(false);
       if (response.status) {
         setProgram(response.data);

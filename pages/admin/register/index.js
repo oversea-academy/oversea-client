@@ -6,7 +6,7 @@ import { CgTrash, CgSearch } from 'react-icons/cg';
 import AuthenticatedRoute from '../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../components/AdminMenu';
 import ModalConfirm from '../../../components/ModalConfirm';
-import { programRepository } from '../../../repositories';
+import { ProgramRegisterRepo } from '../../../repositories';
 import toastRun from '../../../utils/toastRun';
 import datatableStyle from '../../../utils/datatableStyle';
 import { ROLE } from '../../../constants';
@@ -26,7 +26,7 @@ function ProgramRegister() {
 
   const fetchData = async (pageNumber, perPageNumber) => {
     setDataTable({ loading: true });
-    const result = await programRepository.getProgramRegister({
+    const result = await ProgramRegisterRepo.getProgramRegister({
       page: pageNumber,
       limit: perPageNumber
     });
@@ -61,10 +61,10 @@ function ProgramRegister() {
   const onConfirmDelete = async () => {
     if (selectedData && selectedData.id) {
       setIsLoading(true);
-      const response = await programRepository.deleteProgramRegister(selectedData.id);
+      const response = await ProgramRegisterRepo.deleteProgramRegister(selectedData.id);
       if (response?.status) {
         fetchData(page, perPage);
-        toastRun.success('Pendaftar berhasil dihapus');
+        toastRun.success(`Pendaftar ${selectedData?.name} berhasil dihapus`);
       } else {
         toastRun.error(response.message || 'API Error');
       }

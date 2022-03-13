@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import AdminMenu from '../../../../components/AdminMenu';
 import ModalConfirm from '../../../../components/ModalConfirm';
-import { programRepository } from '../../../../repositories';
+import { ProgramClassRepo } from '../../../../repositories';
 import toastRun from '../../../../utils/toastRun';
 
 function CreateProgramClass() {
@@ -60,7 +60,7 @@ function CreateProgramClass() {
 
   const onConfirm = async () => {
     setIsLoading(true);
-    const response = await programRepository.postProgramClass(payload);
+    const response = await ProgramClassRepo.postProgramClass(payload);
     if (response?.status) {
       toastRun.success('Kelas baru berhasil ditambahkan!');
     } else {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { accountRepository } from '../../repositories';
+import { AccountRepo } from '../../repositories';
 import { setSigned } from '../../store/actions/userSignedAction';
 import { setProfile } from '../../store/actions/userProfileAction';
 import { setRoles } from '../../store/actions/userRolesAction';
@@ -16,7 +16,7 @@ const authenticatedRoute = (Component = null, options = {}) => {
     const router = useRouter();
 
     const getProfile = useCallback(async () => {
-      const response = await accountRepository.getProfile();
+      const response = await AccountRepo.getProfile();
       if (response?.status) {
         dispatch(setProfile(response.data));
         dispatch(setRoles(response.data.roles));

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { EventEmitter } from '../../utils/events';
 import GoogleLoginButton from '../GoogleLogin';
-import { accountRepository } from '../../repositories';
+import { AccountRepo } from '../../repositories';
 
 export default function ModalLogin() {
   const [isActive, setIsActive] = useState(false);
@@ -31,11 +32,12 @@ export default function ModalLogin() {
       return;
     }
     setIsLoading(true);
-    const response = await accountRepository.postLogin({
+    const response = await AccountRepo.postLogin({
       email: email,
       password: password
     });
     if (response?.status) {
+      Cookies.set('token', response.data.token, { expires: 7 });
       window.localStorage.setItem('AUTH', '1');
       window.location.reload();
     } else {

@@ -1,4 +1,6 @@
-import accountRepository from './account.repository';
-import programRepository from './program.repository';
+import AccountRepo from './account';
+import ProgramRepo from './program';
+import ProgramClassRepo from './program_class';
+import ProgramRegisterRepo from './program_register';
 
-export { accountRepository, programRepository };
+export { AccountRepo, ProgramRepo, ProgramClassRepo, ProgramRegisterRepo };

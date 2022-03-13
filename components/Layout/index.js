@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Navbar from '../Navbar';
 import ModalLogin from '../ModalLogin';
 import styles from './Layout.module.css';
@@ -7,6 +8,9 @@ import { ToastContainer } from 'react-toastify';
 export default function Layout({ children }) {
   const [displayChildren, setDisplayChildren] = useState(children);
   const [transitionStage, setTransitionStage] = useState('fadeOut');
+  const [isAdminPage, setIsAdminPage] = useState(false);
+
+  const router = useRouter();
 
   function handleTransition() {
     if (transitionStage === 'fadeOut') {
@@ -20,6 +24,14 @@ export default function Layout({ children }) {
   }, []);
 
   useEffect(() => {
+    const pathname = router.pathname;
+
+    if (pathname.includes('/admin')) {
+      setIsAdminPage(true);
+    }
+  }, [router]);
+
+  useEffect(() => {
     if (children !== displayChildren) {
       setTransitionStage('fadeOut');
     }
@@ -27,7 +39,7 @@ export default function Layout({ children }) {
 
   return (
     <div>
-      <Navbar />
+      {isAdminPage && <Navbar />}
       {/* <div
         onTransitionEnd={handleTransition}
         className={`${styles.content} 

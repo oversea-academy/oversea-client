@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import DayJs from 'dayjs';
 import Button from '../Button';
 import { formatCurrency } from '../../utils/helper';
 
@@ -14,7 +15,7 @@ export default function CardCalendarAndPrice({
   const [isDisabled, setIsDisabled] = useState(false);
 
   const formatDate = (date) => {
-    return new Date(date).toDateString().split(' ').slice(1).join(' ');
+    return DayJs(date).format('DD MMM YYYY');
   };
 
   useEffect(() => {

@@ -64,7 +64,7 @@ function ProgramRegister() {
       const response = await ProgramRegisterRepo.deleteProgramRegister(selectedData.id);
       if (response?.status) {
         fetchData(page, perPage);
-        toastRun.success('Pendaftar berhasil dihapus');
+        toastRun.success(`Pendaftar ${selectedData?.name} berhasil dihapus`);
       } else {
         toastRun.error(response.message || 'API Error');
       }

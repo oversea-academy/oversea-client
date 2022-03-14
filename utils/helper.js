@@ -11,7 +11,7 @@ export const formatCurrency = (number, prefix) => {
   }
 
   rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-  return prefix == undefined ? rupiah : rupiah ? 'IDR ' + rupiah : '';
+  return prefix ? `${prefix} ${rupiah}` : `Rp ${rupiah}`;
 };
 
 export const validateWhatsappNumber = (whatsappNumber) => {

@@ -96,7 +96,20 @@ function ProgramRegister() {
     },
     {
       name: 'Status',
-      selector: (row) => row.status
+      selector: (row) => {
+        switch (row.status) {
+          case 'registered':
+            return <div className="badge badge-info">{row.status}</div>;
+          case 'pending':
+            return <div className="badge badge-warning">{row.status}</div>;
+          case 'paid':
+            return <div className="badge badge-success">{row.status}</div>;
+          case 'expired':
+            return <div className="badge badge-error">{row.status}</div>;
+          default:
+            return <div className="badge">{row.status}</div>;
+        }
+      }
     },
     {
       name: 'Action',
@@ -118,7 +131,7 @@ function ProgramRegister() {
   return (
     <div>
       <Head>
-        <title>Oversea Academy | Admin</title>
+        <title>Admin | Pendaftar Program</title>
         <meta name="description" content="Oversea Academy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

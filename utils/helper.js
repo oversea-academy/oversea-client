@@ -28,3 +28,17 @@ export const validateEmail = (email) => {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   );
 };
+
+export const convertBulletListToSemicolon = (text) => {
+  const bullet = '\u2022';
+  const bulletWithSpace = `${bullet} `;
+  const convertedLine = text.replaceAll('\n', ';');
+  return convertedLine.replaceAll(bulletWithSpace, '');
+};
+
+export const convertArrayToBulletList = (textList) => {
+  const bullet = '\u2022';
+  const bulletWithSpace = `${bullet} `;
+  const newLine = '\n';
+  return `${bulletWithSpace}${textList.join(newLine + bulletWithSpace)}`;
+};

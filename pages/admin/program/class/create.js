@@ -6,11 +6,17 @@ import AdminMenu from '../../../../components/AdminMenu';
 import ModalConfirm from '../../../../components/ModalConfirm';
 import { ProgramClassRepo } from '../../../../repositories';
 import toastRun from '../../../../utils/toastRun';
+import { convertBulletListToSemicolon } from '../../../../utils/helper';
+
+const bullet = '\u2022';
+const bulletWithSpace = `${bullet} `;
+const enter = 13;
 
 function CreateProgramClass() {
   const [payload, setPayload] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
+  const [facility, setFacility] = useState(bulletWithSpace);
 
   const createSlug = (txt) => txt.replace(/\s+/g, '-').toLowerCase();
   const handlePayload = (e, key) => {
@@ -30,6 +36,24 @@ function CreateProgramClass() {
     });
   };
 
+  const handleFacility = (e) => {
+    const { keyCode, target } = e;
+    const { selectionStart, value } = target;
+
+    if (keyCode === enter) {
+      target.value = [...value].map((c, i) => (i === selectionStart - 1 ? `\n${bulletWithSpace}` : c)).join('');
+
+      target.selectionStart = selectionStart + bulletWithSpace.length;
+      target.selectionEnd = selectionStart + bulletWithSpace.length;
+    }
+
+    if (value[0] !== bullet) {
+      target.value = `${bulletWithSpace}${value}`;
+    }
+
+    setFacility(target.value);
+  };
+
   const router = useRouter();
   const handleBackBtn = (e) => {
     e.preventDefault();
@@ -44,13 +68,13 @@ function CreateProgramClass() {
       payload.total_hour &&
       payload.total_meet &&
       payload.learning_goal &&
-      payload.facility &&
       payload.schedule_day &&
       payload.schedule_time &&
       payload.price &&
       payload.price_normal &&
       payload.closed_at &&
-      payload.ref_class_type
+      payload.ref_class_type &&
+      facility
     ) {
       setIsShowModal(true);
     } else {
@@ -60,7 +84,10 @@ function CreateProgramClass() {
 
   const onConfirm = async () => {
     setIsLoading(true);
-    const response = await ProgramClassRepo.postProgramClass(payload);
+    const response = await ProgramClassRepo.postProgramClass({
+      ...payload,
+      facility: convertBulletListToSemicolon(facility)
+    });
     if (response?.status) {
       toastRun.success('Kelas baru berhasil ditambahkan!');
     } else {
@@ -176,8 +203,9 @@ function CreateProgramClass() {
                 required
                 type="textarea"
                 placeholder="List fasilitas dipisahkan dengan semicolon, contoh: point 1;point 2"
-                value={payload.facility}
-                onChange={(e) => handlePayload(e, 'facility')}
+                value={facility}
+                onKeyUp={handleFacility}
+                onChange={handleFacility}
                 className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
               />
             </div>

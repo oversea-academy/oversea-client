@@ -1,17 +1,22 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import DayJs, { Dayjs } from 'dayjs';
+import DayJs from 'dayjs';
+import _ from 'lodash';
 import AuthenticatedRoute from '../../../../components/AuthenticatedRoute';
 import ModalConfirm from '../../../../components/ModalConfirm';
 import AdminMenu from '../../../../components/AdminMenu';
 import { ProgramClassRepo } from '../../../../repositories';
 import toastRun from '../../../../utils/toastRun';
+import { convertBulletListToSemicolon, convertArrayToBulletList } from '../../../../utils/helper';
+
+const bullet = '\u2022';
+const bulletWithSpace = `${bullet} `;
+const enter = 13;
 
 function Admin() {
   const router = useRouter();
   const { id } = router.query;
-  const _ = require('lodash');
 
   const [dataKelas, setDataKelas] = useState({
     loading: true,
@@ -24,6 +29,7 @@ function Admin() {
   const [isLoading, setIsLoading] = useState(false);
   const [isStillChanging, setIsStillChanging] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
+  const [facility, setFacility] = useState('');
 
   const handleData = (e, key) => {
     if (key) {
@@ -35,17 +41,6 @@ function Admin() {
         ? setDataTemp({ isEqual: true, data: temp })
         : setDataTemp({ isEqual: false, data: temp });
     }
-  };
-  const createSlug = (txt) => txt.replace(/\s+/g, '-').toLowerCase();
-  const handleName = (e) => {
-    let temp = {
-      ...dataTemp.data,
-      name: e.target.value,
-      slug: createSlug(e.target.value)
-    };
-    _.isEqual(temp, dataKelas.data)
-      ? setDataTemp({ isEqual: true, data: temp })
-      : setDataTemp({ isEqual: false, data: temp });
   };
 
   useEffect(async () => {
@@ -60,7 +55,10 @@ function Admin() {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await ProgramClassRepo.updateProgramClass(id, dataTemp.data);
+    const response = await ProgramClassRepo.updateProgramClass(id, {
+      ...dataTemp.data,
+      facility: convertBulletListToSemicolon(facility)
+    });
 
     if (response?.status) {
       getDataKelas(id);
@@ -84,10 +82,30 @@ function Admin() {
     }
   };
 
+  const handleFacility = (e) => {
+    const { keyCode, target } = e;
+    const { selectionStart, value } = target;
+
+    if (keyCode === enter) {
+      target.value = [...value].map((c, i) => (i === selectionStart - 1 ? `\n${bulletWithSpace}` : c)).join('');
+
+      target.selectionStart = selectionStart + bulletWithSpace.length;
+      target.selectionEnd = selectionStart + bulletWithSpace.length;
+    }
+
+    if (value[0] !== bullet) {
+      target.value = `${bulletWithSpace}${value}`;
+    }
+
+    setFacility(target.value);
+    setDataTemp({ isEqual: false, data: dataTemp.data });
+  };
+
   const handleBackBtn = () => router.push('/admin/program/class');
   const handleChangeBtn = (e) => {
     setIsStillChanging(true);
     setDataTemp({ isEqual: true, data: { ...dataKelas.data } });
+    setFacility(convertArrayToBulletList(dataKelas.data.facilities));
   };
   const handleCancelBtn = () => setIsStillChanging(false);
   const handleSaveBtn = () => {
@@ -121,18 +139,7 @@ function Admin() {
                     <p className="w-56">Nama</p>
                     <p className="mr-4">:</p>
                   </div>
-                  {isStillChanging ? (
-                    <input
-                      required
-                      type="text"
-                      placeholder="Contoh: Kelas IELTS Regular"
-                      value={dataTemp.data.name}
-                      onChange={handleName}
-                      className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
-                    />
-                  ) : (
-                    <p>{dataKelas.data.name}</p>
-                  )}
+                  <p>{dataKelas.data.name}</p>
                 </div>
                 {/* Desc */}
                 <div className="flex flex-col md:flex-row my-6">
@@ -159,11 +166,7 @@ function Admin() {
                     <p className="w-56">Slug</p>
                     <p className="mr-4">:</p>
                   </div>
-                  {isStillChanging ? (
-                    <p className="text-primary font-medium">{dataTemp.data.slug}</p>
-                  ) : (
-                    <p>{dataKelas.data.slug}</p>
-                  )}
+                  <p>{dataKelas.data.slug}</p>
                 </div>
                 {/* Total Hour */}
                 <div className="flex flex-col md:flex-row my-6">
@@ -233,8 +236,9 @@ function Admin() {
                       required
                       type="textarea"
                       placeholder="List fasilitas dipisahkan dengan semicolon, contoh: point 1;point 2"
-                      value={dataTemp.data.facilities}
-                      onChange={(e) => handleData(e, 'facilities')}
+                      value={facility}
+                      onKeyUp={handleFacility}
+                      onChange={handleFacility}
                       className="w-full h-20 rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                     />
                   ) : (
@@ -391,7 +395,7 @@ function Admin() {
         </AdminMenu>
         <ModalConfirm
           title="Yakin mau mengubah program kelas ini?"
-          description="Pastikan kembali status sudah benar"
+          description="Pastikan kembali data sudah benar"
           isShow={isShowModal}
           isLoading={isLoading}
           onConfirm={onConfirm}

@@ -72,12 +72,6 @@ class ProgramClassRepo {
   }
 
   updateProgramClass(programClassId, data) {
-    var keys = Object.keys(data);
-
-    for (var i = 0; i < keys.length; i++) {
-      var val = data[keys[i]];
-      console.log(`${keys[i]}: ${val}`);
-    }
     return new Promise((resolve) => {
       request
         .put(`/program/class/${programClassId}`, {
@@ -90,7 +84,8 @@ class ProgramClassRepo {
           schedule_time: data.schedule_time,
           price: data.price,
           price_normal: data.price_normal,
-          ref_class_type: data.ref_class_type
+          ref_class_type: data.ref_class_type,
+          closed_at: data.closed_at
         })
         .then((response) => {
           resolve(response.data);

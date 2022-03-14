@@ -119,7 +119,7 @@ function Admin() {
     {
       name: 'Harga',
       sortable: true,
-      selector: (row) => formatCurrency(row.price, 'IDR')
+      selector: (row) => formatCurrency(row.price)
     },
     {
       name: 'Tanggal Penutupan',
@@ -147,7 +147,7 @@ function Admin() {
   return (
     <div>
       <Head>
-        <title>Oversea Academy | Admin</title>
+        <title>Admin | Program Kelas</title>
         <meta name="description" content="Oversea Academy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

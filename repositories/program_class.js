@@ -85,7 +85,8 @@ class ProgramClassRepo {
           price: data.price,
           price_normal: data.price_normal,
           ref_class_type: data.ref_class_type,
-          closed_at: data.closed_at
+          closed_at: data.closed_at,
+          description: data.description
         })
         .then((response) => {
           resolve(response.data);

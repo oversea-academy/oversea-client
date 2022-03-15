@@ -3,11 +3,16 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      softblue: '#d6f1f7'
+      softblue: '#d6f1f7',
+      'gray-400': '#eff0f0',
+      'gray-cloud': '#C4C4C4',
+      'red-oringe': '#EE6352',
+      'dark-gray': '#003a47'
     },
     extend: {
       backgroundImage: {
-        'welcome-img': "url('/images/map.png')"
+        'welcome-img': "url('/images/woman-with-headset-full.png')",
+        'class-img': "url('/images/woman-with-laptop-full.png')"
       },
       transitionProperty: {
         height: 'height'
@@ -17,19 +22,19 @@ module.exports = {
   variants: {
     extend: {}
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('@tailwindcss/line-clamp')],
   daisyui: {
     themes: [
       {
         pallete: {
-          primary: '#01818E',
+          primary: '#005365',
           'primary-focus': '#045E67',
           'primary-content': '#ffffff',
           'primary-soft': '#f4fcff',
-          secondary: '#f000b8',
+          secondary: '#01818E',
           'secondary-focus': '#bd0091',
           'secondary-content': '#ffffff',
-          accent: '#37cdbe',
+          accent: '#ECCE76',
           'accent-focus': '#2aa79b',
           'accent-content': '#ffffff',
           neutral: '#3d4451',

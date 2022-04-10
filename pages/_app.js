@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
 
 const tagManagerArgs = {
-  id: GOOGLE_TAG_MANAGER
+  gtmId: GOOGLE_TAG_MANAGER
 };
 
 function MyApp({ Component, pageProps }) {

@@ -28,7 +28,7 @@ export default function Subscribe() {
               <input
                 type="email"
                 required
-                placeholder="subscribe email"
+                placeholder="Email"
                 name="EMAIL"
                 className="
                   rounded-full

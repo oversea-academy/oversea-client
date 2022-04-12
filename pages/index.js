@@ -65,7 +65,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="absolute -bottom-80 md:-bottom-72 lg:-bottom-12">
+            <div className="absolute -bottom-80 md:-bottom-72 lg:-bottom-24 xl:-bottom-12">
               <CardOffer />
             </div>
           </div>

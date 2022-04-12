@@ -50,12 +50,13 @@ export default function Class() {
       type: classType
     });
     if (result.status) {
+      const filteredClassList = result.data.filter((item) => item.slug != slug);
       setClassList({
         loading: false,
-        data: result.data
+        data: filteredClassList
       });
     }
-  }, [classType]);
+  }, [classType, slug]);
 
   const handleClickClass = (slug) => {
     router.push(`/class/${slug}`);
@@ -90,11 +91,11 @@ export default function Class() {
             </div>
           </div>
         </section>
-        <section id="class">
-          {!dataKelas.loading && (
-            <div className="flex flex-col w-full  justify-evenly  content-center -mt-10 md:flex-row lg:mx-auto">
-              <div className="w-full pl-4 mt-14 lg:w-2/5">
-                <div className="text-red-oringe  italic my-6 tracking-wider text-lg md:text-xl">
+        {!dataKelas.loading && (
+          <section id="class">
+            <div className="flex flex-col w-full justify-evenly content-center -mt-10 lg:flex-row lg:mx-auto lg:max-w-7xl">
+              <div className="w-full px-4 mt-14 lg:max-w-xl">
+                <div className="text-red-oringe  italic my-6 tracking-wider text-base md:text-lg lg:text-xl">
                   <div className="flex justify-start font-normal">
                     <p className="pr-4">
                       Total Jam Belajar
@@ -108,11 +109,11 @@ export default function Class() {
                   </div>
                 </div>
                 <div className="text-primary tracking-wider">
-                  <h2 className="mt-6 mb-4 text-2xl md:text-3xl">Tujuan Pembelajaran</h2>
-                  <p className="my-4 text-base lg:text-lg">{dataKelas.data.learning_goal}</p>
+                  <h2 className="mt-6 mb-4 text-lg md:text-2xl font-medium">Tujuan Pembelajaran</h2>
+                  <p className="my-4 text-base md:text-lg">{dataKelas.data.learning_goal}</p>
                 </div>
                 <div className="text-primary tracking-wider">
-                  <h2 className="mt-6 mb-0 text-2xl md:text-3xl">Materi dan Fasilitas yang Didapatkan</h2>
+                  <h2 className="mt-6 mb-0 text-lg md:text-2xl font-medium">Materi dan Fasilitas yang Didapatkan</h2>
                   <div className="py-6 card bordered">
                     {/* loop of facilities */}
                     {dataKelas.data.facilities.map((data) => (
@@ -121,9 +122,9 @@ export default function Class() {
                           <input
                             type="checkbox"
                             defaultChecked
-                            className="self-center checkbox checkbox-primary checked cursor-default"
+                            className="self-center mr-3 checkbox checkbox-primary checked cursor-default"
                           />
-                          <span className="label-primary px-4 text-base lg:text-lg">{data}</span>
+                          <span className="label-primary text-sm md:text-base lg:text-lg">{data}</span>
                         </label>
                       </div>
                     ))}
@@ -131,7 +132,7 @@ export default function Class() {
                   </div>
                 </div>
               </div>
-              <div className="w-full z-10 md:w-3/5 lg:w-2/5">
+              <div className="w-full z-10 mx-auto md:w-96">
                 <CardCalendarAndPrice
                   scheduleDay={dataKelas.data.schedule_day}
                   scheduleTime={dataKelas.data.schedule_time}
@@ -142,32 +143,34 @@ export default function Class() {
                 ></CardCalendarAndPrice>
               </div>
             </div>
-          )}
-        </section>
-        <section id="KelasTerkait">
-          <div className="w-full md:pl-32 mb-20">
-            <div className="text-primary flex flex-col items-center md:items-start mt-10 mb-6">
-              <div className="text-2xl md:text-3xl">Kelas Terkait</div>
-              <div className="border-b-4 w-20 p-2 border-accent"></div>
+          </section>
+        )}
+        {!classList.loading && !dataKelas.loading && (
+          <section id="KelasTerkait">
+            <div className="w-full px-4 lg:max-w-7xl lg:mx-auto mb-20">
+              <div className="flex flex-col items-center md:items-start mt-10 mb-6">
+                <div className="text-xl md:text-2xl font-medium text-primary">Kelas Terkait</div>
+                <div className="border-b-4 w-20 p-2 border-accent"></div>
+              </div>
+              <div className="flex flex-wrap gap-10 justify-center md:justify-start w-full">
+                {classList.data.map(({ id, slug, name, description, price, image }) => (
+                  <CardClassInfo
+                    key={id}
+                    name={name}
+                    description={description}
+                    price={price}
+                    image={image}
+                    onClick={(e) => handleClickClass(slug)}
+                  ></CardClassInfo>
+                ))}
+                {classList.loading && <p className="text-primary italic">Loading...</p>}
+                {!classList.loading && classList.data.length === 0 && (
+                  <p className="text-primary italic">Tidak ada pilihan kelas</p>
+                )}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-10 justify-center lg:justify-start w-full">
-              {classList.data.map(({ id, slug, name, description, price, image }) => (
-                <CardClassInfo
-                  key={id}
-                  name={name}
-                  description={description}
-                  price={price}
-                  image={image}
-                  onClick={(e) => handleClickClass(slug)}
-                ></CardClassInfo>
-              ))}
-              {classList.loading && <p className="text-primary italic">Loading...</p>}
-              {!classList.loading && classList.data.length === 0 && (
-                <p className="text-primary italic">Tidak ada pilihan kelas</p>
-              )}
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
         {!dataKelas.loading && <Footer />}
       </main>
     </div>

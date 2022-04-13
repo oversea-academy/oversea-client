@@ -96,14 +96,14 @@ export default function Register() {
 
       <main>
         <section id="register">
-          <div className="hero min-h-screen bg-class-img relative">
+          <div className="hero min-h-screen md:bg-class-img relative">
             {isLoading ? (
               <div className="text-left">Loading...</div>
             ) : (
               <div
                 className="
-                  w-full md:w-3/4 bg-base-100 rounded-3xl 
-                  border-none shadow-lg absolute -bottom-96 lg:-bottom-64
+                  w-full md:w-3/4 bg-base-100 md:rounded-3xl 
+                  border-none md:shadow-lg lg:absolute -bottom-96 lg:-bottom-64
                   px-4 md:px-8 py-12
                 "
               >

@@ -48,7 +48,7 @@ export default function Footer() {
           </a>
           <a
             className="w-8 md:w-10 lg:w-12"
-            href="https://wa.me/6281330541160?text=Halo%20minsea"
+            href="https://wa.me/6281330541160?text=Halo%20minsea%2C%20mau%20nanya%20dong"
             target="_blank"
             rel="noreferrer"
           >

@@ -96,18 +96,18 @@ export default function Register() {
 
       <main>
         <section id="register">
-          <div className="hero min-h-screen bg-class-img relative">
+          <div className="hero min-h-screen md:bg-class-img relative">
             {isLoading ? (
               <div className="text-left">Loading...</div>
             ) : (
               <div
                 className="
-                  w-full md:w-3/4 bg-base-100 rounded-3xl 
-                  border-none shadow-lg absolute -bottom-96 md:-bottom-64
+                  w-full md:w-3/4 bg-base-100 md:rounded-3xl 
+                  border-none md:shadow-lg lg:absolute -bottom-96 lg:-bottom-64
                   px-4 md:px-8 py-12
                 "
               >
-                <div className="h-full flex flex-col md:flex-row justify-between">
+                <div className="h-full flex flex-col lg:flex-row justify-between">
                   <div className="flex-grow">
                     <div className="text-xl text-primary font-bold mb-8">Isian Data Pribadi</div>
                     <div className="form-group">
@@ -167,10 +167,10 @@ export default function Register() {
                   </div>
                   <div
                     className="
-                      flex-none w-full md:w-px md:h-full 
-                      border-t-2 md:border-t-0 md:border-l-2 
+                      flex-none w-full lg:w-px lg:h-full 
+                      border-t-2 lg:border-t-0 lg:border-l-2 
                       border-primary 
-                      my-12 md:my-0 md:mx-12
+                      my-12 lg:my-0 lg:mx-12
                     "
                   ></div>
                   <div className="flex-grow">

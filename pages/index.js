@@ -53,9 +53,10 @@ export default function Home() {
           <div className="hero min-h-screen bg-welcome-img relative">
             <div className="w-full hero-content justify-start mb-32">
               <div className="max-w-lg ">
-                {/* <Image src="/Logo.png" alt="logo" width={200} height={100} objectFit="contain" /> */}
                 <p className="mb-12 text-primary font-bold">Oversea Academy</p>
-                <div className="text-5xl text-primary pb-5">All-in-one Oversea Study Preparation</div>
+                <div className="text-3xl md:text-4xl lg:text-5xl text-primary pb-5">
+                  All-in-one Oversea Study Preparation
+                </div>
                 <div className="text-primary pb-5">Let's prepare your oversea study and career</div>
                 <a href="#class">
                   <div className="w-48">
@@ -64,13 +65,13 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="absolute -bottom-64 lg:-bottom-12">
+            <div className="absolute -bottom-80 md:-bottom-72 lg:-bottom-24 xl:-bottom-12">
               <CardOffer />
             </div>
           </div>
         </section>
 
-        <section id="class" className="mt-64 lg:mt-24">
+        <section id="class" className="mt-72 md:mt-64 lg:mt-24">
           <div className="w-full flex justify-center">
             <div className="w-full md:w-10/12 lg:w-8/12 pt-16 pb-8 md:py-16 flex flex-col items-center">
               <div className="text-primary font-semibold text-2xl md:text-4xl">Pilihan Kelas</div>

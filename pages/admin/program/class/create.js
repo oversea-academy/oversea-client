@@ -72,6 +72,7 @@ function CreateProgramClass() {
       payload.schedule_time &&
       payload.price &&
       payload.price_normal &&
+      payload.started_at &&
       payload.closed_at &&
       payload.ref_class_type &&
       facility
@@ -82,10 +83,17 @@ function CreateProgramClass() {
     }
   };
 
+  const formatDate = (rawDate) => {
+    const [date, time] = rawDate.split('T');
+    return new Date(`${date} ${time}`).toISOString();
+  };
+
   const onConfirm = async () => {
     setIsLoading(true);
     const response = await ProgramClassRepo.postProgramClass({
       ...payload,
+      started_at: formatDate(payload.started_at),
+      closed_at: formatDate(payload.closed_at),
       facility: convertBulletListToSemicolon(facility)
     });
     if (response?.status) {
@@ -269,6 +277,21 @@ function CreateProgramClass() {
                 className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
               />
             </div>
+            {/* Started At */}
+            <div className="flex flex-col md:flex-row my-6">
+              <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                <p className="w-56">Tanggal Pembukaan</p>
+                <p className="mr-4">:</p>
+              </div>
+              <input
+                required
+                type="datetime-local"
+                placeholder="Tanggal pembukaan kelas"
+                value={payload.started_at}
+                onChange={(e) => handlePayload(e, 'started_at')}
+                className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+              />
+            </div>
             {/* Closed At */}
             <div className="flex flex-col md:flex-row my-6">
               <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
@@ -277,7 +300,7 @@ function CreateProgramClass() {
               </div>
               <input
                 required
-                type="date"
+                type="datetime-local"
                 placeholder="Tanggal penutupan kelas"
                 value={payload.closed_at}
                 onChange={(e) => handlePayload(e, 'closed_at')}
@@ -293,7 +316,7 @@ function CreateProgramClass() {
               <input
                 required
                 type="text"
-                placeholder="Contoh: ielts;basic"
+                placeholder="Contoh: ielts;toefl;basic;private"
                 value={payload.ref_class_type}
                 onChange={(e) => handlePayload(e, 'ref_class_type')}
                 className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"

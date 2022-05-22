@@ -4,31 +4,49 @@ import DayJs from 'dayjs';
 import Button from '../Button';
 import { formatCurrency } from '../../utils/helper';
 
+require('dayjs/locale/id');
+DayJs.locale('id');
+
 export default function CardCalendarAndPrice({
   scheduleDay = 'Setiap Senin, Rabu, dan Jum’at',
   scheduleTime = 'Pukul 19.00-21.30 WIB',
   price = '1200000',
   priceNormal = '1200000',
+  startedAt = '',
   closedAt = '',
   onClick
 }) {
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isBeforeDate, setIsBeforeDate] = useState(false);
+  const [isAfterDate, setIsAfterDate] = useState(false);
 
   const formatDate = (date) => {
-    return DayJs(date).format('DD MMM YYYY');
+    return DayJs(date).format('DD MMM YYYY Pukul HH:mm');
   };
 
   useEffect(() => {
-    if (closedAt) {
+    if (startedAt && closedAt) {
+      const dateStarted = new Date(startedAt);
       const dateClosed = new Date(closedAt);
       const dateNow = new Date();
-      if (dateNow > dateClosed) {
+
+      if (dateNow < dateStarted || dateNow > dateClosed) {
         setIsDisabled(true);
+      } else {
+        setIsDisabled(false);
+      }
+
+      if (dateNow < dateStarted) {
+        setIsBeforeDate(true);
+      }
+
+      if (dateNow > dateClosed) {
+        setIsAfterDate(true);
       }
     } else {
-      setIsDisabled(false);
+      setIsDisabled(true);
     }
-  }, [closedAt]);
+  }, [startedAt, closedAt]);
 
   return (
     <div className="container mx-auto md:rounded-3xl border-none md:shadow-2xl md:bg-base-100">
@@ -58,9 +76,18 @@ export default function CardCalendarAndPrice({
 
         <div className="flex flex-col items-center justify-center">
           <Button title="Ambil Kelas" isDisabled={isDisabled} onClick={onClick} />
-          {isDisabled && <span className="text-sm text-error font-semibold">Masa pendaftaran kelas berakhir</span>}
+          {isDisabled && isBeforeDate && (
+            <span className="text-sm text-primary font-semibold text-center">{`Pendaftaran dimulai pada ${formatDate(
+              startedAt
+            )}`}</span>
+          )}
+          {isDisabled && isAfterDate && (
+            <span className="text-sm text-error font-semibold text-center">Masa pendaftaran kelas berakhir</span>
+          )}
           {!isDisabled && closedAt && (
-            <span className="text-sm text-primary font-semibold">{`Pendaftaran sampai ${formatDate(closedAt)}`}</span>
+            <span className="text-sm text-primary font-semibold text-center">{`Pendaftaran sampai ${formatDate(
+              closedAt
+            )}`}</span>
           )}
         </div>
       </div>

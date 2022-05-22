@@ -138,6 +138,7 @@ export default function Class() {
                   scheduleTime={dataKelas.data.schedule_time}
                   price={dataKelas.data.price}
                   priceNormal={dataKelas.data.price_normal}
+                  startedAt={dataKelas.data.started_at}
                   closedAt={dataKelas.data.closed_at}
                   onClick={(e) => handleClickRegister(dataKelas.data.id)}
                 ></CardCalendarAndPrice>

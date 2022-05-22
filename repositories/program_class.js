@@ -17,6 +17,7 @@ class ProgramClassRepo {
           schedule_time: data.schedule_time,
           price: data.price,
           price_normal: data.price_normal,
+          started_at: data.started_at,
           closed_at: data.closed_at,
           ref_class_type: data.ref_class_type
         })
@@ -85,6 +86,7 @@ class ProgramClassRepo {
           price: data.price,
           price_normal: data.price_normal,
           ref_class_type: data.ref_class_type,
+          started_at: data.started_at,
           closed_at: data.closed_at,
           description: data.description
         })

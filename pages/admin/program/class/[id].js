@@ -43,6 +43,18 @@ function Admin() {
     }
   };
 
+  const handleCheckbox = (e, key) => {
+    if (key) {
+      let temp = {
+        ...dataTemp.data,
+        [key]: e.target.checked
+      };
+      _.isEqual(temp, dataKelas.data)
+        ? setDataTemp({ isEqual: true, data: temp })
+        : setDataTemp({ isEqual: false, data: temp });
+    }
+  };
+
   useEffect(async () => {
     setDataKelas({ loading: true, data: {} });
     setDataTemp({ isEqual: false, data: {} });
@@ -391,6 +403,24 @@ function Admin() {
                     />
                   ) : (
                     <p>{dataKelas.data.class_type}</p>
+                  )}
+                </div>
+                {/* Class Type */}
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="w-56">Is published</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  {isStillChanging ? (
+                    <input
+                      required
+                      type="checkbox"
+                      checked={dataTemp.data.is_published}
+                      onChange={(e) => handleCheckbox(e, 'is_published')}
+                      className="toggle toggle-primary"
+                    />
+                  ) : (
+                    <p>{dataKelas.data.is_published ? 'Ya' : 'Tidak'}</p>
                   )}
                 </div>
                 {/* Button */}

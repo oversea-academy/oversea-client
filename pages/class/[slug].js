@@ -47,7 +47,8 @@ export default function Class() {
     });
     const result = await ProgramClassRepo.getProgramClass({
       limit: 3,
-      type: classType
+      type: classType,
+      is_published: 1
     });
     if (result.status) {
       const filteredClassList = result.data.filter((item) => item.slug != slug);
@@ -136,6 +137,7 @@ export default function Class() {
                 <CardCalendarAndPrice
                   scheduleDay={dataKelas.data.schedule_day}
                   scheduleTime={dataKelas.data.schedule_time}
+                  scheduleImage={dataKelas.data.schedule_image}
                   price={dataKelas.data.price}
                   priceNormal={dataKelas.data.price_normal}
                   startedAt={dataKelas.data.started_at}

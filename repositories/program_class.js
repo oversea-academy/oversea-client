@@ -17,6 +17,7 @@ class ProgramClassRepo {
           schedule_time: data.schedule_time,
           price: data.price,
           price_normal: data.price_normal,
+          started_at: data.started_at,
           closed_at: data.closed_at,
           ref_class_type: data.ref_class_type
         })
@@ -33,9 +34,10 @@ class ProgramClassRepo {
     const page = data.page || 1;
     const limit = data.limit || 6;
     const type = data.type || '';
+    const is_published = typeof data.is_published !== 'undefined' ? `&is_published=${data.is_published}` : '';
     return new Promise((resolve) => {
       request
-        .get(`/program/class?page=${page}&limit=${limit}&type=${type}`)
+        .get(`/program/class?page=${page}&limit=${limit}&type=${type}${is_published}`)
         .then((response) => {
           resolve(response.data);
         })
@@ -85,8 +87,10 @@ class ProgramClassRepo {
           price: data.price,
           price_normal: data.price_normal,
           ref_class_type: data.ref_class_type,
+          started_at: data.started_at,
           closed_at: data.closed_at,
-          description: data.description
+          description: data.description,
+          is_published: data.is_published ? 1 : 0
         })
         .then((response) => {
           resolve(response.data);

@@ -24,7 +24,8 @@ export default function Home() {
       data: []
     });
     const result = await ProgramClassRepo.getProgramClass({
-      type: classType
+      type: classType,
+      is_published: 1
     });
     if (result.status) {
       setClassList({

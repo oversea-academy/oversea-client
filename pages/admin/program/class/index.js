@@ -126,6 +126,10 @@ function Admin() {
       selector: (row) => (row.closed_at ? DayJs(row.closed_at).format('DD MMM YYYY HH:mm A') : '')
     },
     {
+      name: 'Published',
+      selector: (row) => <input type="checkbox" className="toggle toggle-primary" checked={row.is_published} readOnly />
+    },
+    {
       name: 'Action',
       button: true,
       width: '80px',

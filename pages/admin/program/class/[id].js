@@ -43,6 +43,18 @@ function Admin() {
     }
   };
 
+  const handleCheckbox = (e, key) => {
+    if (key) {
+      let temp = {
+        ...dataTemp.data,
+        [key]: e.target.checked
+      };
+      _.isEqual(temp, dataKelas.data)
+        ? setDataTemp({ isEqual: true, data: temp })
+        : setDataTemp({ isEqual: false, data: temp });
+    }
+  };
+
   useEffect(async () => {
     setDataKelas({ loading: true, data: {} });
     setDataTemp({ isEqual: false, data: {} });
@@ -51,12 +63,19 @@ function Admin() {
     }
   }, [id]);
 
+  const formatDate = (rawDate) => {
+    const [date, time] = rawDate.split('T');
+    return new Date(`${date} ${time}`).toISOString();
+  };
+
   const onConfirm = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     const response = await ProgramClassRepo.updateProgramClass(id, {
       ...dataTemp.data,
+      started_at: dataTemp.data.started_at ? formatDate(dataTemp.data.started_at) : null,
+      closed_at: dataTemp.data.closed_at ? formatDate(dataTemp.data.closed_at) : null,
       facility: convertBulletListToSemicolon(facility)
     });
 
@@ -325,6 +344,27 @@ function Admin() {
                     <p>{dataKelas.data.price_normal}</p>
                   )}
                 </div>
+                {/* Started At */}
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="w-56">Pembukaan Kelas</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  {isStillChanging ? (
+                    <input
+                      required
+                      type="datetime-local"
+                      placeholder="Tanggal pembukaan kelas"
+                      value={dataTemp.data.started_at}
+                      onChange={(e) => handleData(e, 'started_at')}
+                      className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
+                    />
+                  ) : (
+                    <p>
+                      {dataKelas.data.started_at ? DayJs(dataKelas.data.started_at).format('DD MMM YYYY HH:mm A') : ''}
+                    </p>
+                  )}
+                </div>
                 {/* Closed At */}
                 <div className="flex flex-col md:flex-row my-6">
                   <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
@@ -334,9 +374,9 @@ function Admin() {
                   {isStillChanging ? (
                     <input
                       required
-                      type="date"
+                      type="datetime-local"
                       placeholder="Tanggal penutupan kelas"
-                      value={DayJs(dataTemp.data.closed_at).format('YYYY-MM-DD')}
+                      value={dataTemp.data.closed_at}
                       onChange={(e) => handleData(e, 'closed_at')}
                       className="w-full rounded-lg py-2 px-4 border bg-primary-content text-gray-700 text-sm focus-within:ring focus-within:ring-accent focus-within:ring-opacity-40 focus:outline-none focus:placeholder-transparent"
                     />
@@ -363,6 +403,24 @@ function Admin() {
                     />
                   ) : (
                     <p>{dataKelas.data.class_type}</p>
+                  )}
+                </div>
+                {/* Class Type */}
+                <div className="flex flex-col md:flex-row my-6">
+                  <div className="flex flex-row w-48 md:w-56 my-auto justify-between font-semibold">
+                    <p className="w-56">Is published</p>
+                    <p className="mr-4">:</p>
+                  </div>
+                  {isStillChanging ? (
+                    <input
+                      required
+                      type="checkbox"
+                      checked={dataTemp.data.is_published}
+                      onChange={(e) => handleCheckbox(e, 'is_published')}
+                      className="toggle toggle-primary"
+                    />
+                  ) : (
+                    <p>{dataKelas.data.is_published ? 'Ya' : 'Tidak'}</p>
                   )}
                 </div>
                 {/* Button */}

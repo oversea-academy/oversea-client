@@ -64,7 +64,8 @@ export default function Class() {
   };
 
   const handleClickRegister = (id) => {
-    router.push(`/register/${id}`);
+    router.push('https://forms.gle/33K5mKQPzqujUvgr8');
+    // router.push(`/register/${id}`);
   };
 
   return (
